@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>veche.design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:      #1a1712;
+      --paper:    #f5f2ec;
+      --mid:      #e8e2d6;
+      --red:      #c0392b;
+      --red-lt:   #e05444;
+      --muted:    #7a746a;
+      --border:   rgba(26,23,18,0.12);
+      --f:        'Montserrat', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--f); background: var(--paper); color: var(--ink); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+
+    /* Lang bar */
+    .lang-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; justify-content: flex-end; padding: 16px 48px; pointer-events: none; }
+    .lang-bar button { pointer-events: all; background: none; border: 1px solid rgba(245,242,236,0.3); font-family: var(--f); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; padding: 5px 12px; color: rgba(245,242,236,0.5); transition: all 0.2s; }
+    .lang-bar button:first-child { border-right: none; }
+    .lang-bar button.active, .lang-bar button:hover { background: rgba(245,242,236,0.15); color: var(--paper); border-color: rgba(245,242,236,0.4); }
+    .lang-bar.dark button { color: var(--muted); border-color: var(--border); }
+    .lang-bar.dark button.active, .lang-bar.dark button:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+    /* Lang switching */
+    [data-lang] { display: none; }
+    body.lang-en [data-lang="en"], body.lang-de [data-lang="de"] { display: block; }
+    span[data-lang] { display: none; }
+    body.lang-en span[data-lang="en"], body.lang-de span[data-lang="de"] { display: inline; }
+
+    /* HERO */
+    .hero { min-height: 100vh; background: var(--ink); color: var(--paper); display: flex; flex-direction: column; justify-content: center; padding: 120px 60px 80px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 75% 55%, rgba(192,57,43,0.08) 0%, transparent 60%); pointer-events: none; }
+
+    .hero-brand { font-size: clamp(1.2rem, 2.5vw, 1.8rem); font-weight: 300; letter-spacing: 0.1em; color: rgba(245,242,236,0.4); margin-bottom: 40px; opacity: 0; animation: fadeUp 0.7s ease forwards 0.1s; }
+
+    .hero h1 { font-weight: 900; font-size: clamp(2.8rem, 7vw, 7rem); line-height: 0.95; letter-spacing: -0.03em; text-transform: uppercase; margin-bottom: 64px; opacity: 0; animation: fadeUp 0.8s ease forwards 0.3s; }
+    .hero h1 em { font-style: normal; color: var(--red-lt); }
+
+    .hero-form-wrap { opacity: 0; animation: fadeUp 0.8s ease forwards 0.5s; max-width: 540px; }
+    .hero-form-label { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(245,242,236,0.35); margin-bottom: 18px; display: block; font-weight: 600; }
+    .hero-form { display: flex; flex-direction: column; gap: 10px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .hero-form input, .hero-form textarea { background: rgba(245,242,236,0.05); border: 1px solid rgba(245,242,236,0.13); color: var(--paper); font-family: var(--f); font-size: 13px; padding: 13px 16px; outline: none; width: 100%; transition: border-color 0.2s; resize: none; }
+    .hero-form input::placeholder, .hero-form textarea::placeholder { color: rgba(245,242,236,0.28); }
+    .hero-form input:focus, .hero-form textarea:focus { border-color: rgba(192,57,43,0.55); }
+    .hero-form textarea { min-height: 90px; }
+    .btn-send { background: var(--red); color: var(--paper); border: none; font-family: var(--f); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 15px 30px; cursor: pointer; align-self: flex-start; transition: background 0.2s; font-weight: 600; }
+    .btn-send:hover { background: var(--red-lt); }
+    .form-ok { display: none; color: rgba(245,242,236,0.55); font-size: 13px; padding: 10px 0; }
+
+    /* WHAT */
+    .what { background: var(--paper); padding: 110px 60px; }
+    .section-tag { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); margin-bottom: 20px; display: block; font-weight: 700; }
+    .big-title { font-weight: 900; font-size: clamp(1.6rem, 3.8vw, 3.6rem); line-height: 1.0; text-transform: uppercase; letter-spacing: -0.025em; margin-bottom: 64px; }
+
+    .what-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .what-card { background: var(--mid); padding: 44px 36px 52px; position: relative; overflow: hidden; transition: background 0.35s; cursor: default; }
+    .what-card:hover { background: var(--ink); }
+    .what-card:hover .wc-name { color: var(--red-lt); }
+    .what-card:hover .wc-text { color: rgba(245,242,236,0.6); }
+    .what-card:hover .wc-bar { background: var(--red-lt); }
+    .wc-bar { width: 28px; height: 2px; background: var(--red); margin-bottom: 24px; transition: background 0.3s; }
+    .wc-name { font-size: clamp(1.5rem, 2.2vw, 2rem); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--red); margin-bottom: 20px; transition: color 0.3s; line-height: 1.05; }
+    .wc-text { font-size: 0.88rem; line-height: 1.8; color: var(--muted); transition: color 0.3s; }
+
+    /* HOW */
+    .how { background: var(--ink); color: var(--paper); padding: 110px 60px; }
+    .how-hd { margin-bottom: 60px; }
+    .how-hd h2 { font-weight: 900; font-size: clamp(1.6rem, 3.8vw, 3.6rem); text-transform: uppercase; letter-spacing: -0.025em; line-height: 1.0; margin-bottom: 20px; }
+    .how-sub { color: rgba(245,242,236,0.45); font-size: 0.88rem; max-width: 540px; line-height: 1.75; }
+
+    .sprints { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; }
+    .sprint { background: rgba(245,242,236,0.04); border: 1px solid rgba(245,242,236,0.07); padding: 32px 24px 36px; display: flex; flex-direction: column; transition: background 0.3s; }
+    .sprint:hover { background: rgba(245,242,236,0.08); }
+    .sprint.core { border-color: rgba(192,57,43,0.3); background: rgba(192,57,43,0.07); }
+    .sprint.core:hover { background: rgba(192,57,43,0.13); }
+    .sp-name { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--red-lt); margin-bottom: 16px; line-height: 1.4; }
+    .sp-desc { font-size: 0.82rem; line-height: 1.75; color: rgba(245,242,236,0.5); margin-bottom: 24px; flex: 1; }
+    .sp-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; }
+    .stag { font-size: 0.65rem; letter-spacing: 0.07em; border: 1px solid rgba(245,242,236,0.16); padding: 3px 8px; color: rgba(245,242,236,0.38); text-transform: uppercase; }
+    .sprint.core .stag { border-color: rgba(192,57,43,0.4); color: var(--red-lt); }
+
+    /* WHO */
+    .who { background: var(--paper); padding: 110px 60px; }
+    .who h2 { font-weight: 900; font-size: clamp(1.6rem, 3.8vw, 3.2rem); text-transform: uppercase; letter-spacing: -0.025em; margin-bottom: 60px; line-height: 1.05; }
+    .who-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .who-card { background: var(--mid); padding: 52px 44px; position: relative; overflow: hidden; transition: background 0.35s; cursor: default; }
+    .who-card:hover { background: var(--ink); }
+    .who-card:hover .wh-name { color: var(--red-lt); }
+    .who-card:hover .wh-body, .who-card:hover .wh-list li { color: rgba(245,242,236,0.55); }
+    .who-card:hover .wh-list li { border-top-color: rgba(245,242,236,0.1); }
+    .who-card:hover .wh-list li::before { color: var(--red-lt); }
+    .who-card:hover .wh-bar { background: var(--red-lt); }
+    .wh-bar { width: 28px; height: 2px; background: var(--red); margin-bottom: 24px; transition: background 0.3s; }
+    .wh-name { font-size: clamp(1.6rem, 2.8vw, 2.4rem); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--red); margin-bottom: 20px; transition: color 0.3s; line-height: 1.05; }
+    .wh-body { font-size: 0.88rem; line-height: 1.8; color: var(--muted); margin-bottom: 24px; transition: color 0.3s; }
+    .wh-list { list-style: none; }
+    .wh-list li { font-size: 0.84rem; color: var(--muted); padding: 7px 0 7px 20px; position: relative; border-top: 1px solid var(--border); transition: color 0.3s, border-color 0.3s; }
+    .wh-list li::before { content: '→'; position: absolute; left: 0; top: 8px; color: var(--red); font-size: 0.72rem; }
+
+    /* CONTACT */
+    .contact { background: var(--ink); color: var(--paper); padding: 110px 60px; text-align: center; }
+    .contact h2 { font-weight: 900; font-size: clamp(2.2rem, 5.5vw, 5rem); text-transform: uppercase; letter-spacing: -0.03em; line-height: 0.95; margin-bottom: 52px; }
+    .contact h2 em { font-style: normal; color: var(--red-lt); }
+    .btn-cta { display: inline-block; background: var(--red); color: var(--paper); border: none; font-family: var(--f); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; padding: 18px 44px; cursor: pointer; transition: background 0.2s; font-weight: 700; }
+    .btn-cta:hover { background: var(--red-lt); }
+
+    /* Modal */
+    .modal-ov { display: none; position: fixed; inset: 0; background: rgba(8,6,4,0.88); z-index: 500; align-items: center; justify-content: center; padding: 32px; }
+    .modal-ov.open { display: flex; }
+    .modal { background: var(--ink); border: 1px solid rgba(245,242,236,0.1); padding: 52px 44px; max-width: 520px; width: 100%; position: relative; }
+    .modal-x { position: absolute; top: 18px; right: 22px; background: none; border: none; color: rgba(245,242,236,0.35); font-size: 1.5rem; cursor: pointer; transition: color 0.2s; line-height: 1; }
+    .modal-x:hover { color: var(--paper); }
+    .modal h3 { font-weight: 700; font-size: 0.95rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper); margin-bottom: 28px; }
+    .modal-form { display: flex; flex-direction: column; gap: 10px; }
+    .modal-form input, .modal-form textarea { background: rgba(245,242,236,0.05); border: 1px solid rgba(245,242,236,0.12); color: var(--paper); font-family: var(--f); font-size: 13px; padding: 13px 16px; outline: none; width: 100%; transition: border-color 0.2s; resize: none; }
+    .modal-form input::placeholder, .modal-form textarea::placeholder { color: rgba(245,242,236,0.28); }
+    .modal-form input:focus, .modal-form textarea:focus { border-color: rgba(192,57,43,0.55); }
+    .modal-form textarea { min-height: 110px; }
+    .modal-ok { display: none; color: rgba(245,242,236,0.55); font-size: 13px; padding: 10px 0; }
+
+    /* Footer */
+    footer { background: var(--ink); border-top: 1px solid rgba(245,242,236,0.07); padding: 26px 60px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; }
+    .ft-brand { font-size: 0.82rem; font-weight: 300; letter-spacing: 0.1em; color: rgba(245,242,236,0.28); }
+    .ft-links { display: flex; gap: 24px; }
+    .ft-links a { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,242,236,0.28); text-decoration: none; transition: color 0.2s; }
+    .ft-links a:hover { color: var(--paper); }
+
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .hero, .what, .how, .who, .contact { padding: 80px 28px; }
+      footer { padding: 24px 28px; }
+      .lang-bar { padding: 14px 28px; }
+      .sprints { grid-template-columns: 1fr 1fr; }
+      .what-cards, .who-cards { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 540px) {
+      .sprints { grid-template-columns: 1fr; }
+      .hero h1 { font-size: clamp(2.2rem, 11vw, 4rem); }
+    }
+  </style>
+</head>
+<body class="lang-en">
+
+  <div class="lang-bar" id="langBar">
+    <button class="active" onclick="setLang('en')" id="btn-en">EN</button>
+    <button onclick="setLang('de')" id="btn-de">DE</button>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-brand">veche.design</div>
+
+    <h1 data-lang="en">Tangible Impact.<br><em>AI&#8209;Proof Jobs.</em></h1>
+    <h1 data-lang="de">Greifbarer Impact.<br><em>KI&#8209;sichere Jobs.</em></h1>
+
+    <div class="hero-form-wrap">
+      <span class="hero-form-label" data-lang="en">Get in touch</span>
+      <span class="hero-form-label" data-lang="de">Kontakt aufnehmen</span>
+      <form class="hero-form" onsubmit="submitForm(event,'hero-ok')">
+        <div class="form-row">
+          <input type="text" placeholder="Name" required>
+          <input type="email" placeholder="Email" required>
+        </div>
+        <textarea placeholder="Tell us about your project…" data-de="Erzählen Sie uns von Ihrem Projekt…"></textarea>
+        <button type="submit" class="btn-send">
+          <span data-lang="en">Send</span>
+          <span data-lang="de">Senden</span>
+        </button>
+        <p class="form-ok" id="hero-ok">
+          <span data-lang="en">Thank you — we'll be in touch soon.</span>
+          <span data-lang="de">Danke — wir melden uns bald.</span>
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <!-- WHAT -->
+  <section class="what">
+    <div class="reveal">
+      <span class="section-tag" data-lang="en">What we work on</span>
+      <span class="section-tag" data-lang="de">Womit wir arbeiten</span>
+      <div class="big-title" data-lang="en">Things people can touch, taste &amp; experience.</div>
+      <div class="big-title" data-lang="de">Dinge, die man berühren, schmecken &amp; erleben kann.</div>
+    </div>
+    <div class="what-cards reveal">
+      <div class="what-card">
+        <div class="wc-bar"></div>
+        <div class="wc-name" data-lang="en">Products</div>
+        <div class="wc-name" data-lang="de">Produkte</div>
+        <div class="wc-text" data-lang="en">Physical products such as consumer goods, foods, tech, circular economy and the crafts.</div>
+        <div class="wc-text" data-lang="de">Physische Produkte wie Konsumgüter, Lebensmittel, Technologie, Kreislaufwirtschaft und Handwerk.</div>
+      </div>
+      <div class="what-card">
+        <div class="wc-bar"></div>
+        <div class="wc-name" data-lang="en">Programs</div>
+        <div class="wc-name" data-lang="de">Programme</div>
+        <div class="wc-text" data-lang="en">Training, methods, courses driving impact and growth.</div>
+        <div class="wc-text" data-lang="de">Trainings, Methoden und Kurse, die Impact und Wachstum fördern.</div>
+      </div>
+      <div class="what-card">
+        <div class="wc-bar"></div>
+        <div class="wc-name" data-lang="en">Places</div>
+        <div class="wc-name" data-lang="de">Orte</div>
+        <div class="wc-text" data-lang="en">Spaces that facilitate growth and community such as retail, community hubs or innovation parks.</div>
+        <div class="wc-text" data-lang="de">Räume, die Wachstum und Gemeinschaft fördern — Einzelhandel, Community Hubs oder Innovationsparks.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section class="how">
+    <div class="how-hd reveal">
+      <span class="section-tag" data-lang="en">Our key service</span>
+      <span class="section-tag" data-lang="de">Unser Kernangebot</span>
+      <h2 data-lang="en">From first idea to funded project.</h2>
+      <h2 data-lang="de">Von der ersten Idee zum finanzierten Projekt.</h2>
+      <p class="how-sub" data-lang="en">We start every engagement with an audit and agree on a roadmap. You can start at any stage.</p>
+      <p class="how-sub" data-lang="de">Wir beginnen jedes Engagement mit einem Audit und vereinbaren eine Roadmap. Sie können in jeder Phase einsteigen.</p>
+    </div>
+    <div class="sprints reveal">
+
+      <div class="sprint">
+        <div class="sp-name" data-lang="en">Audit Sprint</div>
+        <div class="sp-name" data-lang="de">Audit Sprint</div>
+        <div class="sp-desc" data-lang="en">We map the current state of your project and define a clear development roadmap.</div>
+        <div class="sp-desc" data-lang="de">Wir erfassen den aktuellen Stand und definieren eine klare Entwicklungs-Roadmap.</div>
+        <div class="sp-tags">
+          <span class="stag" data-lang="en">Scoping</span><span class="stag" data-lang="de">Scoping</span>
+          <span class="stag" data-lang="en">User Needs</span><span class="stag" data-lang="de">Nutzerbedürfnisse</span>
+          <span class="stag" data-lang="en">Roadmap</span><span class="stag" data-lang="de">Roadmap</span>
+          <span class="stag" data-lang="en">Legal Basics</span><span class="stag" data-lang="de">Rechtl. Grundlagen</span>
+        </div>
+      </div>
+
+      <div class="sprint core">
+        <div class="sp-name" data-lang="en">Fundable Concept Sprint ★</div>
+        <div class="sp-name" data-lang="de">Fundable Concept Sprint ★</div>
+        <div class="sp-desc" data-lang="en">We turn your project into something a funder can evaluate — our core service.</div>
+        <div class="sp-desc" data-lang="de">Wir verwandeln Ihr Projekt in etwas, das ein Förderer bewerten kann — unser Kernangebot.</div>
+        <div class="sp-tags">
+          <span class="stag" data-lang="en">Fundraising Note</span><span class="stag" data-lang="de">Fundraising-Note</span>
+          <span class="stag" data-lang="en">Product Sketches</span><span class="stag" data-lang="de">Produktskizzen</span>
+          <span class="stag" data-lang="en">Financial Model</span><span class="stag" data-lang="de">Finanzmodell</span>
+          <span class="stag" data-lang="en">Explainer Video</span><span class="stag" data-lang="de">Erklärvideo</span>
+        </div>
+      </div>
+
+      <div class="sprint">
+        <div class="sp-name" data-lang="en">Validation Sprint</div>
+        <div class="sp-name" data-lang="de">Validierungssprint</div>
+        <div class="sp-desc" data-lang="en">We test your concept with real users and experts using structured co-creation.</div>
+        <div class="sp-desc" data-lang="de">Wir testen Ihr Konzept mit echten Nutzern und Experten durch strukturierte Co-Creation.</div>
+        <div class="sp-tags">
+          <span class="stag" data-lang="en">User Interviews</span><span class="stag" data-lang="de">Nutzer-Interviews</span>
+          <span class="stag" data-lang="en">Expert Input</span><span class="stag" data-lang="de">Experteninput</span>
+          <span class="stag" data-lang="en">Synthesis</span><span class="stag" data-lang="de">Synthese</span>
+        </div>
+      </div>
+
+      <div class="sprint">
+        <div class="sp-name" data-lang="en">Funding Support Sprint</div>
+        <div class="sp-name" data-lang="de">Funding Support Sprint</div>
+        <div class="sp-desc" data-lang="en">We identify funders, support applications and prepare for due diligence.</div>
+        <div class="sp-desc" data-lang="de">Wir identifizieren Förderer, unterstützen Anträge und bereiten auf Due Diligence vor.</div>
+        <div class="sp-tags">
+          <span class="stag" data-lang="en">Funder Longlist</span><span class="stag" data-lang="de">Förderer-Longlist</span>
+          <span class="stag" data-lang="en">Application Review</span><span class="stag" data-lang="de">Antragsreview</span>
+          <span class="stag" data-lang="en">Due Diligence</span><span class="stag" data-lang="de">Due Diligence</span>
+        </div>
+      </div>
+
+      <div class="sprint">
+        <div class="sp-name" data-lang="en">Co-Development</div>
+        <div class="sp-name" data-lang="de">Co-Development</div>
+        <div class="sp-desc" data-lang="en">Long-term partnership for projects ready to scale — portfolio building and expansion.</div>
+        <div class="sp-desc" data-lang="de">Langfristige Partnerschaft für skalierungsbereite Projekte — Portfolio-Aufbau und Expansion.</div>
+        <div class="sp-tags">
+          <span class="stag" data-lang="en">Portfolio</span><span class="stag" data-lang="de">Portfolio</span>
+          <span class="stag" data-lang="en">Expansion</span><span class="stag" data-lang="de">Expansion</span>
+          <span class="stag" data-lang="en">Ongoing</span><span class="stag" data-lang="de">Fortlaufend</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WHO -->
+  <section class="who">
+    <div class="reveal">
+      <span class="section-tag" data-lang="en">Who we work with</span>
+      <span class="section-tag" data-lang="de">Mit wem wir arbeiten</span>
+      <h2 data-lang="en">Built for ecosystem builders<br>and the teams they support.</h2>
+      <h2 data-lang="de">Für Ökosystem-Akteure<br>und die Teams, die sie unterstützen.</h2>
+    </div>
+    <div class="who-cards reveal">
+      <div class="who-card">
+        <div class="wh-bar"></div>
+        <div class="wh-name" data-lang="en">Ecosystem Builders</div>
+        <div class="wh-name" data-lang="de">Ökosystem-Akteure</div>
+        <p class="wh-body" data-lang="en">Organisations that foster strong economies and communities — and need a trusted methodology to develop tangible projects in their portfolio.</p>
+        <p class="wh-body" data-lang="de">Organisationen, die starke Wirtschaft und Gemeinschaft fördern — und eine bewährte Methodik für greifbare Projekte in ihrem Portfolio benötigen.</p>
+        <ul class="wh-list">
+          <li data-lang="en">Incubators &amp; Accelerators</li>
+          <li data-lang="de">Inkubatoren &amp; Acceleratoren</li>
+          <li data-lang="en">City Development Agencies</li>
+          <li data-lang="de">Stadtentwicklungsgesellschaften</li>
+          <li data-lang="en">Employment Agencies</li>
+          <li data-lang="de">Arbeitsvermittlungen</li>
+          <li data-lang="en">Chambers of Commerce</li>
+          <li data-lang="de">Industrie- und Handelskammern</li>
+        </ul>
+      </div>
+      <div class="who-card">
+        <div class="wh-bar"></div>
+        <div class="wh-name" data-lang="en">Teams</div>
+        <div class="wh-name" data-lang="de">Teams</div>
+        <p class="wh-body" data-lang="en">Teams and individuals building something real — a product, a program, or a place — who need structured support to make it fundable.</p>
+        <p class="wh-body" data-lang="de">Teams und Einzelpersonen, die etwas Reales aufbauen — ein Produkt, ein Programm oder einen Ort — und strukturierte Unterstützung suchen, um es finanzierbar zu machen.</p>
+        <ul class="wh-list">
+          <li data-lang="en">Early-stage product developers</li>
+          <li data-lang="de">Frühe Produktentwickler</li>
+          <li data-lang="en">Proven business model launchers</li>
+          <li data-lang="de">Bewährte Geschäftsmodell-Starter</li>
+          <li data-lang="en">Location &amp; program operators</li>
+          <li data-lang="de">Standort- &amp; Programmbetreiber</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact">
+    <div class="reveal">
+      <span class="section-tag" data-lang="en">Let's build something real</span>
+      <span class="section-tag" data-lang="de">Lassen Sie uns etwas Reales aufbauen</span>
+      <h2 data-lang="en">Ready<br>to start?</h2>
+      <h2 data-lang="de">Bereit<br>loszulegen?</h2>
+      <button class="btn-cta" onclick="openModal()">
+        <span data-lang="en">Get in touch</span>
+        <span data-lang="de">Kontakt aufnehmen</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="ft-brand">veche.design</span>
+    <div class="ft-links">
+      <a href="#" data-lang="en">Impressum</a>
+      <a href="#" data-lang="de">Impressum</a>
+      <a href="#" data-lang="en">Privacy Policy</a>
+      <a href="#" data-lang="de">Datenschutz</a>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal-ov" id="mOv" onclick="closeOut(event)">
+    <div class="modal">
+      <button class="modal-x" onclick="closeModal()">×</button>
+      <h3>
+        <span data-lang="en">Get in touch</span>
+        <span data-lang="de">Kontakt aufnehmen</span>
+      </h3>
+      <form class="modal-form" onsubmit="submitForm(event,'modal-ok')">
+        <div class="form-row">
+          <input type="text" placeholder="Name" required>
+          <input type="email" placeholder="Email" required>
+        </div>
+        <input type="text" placeholder="Organisation (optional)">
+        <textarea placeholder="Tell us about your project…" data-de="Erzählen Sie uns von Ihrem Projekt…" required></textarea>
+        <button type="submit" class="btn-send">
+          <span data-lang="en">Send message</span>
+          <span data-lang="de">Nachricht senden</span>
+        </button>
+        <p class="modal-ok" id="modal-ok">
+          <span data-lang="en">Thank you — we'll be in touch soon.</span>
+          <span data-lang="de">Danke — wir melden uns bald.</span>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function setLang(l) {
+      document.body.className = 'lang-' + l;
+      document.getElementById('btn-en').classList.toggle('active', l==='en');
+      document.getElementById('btn-de').classList.toggle('active', l==='de');
+      document.querySelectorAll('[data-de]').forEach(el => {
+        el.placeholder = l==='de' ? el.dataset.de : 'Tell us about your project…';
+      });
+    }
+    function openModal() { document.getElementById('mOv').classList.add('open'); document.body.style.overflow='hidden'; }
+    function closeModal() { document.getElementById('mOv').classList.remove('open'); document.body.style.overflow=''; }
+    function closeOut(e) { if (e.target===document.getElementById('mOv')) closeModal(); }
+    function submitForm(e, id) {
+      e.preventDefault();
+      document.getElementById(id).style.display='block';
+      e.target.querySelectorAll('input,textarea,button[type=submit]').forEach(el=>el.disabled=true);
+    }
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    const lb = document.getElementById('langBar');
+    const lightSecs = document.querySelectorAll('.what,.who');
+    const lbObs = new IntersectionObserver(entries => {
+      entries.forEach(() => {
+        let light = false;
+        lightSecs.forEach(s => { const r = s.getBoundingClientRect(); if (r.top < 50 && r.bottom > 0) light = true; });
+        lb.classList.toggle('dark', light);
+      });
+    }, { threshold: 0, rootMargin: '-50px 0px 0px 0px' });
+    lightSecs.forEach(s => lbObs.observe(s));
+  </script>
+</body>
+</html>
