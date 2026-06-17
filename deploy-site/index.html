@@ -1,261 +1,355 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>veche.design</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-  <style>
-    /*
-      PALETTE:
-      #304C53   dark teal   → Background A (hero, how, contact)
-      #F2F0EA   off-white   → Background B (what, who, footer) + text on A
-      #AFE0E7   pale teal   → highlight text on both, bars, arrows
-      #DDAD9C   warm salmon → buttons, card/box backgrounds
-      #BC6C50   terracotta  → hover states
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>veche.design</title>
+<style>
+/* Montserrat — self-hosted, correct static weights (no external requests) */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300;
+  src: url(./fonts/montserrat-300.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url(./fonts/montserrat-400.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: url(./fonts/montserrat-500.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600;
+  src: url(./fonts/montserrat-600.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url(./fonts/montserrat-700.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 900;
+  src: url(./fonts/montserrat-900.woff2) format('woff2');
+}
 
-      BG A (#304C53): text #F2F0EA, highlight #AFE0E7, boxes #DDAD9C, hover #BC6C50
-      BG B (#F2F0EA): text #304C53, highlight #AFE0E7, boxes #DDAD9C, hover #BC6C50
-    */
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: #F2F0EA;
-      color: #304C53;
-      font-size: 16px;
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-    }
+  /*
+    PALETTE — Broad-inspired, warm red instead of museum red:
+    #C8332B   red       — nav brand, headings, buttons, hero bg, accents
+    #111111   near-black— text on white, dark footer bg
+    #FFFFFF   white     — nav bg, section bg, button text
+    #F4F4F2   light grey— card backgrounds (the "Collection" section feel)
+    #6E6E6E   mid grey  — secondary text, nav lang toggle
+  */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Montserrat',sans-serif;
+    background:#fff;color:#111111;
+    font-size:16px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
 
-    /* LANG BAR — default on Background A */
-    .lang-bar {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 200; display: flex; justify-content: flex-end;
-      padding: 16px 48px; pointer-events: none;
-    }
-    .lang-bar button {
-      pointer-events: all; background: none;
-      border: 1px solid rgba(242,240,234,0.4);
-      font-family: 'Montserrat', sans-serif; font-size: 11px;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      cursor: pointer; padding: 5px 13px;
-      color: rgba(242,240,234,0.6);
-      transition: all 0.2s; font-weight: 700;
-    }
-    .lang-bar button:first-child { border-right: none; }
-    .lang-bar button.active,
-    .lang-bar button:hover { background: #BC6C50; color: #F2F0EA; border-color: #BC6C50; }
-    /* on Background B sections */
-    .lang-bar.on-grey button { border-color: rgba(48,76,83,0.3); color: rgba(48,76,83,0.55); }
-    .lang-bar.on-grey button.active,
-    .lang-bar.on-grey button:hover { background: #BC6C50; color: #F2F0EA; border-color: #BC6C50; }
+  /* ══ NAV ══ */
+  nav{
+    position:sticky; top:0; z-index:300;
+    background:#ffffff;
+    border-bottom:1px solid rgba(17,17,17,0.08);
+    padding:18px 48px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-brand{
+    font-size:1.05rem; font-weight:700; letter-spacing:0.02em;
+    color:#C8332B; text-decoration:none;
+  }
+  .nav-right{ display:flex; align-items:center; gap:28px; }
+  .nav-links{ display:flex; gap:28px; }
+  .nav-links a{
+    font-size:0.82rem; font-weight:500; letter-spacing:0.02em;
+    color:#111111; text-decoration:none; transition:color 0.2s;
+  }
+  .nav-links a:hover{ color:#C8332B; }
+  .lang-toggle{ display:flex; gap:6px; }
+  .lang-toggle button{
+    background:none; border:1px solid rgba(110,110,110,0.3);
+    font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:0.1em;
+    text-transform:uppercase; cursor:pointer; padding:4px 10px;
+    color:#6E6E6E; transition:all 0.2s; font-weight:600;
+  }
+  .lang-toggle button.active,
+  .lang-toggle button:hover{ background:#6E6E6E; color:#fff; border-color:#6E6E6E; }
 
-    /* LANG SWITCH */
-    [data-lang] { display: none; }
-    body.lang-en [data-lang="en"], body.lang-de [data-lang="de"] { display: block; }
-    span[data-lang] { display: none; }
-    body.lang-en span[data-lang="en"], body.lang-de span[data-lang="de"] { display: inline; }
+  /* ══ LANG SWITCH ══ */
+  [data-lang]{display:none;}
+  body.lang-en [data-lang="en"], body.lang-de [data-lang="de"]{display:block;}
+  span[data-lang]{display:none;}
+  body.lang-en span[data-lang="en"], body.lang-de span[data-lang="de"]{display:inline;}
 
-    /* BUTTON */
-    .btn {
-      display: inline-block; background: #DDAD9C; color: #304C53;
-      border: none; font-family: 'Montserrat', sans-serif;
-      font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
-      padding: 18px 48px; cursor: pointer; font-weight: 700;
-      text-decoration: none; transition: background 0.2s, transform 0.15s;
-    }
-    .btn:hover { background: #BC6C50; color: #F2F0EA; transform: translateY(-1px); }
+  /* ══ BUTTON (pill, Broad-style) ══ */
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    background:#C8332B; color:#ffffff;
+    border:none; border-radius:999px;
+    font-family:'Montserrat',sans-serif;
+    font-size:13px; letter-spacing:0.04em; font-weight:600;
+    padding:15px 32px; cursor:pointer;
+    text-decoration:none; transition:background 0.2s, transform 0.15s;
+  }
+  .btn:hover{ background:#a82a23; transform:translateY(-1px); }
+  .btn-outline{
+    background:transparent; color:#ffffff;
+    border:1.5px solid rgba(255,255,255,0.6);
+  }
+  .btn-outline:hover{ background:rgba(255,255,255,0.12); border-color:#fff; }
 
-    /* SECTION TAG */
-    .section-tag {
-      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: #AFE0E7; margin-bottom: 18px; display: block; font-weight: 700;
-    }
-    /* section tag on Background B */
-    .what .section-tag, .who .section-tag { color: #AFE0E7; }
+  /* ══ SECTION TAG ══ */
+  .section-tag{
+    font-size:12px; letter-spacing:0.16em; text-transform:uppercase;
+    color:#C8332B; margin-bottom:18px; display:block; font-weight:700;
+  }
 
-    /* HERO — bg: #304C53 */
-    .hero {
-      min-height: 100vh; background: #304C53; color: #F2F0EA;
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 140px 64px 100px; position: relative; overflow: hidden;
-    }
-    .hero::before {
-      content: ''; position: absolute; inset: 0; pointer-events: none;
-      background:
-        radial-gradient(ellipse at 85% 15%, rgba(175,224,231,0.12) 0%, transparent 50%),
-        radial-gradient(ellipse at 8%  85%, rgba(188,108,80,0.2)   0%, transparent 45%);
-    }
-    .hero-brand {
-      font-size: clamp(0.9rem, 1.8vw, 1.4rem); font-weight: 600;
-      letter-spacing: 0.14em; color: rgba(242,240,234,0.45);
-      margin-bottom: 40px; opacity: 0; animation: fadeUp 0.6s ease forwards 0.1s;
-    }
-    .hero h1 {
-      font-weight: 900; font-size: clamp(2rem, 4.6vw, 4.8rem);
-      line-height: 1.02; letter-spacing: -0.025em; text-transform: uppercase;
-      max-width: 1060px; margin-bottom: 60px; color: #F2F0EA;
-      opacity: 0; animation: fadeUp 0.8s ease forwards 0.3s;
-    }
-    .hero h1 em { font-style: normal; color: #AFE0E7; }
-    .hero-cta {
-      opacity: 0; animation: fadeUp 0.8s ease forwards 0.55s;
-      display: inline-block; align-self: flex-start;
-    }
+  /* ══ HERO — 2/3 red left, 1/3 white right ══ */
+  .hero{
+    display:grid; grid-template-columns:1fr 1fr;
+    min-height:calc(100vh - 73px);
+    padding:28px 28px 28px 0;
+    background:#ffffff;
+  }
+  .hero-left{
+    background:#C8332B; color:#ffffff;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:64px 64px;
+  }
+  .hero-right{
+    background:#ffffff;
+    /* space reserved for an image later */
+  }
+  .hero h1{
+    font-weight:600;
+    font-size:clamp(1.5rem, 2.6vw, 2.4rem);
+    line-height:1.3; letter-spacing:-0.005em;
+    margin-bottom:40px; color:#ffffff;
+    opacity:0; animation:fadeUp 0.8s ease forwards 0.3s;
+  }
+  .hero h1 .highlight{ color:#ffffff; font-weight:700; text-transform:uppercase; }
+  .hero-cta{ opacity:0; animation:fadeUp 0.8s ease forwards 0.55s; }
 
-    /* WHAT — bg: #F2F0EA */
-    .what { background: #F2F0EA; padding: 110px 64px; }
-    .big-title {
-      font-weight: 900; font-size: clamp(1.5rem, 3vw, 3rem);
-      line-height: 1.05; text-transform: uppercase;
-      letter-spacing: -0.02em; margin-bottom: 60px; color: #304C53;
-    }
-    .what-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; }
-    .what-card {
-      background: #DDAD9C; padding: 44px 36px 52px;
-      transition: background 0.35s; cursor: default;
-    }
-    .what-card:hover { background: #BC6C50; }
-    .what-card:hover .wc-bar  { background: #F2F0EA; }
-    .what-card:hover .wc-name { color: #F2F0EA; }
-    .what-card:hover .wc-text { color: rgba(242,240,234,0.85); }
-    .wc-bar  { width: 28px; height: 2px; background: #304C53; margin-bottom: 22px; transition: background 0.3s; }
-    .wc-name {
-      font-size: clamp(1.3rem, 1.9vw, 1.8rem); font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.06em; color: #304C53;
-      margin-bottom: 18px; transition: color 0.3s; line-height: 1.05;
-    }
-    .wc-text { font-size: 0.95rem; line-height: 1.8; color: rgba(48,76,83,0.75); transition: color 0.3s; font-weight: 400; }
+  /* ══ WHAT ══ */
+  .what{ background:#ffffff; padding:110px 64px; }
+  .big-title{
+    font-weight:900; font-size:clamp(1.6rem, 3vw, 2.8rem);
+    line-height:1.1; letter-spacing:-0.015em;
+    margin-bottom:60px; color:#111111;
+  }
+  .what-cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .what-card{
+    background:#ffffff;
+    border:1px solid rgba(17,17,17,0.14);
+    padding:40px 32px 46px;
+    transition:box-shadow 0.3s, transform 0.3s, border-color 0.3s;
+    cursor:default;
+  }
+  .what-card:hover{
+    box-shadow:0 18px 40px rgba(17,17,17,0.1);
+    transform:translateY(-3px);
+    border-color:rgba(17,17,17,0.08);
+  }
+  .wc-name{
+    font-size:1.15rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.04em;
+    color:#C8332B; margin-bottom:18px;
+  }
+  .wc-text{ font-size:0.94rem; line-height:1.8; color:#333333; }
 
-    /* HOW — bg: #304C53 */
-    .how { background: #304C53; padding: 110px 64px; }
-    .how-hd { margin-bottom: 56px; }
-    .how-hd h2 {
-      font-weight: 900; font-size: clamp(1.5rem, 3vw, 3rem);
-      text-transform: uppercase; letter-spacing: -0.02em;
-      line-height: 1.05; margin-bottom: 18px; color: #F2F0EA;
-    }
-    .how-sub { color: rgba(242,240,234,0.65); font-size: 0.9rem; max-width: 560px; line-height: 1.75; }
-    .sprints { display: grid; grid-template-columns: repeat(5,1fr); gap: 3px; }
-    .sprint {
-      background: #DDAD9C; border: none;
-      padding: 32px 22px 36px; display: flex; flex-direction: column; transition: background 0.3s;
-    }
-    .sprint:hover { background: #BC6C50; }
-    .sprint:hover .sp-name { color: #F2F0EA; }
-    .sprint:hover .sp-desc { color: rgba(242,240,234,0.8); }
-    .sprint.core { background: #DDAD9C; outline: 2px solid #AFE0E7; outline-offset: -2px; }
-    .sprint.core:hover { background: #BC6C50; outline-color: transparent; }
-    .sp-name { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #304C53; margin-bottom: 16px; line-height: 1.4; transition: color 0.3s; }
-    .sprint.core .sp-name { color: #304C53; }
-    .sp-desc { font-size: 0.88rem; line-height: 1.75; color: rgba(48,76,83,0.75); transition: color 0.3s; }
+  /* ══ DESIGN CHALLENGE ══ */
+  .design-challenge{
+    display:grid; grid-template-columns:1fr 1fr;
+    min-height:560px;
+  }
+  .dc-image{ background:#ffffff; }
+  .dc-content{
+    background:#ffffff;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:80px 64px;
+  }
+  .dc-title{
+    font-weight:900; font-size:clamp(1.6rem, 3vw, 2.6rem);
+    line-height:1.1; letter-spacing:-0.015em;
+    color:#111111; margin-bottom:36px;
+  }
+  .dc-box{
+    background:#ffffff;
+    border:1px solid rgba(17,17,17,0.14);
+    padding:32px 30px;
+    max-width:460px;
+    transition:box-shadow 0.3s, transform 0.3s, border-color 0.3s;
+    cursor:default;
+  }
+  .dc-box:hover{
+    box-shadow:0 18px 40px rgba(17,17,17,0.1);
+    transform:translateY(-3px);
+    border-color:rgba(17,17,17,0.08);
+  }
+  .dc-box p{ font-size:0.94rem; line-height:1.85; color:#333333; }
 
-    /* WHO — bg: #F2F0EA */
-    .who { background: #F2F0EA; padding: 110px 64px; }
-    .who h2 {
-      font-weight: 900; font-size: clamp(1.5rem, 3vw, 3rem);
-      text-transform: uppercase; letter-spacing: -0.02em;
-      margin-bottom: 56px; line-height: 1.05; color: #304C53;
-    }
-    .who-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
-    .who-card {
-      background: #DDAD9C; padding: 52px 48px;
-      display: flex; flex-direction: column;
-      transition: background 0.35s; cursor: default; min-height: 300px;
-    }
-    .who-card:hover { background: #BC6C50; }
-    .who-card:hover .wh-bar      { background: #F2F0EA; }
-    .who-card:hover .wh-name     { color: #F2F0EA; }
-    .who-card:hover .wh-subtitle { color: rgba(242,240,234,0.8); }
-    .who-card:hover .wh-list     { opacity: 1; transform: translateY(0); }
-    .who-card:hover .wh-list li  { color: rgba(242,240,234,0.85); border-top-color: rgba(242,240,234,0.25); }
-    .who-card:hover .wh-list li:last-child { border-bottom-color: rgba(242,240,234,0.25); }
-    .who-card:hover .wh-list li::before { color: #AFE0E7; }
-    .wh-bar { width: 28px; height: 2px; background: #304C53; margin-bottom: 22px; transition: background 0.3s; }
-    .wh-name {
-      font-size: clamp(1.5rem, 2.4vw, 2.2rem); font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.04em; color: #304C53;
-      margin-bottom: 12px; transition: color 0.3s; line-height: 1.05;
-    }
-    .wh-subtitle { font-size: 1rem; font-weight: 400; line-height: 1.6; color: rgba(48,76,83,0.75); transition: color 0.3s; }
-    .wh-list {
-      list-style: none; margin-top: 28px;
-      opacity: 1; transform: none;
-      transition: opacity 0.35s ease, transform 0.35s ease;
-    }
-    .wh-list li {
-      font-size: 0.92rem; color: rgba(48,76,83,0.8);
-      padding: 8px 0 8px 22px; position: relative;
-      border-top: 1px solid rgba(48,76,83,0.15); font-weight: 400;
-    }
-    .wh-list li:last-child { border-bottom: 1px solid rgba(48,76,83,0.15); }
-    .wh-list li::before { content: '→'; position: absolute; left: 0; top: 9px; color: #304C53; font-size: 0.75rem; }
+  /* ══ HOW ══ */
+  .how{ background:#ffffff; padding:110px 64px; }
+  .how-hd{ margin-bottom:56px; }
+  .how-hd h2{
+    font-weight:900; font-size:clamp(1.6rem, 3vw, 2.8rem);
+    line-height:1.1; letter-spacing:-0.015em;
+    margin-bottom:18px; color:#111111;
+  }
+  .how-sub{ color:#444444; font-size:0.92rem; max-width:560px; line-height:1.75; }
 
-    /* CONTACT — bg: #304C53 */
-    .contact { background: #304C53; color: #F2F0EA; padding: 110px 64px; text-align: center; }
-    .contact h2 {
-      font-weight: 900; font-size: clamp(2.2rem, 5vw, 5rem);
-      text-transform: uppercase; letter-spacing: -0.03em;
-      line-height: 0.95; margin-bottom: 52px; color: #F2F0EA;
-    }
-    .contact h2 em { font-style: normal; color: #AFE0E7; }
+  .sprints{ display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+  .sprint{
+    background:#ffffff;
+    border:1px solid rgba(17,17,17,0.14);
+    padding:30px 22px 34px;
+    display:flex; flex-direction:column;
+    transition:box-shadow 0.3s, transform 0.3s;
+  }
+  .sprint:hover{
+    box-shadow:0 16px 36px rgba(17,17,17,0.1);
+    transform:translateY(-3px);
+  }
+  .sp-name{
+    font-size:0.8rem; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.06em; color:#C8332B; margin-bottom:16px; line-height:1.4;
+  }
+  .sp-desc{ font-size:0.88rem; line-height:1.75; color:#333333; }
 
-    /* FOOTER — bg: #F2F0EA */
-    footer {
-      background: #F2F0EA; border-top: 3px solid #DDAD9C;
-      padding: 26px 64px; display: flex; justify-content: space-between;
-      align-items: center; flex-wrap: wrap; gap: 14px;
-    }
-    .ft-brand { font-size: 0.82rem; font-weight: 300; letter-spacing: 0.1em; color: #304C53; }
-    .ft-links { display: flex; gap: 24px; }
-    .ft-links a { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #304C53; text-decoration: none; transition: color 0.2s; opacity: 0.7; }
-    .ft-links a:hover { color: #BC6C50; opacity: 1; }
+  /* ══ WHO — grey "collection" section ══ */
+  .who{ background:#F4F4F2; padding:110px 64px; }
+  .who h2{
+    font-weight:900; font-size:clamp(1.6rem, 3vw, 2.8rem);
+    letter-spacing:-0.015em; margin-bottom:56px; line-height:1.1; color:#111111;
+  }
+  .who-cards{ display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+  .who-card{
+    background:#ffffff;
+    border:1px solid rgba(17,17,17,0.12);
+    padding:48px 44px;
+    transition:box-shadow 0.3s, transform 0.3s;
+    cursor:default; min-height:180px;
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .who-card:hover{
+    box-shadow:0 18px 40px rgba(17,17,17,0.1);
+    transform:translateY(-3px);
+  }
+  .wh-name{
+    font-size:1.4rem; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.03em; color:#C8332B; margin-bottom:14px;
+  }
+  .wh-subtitle{ font-size:1rem; font-weight:400; line-height:1.6; color:#222222; }
 
-    /* REVEAL */
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .reveal.visible { opacity: 1; transform: none; }
+  /* ══ CONTACT — dark footer-style section ══ */
+  .contact{
+    background:#111111; color:#ffffff;
+    padding:110px 64px; text-align:center;
+  }
+  .contact .section-tag{ color:#e36a62; }
+  .contact h2{
+    font-weight:900; font-size:clamp(2rem, 4.4vw, 4rem);
+    letter-spacing:-0.02em; line-height:1.05; margin-bottom:48px; color:#ffffff;
+  }
+  .contact h2 em{ font-style:normal; color:#e36a62; }
+  .contact .btn{ background:#C8332B; }
+  .contact .btn:hover{ background:#e36a62; }
 
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  /* ══ FOOTER — narrow white bar ══ */
+  footer{
+    background:#ffffff;
+    border-top:1px solid rgba(17,17,17,0.1);
+    padding:24px 48px;
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:14px;
+  }
+  .ft-brand{ font-size:0.9rem; font-weight:700; color:#C8332B; }
+  .ft-links{ display:flex; gap:24px; }
+  .ft-links a{
+    font-size:10px; letter-spacing:0.1em; text-transform:uppercase;
+    color:#C8332B; text-decoration:none; transition:opacity 0.2s;
+  }
+  .ft-links a:hover{ opacity:0.65; }
 
-    /* RESPONSIVE */
-    @media (max-width: 960px) {
-      .hero, .what, .how, .who, .contact { padding: 80px 28px; }
-      footer { padding: 24px 28px; }
-      .lang-bar { padding: 14px 28px; }
-      .sprints { grid-template-columns: 1fr 1fr; }
-      .what-cards, .who-cards { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 540px) {
-      .sprints { grid-template-columns: 1fr; }
-      .hero h1 { font-size: clamp(1.8rem, 9vw, 2.8rem); }
-    }
-  </style>
+  /* ══ REVEAL ══ */
+  .reveal{ opacity:0; transform:translateY(20px); transition:opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible{ opacity:1; transform:none; }
+  @keyframes fadeUp{ from{opacity:0;transform:translateY(14px);} to{opacity:1;transform:none;} }
+
+  /* ══ RESPONSIVE ══ */
+  @media (max-width:960px){
+    .hero{ grid-template-columns:1fr; padding:0; }
+    .hero-right{ display:none; }
+    .hero-left{ padding:48px 28px; }
+    .what,.how,.who,.contact{ padding:80px 28px; }
+    footer{ padding:20px 28px; }
+    nav{ padding:16px 24px; }
+    .nav-links{ display:none; }
+    .sprints{ grid-template-columns:1fr 1fr; }
+    .what-cards{ grid-template-columns:1fr; }
+    .design-challenge{ grid-template-columns:1fr; min-height:auto; }
+    .dc-image{ display:none; }
+    .dc-content{ padding:64px 28px; }
+    .who-cards{ grid-template-columns:1fr; }
+  }
+  @media (max-width:540px){
+    .sprints{ grid-template-columns:1fr; }
+  }
+</style>
 </head>
-<body class="lang-en">
+<body class="lang-en" id="top">
 
-  <div class="lang-bar" id="langBar">
-    <button class="active" onclick="setLang('en')" id="btn-en">EN</button>
-    <button onclick="setLang('de')" id="btn-de">DE</button>
-  </div>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-brand">veche.design</div>
-    <h1 data-lang="en">We help teams develop,<br>communicate and fund<br><em>non-digital projects</em><br>and AI&#8209;proof jobs.</h1>
-    <h1 data-lang="de">Wir helfen Teams, nicht-digitale<br>Projekte und <em>KI&#8209;sichere Jobs</em><br>zu entwickeln, zu kommunizieren<br>und zu finanzieren.</h1>
-    <div class="hero-cta">
-      <a href="mailto:veche.design@gmail.com" class="btn">
-        <span data-lang="en">Get in touch</span>
-        <span data-lang="de">Kontakt aufnehmen</span>
-      </a>
+  <!-- ══ NAV ══ -->
+  <nav>
+    <a href="#top" class="nav-brand">veche.design</a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <!-- space reserved for future navigation items -->
+      </div>
+      <div class="lang-toggle">
+        <button class="active" onclick="setLang('en')" id="btn-en">EN</button>
+        <button onclick="setLang('de')" id="btn-de">DE</button>
+      </div>
     </div>
+  </nav>
+
+  <!-- ══ HERO ══ -->
+  <section class="hero">
+    <div class="hero-left">
+      <h1 data-lang="en">We help teams develop, communicate and fund<br><span class="highlight">non-digital projects</span><br>and <span class="highlight">AI-proof jobs</span>.</h1>
+      <h1 data-lang="de">Wir helfen Teams,<br><span class="highlight">NICHT-DIGITALE PROJEKTE</span><br>und <span class="highlight">KI-SICHERE JOBS</span><br>zu entwickeln, kommunizieren und finanzieren.</h1>
+      <div class="hero-cta">
+        <a href="mailto:hello@veche.design" class="btn btn-outline">
+          <span data-lang="en">Get in touch</span>
+          <span data-lang="de">Kontakt aufnehmen</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-right"></div>
   </section>
 
-  <!-- WHAT -->
+  <!-- ══ WHAT ══ -->
   <section class="what">
     <div class="reveal">
       <span class="section-tag" data-lang="en">What we work on</span>
@@ -265,21 +359,18 @@
     </div>
     <div class="what-cards reveal">
       <div class="what-card">
-        <div class="wc-bar"></div>
         <div class="wc-name" data-lang="en">Products</div>
         <div class="wc-name" data-lang="de">Produkte</div>
         <div class="wc-text" data-lang="en">Physical products such as consumer goods, foods, tech, circular economy and the crafts.</div>
         <div class="wc-text" data-lang="de">Physische Produkte wie Konsumgüter, Lebensmittel, Technologie, Kreislaufwirtschaft und Handwerk.</div>
       </div>
       <div class="what-card">
-        <div class="wc-bar"></div>
-        <div class="wc-name" data-lang="en">Programs</div>
-        <div class="wc-name" data-lang="de">Programme</div>
-        <div class="wc-text" data-lang="en">Information structured into trainings, methods and courses that drive impact and growth.</div>
-        <div class="wc-text" data-lang="de">Wissen strukturiert in Trainings, Methoden und Kurse, die Impact und Wachstum fördern.</div>
+        <div class="wc-name" data-lang="en">Methods</div>
+        <div class="wc-name" data-lang="de">Methoden</div>
+        <div class="wc-text" data-lang="en">Methods, analytical tools, event programs, training programs, incubators, policy proposals.</div>
+        <div class="wc-text" data-lang="de">Methoden, analytische Werkzeuge, Veranstaltungsprogramme, Trainingsprogramme, Inkubatoren, politische Vorschläge.</div>
       </div>
       <div class="what-card">
-        <div class="wc-bar"></div>
         <div class="wc-name" data-lang="en">Places</div>
         <div class="wc-name" data-lang="de">Orte</div>
         <div class="wc-text" data-lang="en">Spaces that facilitate growth and connection such as retail, community hubs or innovation parks.</div>
@@ -288,11 +379,26 @@
     </div>
   </section>
 
-  <!-- HOW -->
-  <section class="how">
-    <div class="how-hd reveal">
+  <!-- ══ DESIGN CHALLENGE ══ -->
+  <section class="design-challenge">
+    <div class="dc-image"></div>
+    <div class="dc-content reveal">
       <span class="section-tag" data-lang="en">Our key service</span>
       <span class="section-tag" data-lang="de">Unser Kernangebot</span>
+      <div class="dc-title" data-lang="en">Design Challenge</div>
+      <div class="dc-title" data-lang="de">Design Challenge</div>
+      <div class="dc-box">
+        <p data-lang="en">A powerful way to develop. First, we channel existing insights into a clear video brief and project docs.<br><br>Then we gather relevant external input &mdash; under NDA and if needed publicly &mdash; to push your projects further fast.</p>
+        <p data-lang="de">Eine kraftvolle Art zu entwickeln. Zunächst kanalisieren wir vorhandene Erkenntnisse in ein klares Videobriefing und Projektunterlagen.<br><br>Anschließend holen wir relevantes externes Feedback ein &mdash; unter NDA und bei Bedarf öffentlich &mdash;, um Ihre Projekte schnell weiterzubringen.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ HOW ══ -->
+  <section class="how">
+    <div class="how-hd reveal">
+      <span class="section-tag" data-lang="en">How we work</span>
+      <span class="section-tag" data-lang="de">Wie wir arbeiten</span>
       <h2 data-lang="en">From first idea to funded project.</h2>
       <h2 data-lang="de">Von der ersten Idee zum finanzierten Projekt.</h2>
       <p class="how-sub" data-lang="en">We begin with an audit and agree on a roadmap. You can start at any stage.</p>
@@ -300,22 +406,22 @@
     </div>
     <div class="sprints reveal">
       <div class="sprint">
-        <div class="sp-name" data-lang="en">Audit Sprint</div>
-        <div class="sp-name" data-lang="de">Audit Sprint</div>
+        <div class="sp-name" data-lang="en">Internal Audit Sprint</div>
+        <div class="sp-name" data-lang="de">Internal Audit Sprint</div>
         <div class="sp-desc" data-lang="en">We build a plan based on what you have.</div>
         <div class="sp-desc" data-lang="de">Wir entwickeln einen Plan auf Basis dessen, was Sie haben.</div>
       </div>
-      <div class="sprint core">
-        <div class="sp-name" data-lang="en">Fundable Concept Sprint ★</div>
-        <div class="sp-name" data-lang="de">Fundable Concept Sprint ★</div>
-        <div class="sp-desc" data-lang="en">We get your project ready for sales and/or funding.</div>
-        <div class="sp-desc" data-lang="de">Wir bereiten Ihr Projekt für Vertrieb und/oder Finanzierung vor.</div>
-      </div>
       <div class="sprint">
-        <div class="sp-name" data-lang="en">Validation Sprint</div>
-        <div class="sp-name" data-lang="de">Validierungssprint</div>
+        <div class="sp-name" data-lang="en">External Validation Sprint</div>
+        <div class="sp-name" data-lang="de">External Validation Sprint</div>
         <div class="sp-desc" data-lang="en">We test your project with real users and experts.</div>
         <div class="sp-desc" data-lang="de">Wir testen Ihr Projekt mit echten Nutzern und Experten.</div>
+      </div>
+      <div class="sprint">
+        <div class="sp-name" data-lang="en">Fundable Concept Sprint</div>
+        <div class="sp-name" data-lang="de">Fundable Concept Sprint</div>
+        <div class="sp-desc" data-lang="en">We get your project ready for funding.</div>
+        <div class="sp-desc" data-lang="de">Wir bereiten Ihr Projekt für die Finanzierung vor.</div>
       </div>
       <div class="sprint">
         <div class="sp-name" data-lang="en">Funding Support Sprint</div>
@@ -323,16 +429,10 @@
         <div class="sp-desc" data-lang="en">We identify funders, support applications and prepare for due diligence.</div>
         <div class="sp-desc" data-lang="de">Wir identifizieren Förderer, unterstützen Anträge und bereiten auf Due Diligence vor.</div>
       </div>
-      <div class="sprint">
-        <div class="sp-name" data-lang="en">Co-Development</div>
-        <div class="sp-name" data-lang="de">Co-Development</div>
-        <div class="sp-desc" data-lang="en">We partner long-term to build a portfolio and scale.</div>
-        <div class="sp-desc" data-lang="de">Wir arbeiten langfristig zusammen, um ein Portfolio aufzubauen und zu skalieren.</div>
-      </div>
     </div>
   </section>
 
-  <!-- WHO -->
+  <!-- ══ WHO ══ -->
   <section class="who">
     <div class="reveal">
       <span class="section-tag" data-lang="en">Who we work with</span>
@@ -342,83 +442,55 @@
     </div>
     <div class="who-cards reveal">
       <div class="who-card">
-        <div class="wh-bar"></div>
         <div class="wh-name" data-lang="en">Ecosystem Builders</div>
         <div class="wh-name" data-lang="de">Ökosystem-Akteure</div>
-        <p class="wh-subtitle" data-lang="en">We provide a trusted method to test projects.</p>
-        <p class="wh-subtitle" data-lang="de">Wir bieten eine bewährte Methode, um Projekte zu testen.</p>
-        <ul class="wh-list">
-          <li data-lang="en">Incubators &amp; Accelerators</li>
-          <li data-lang="de">Inkubatoren &amp; Acceleratoren</li>
-          <li data-lang="en">City Development Agencies</li>
-          <li data-lang="de">Stadtentwicklungsgesellschaften</li>
-          <li data-lang="en">Foundations</li>
-          <li data-lang="de">Stiftungen</li>
-          <li data-lang="en">Chambers of Commerce</li>
-          <li data-lang="de">Industrie- und Handelskammern</li>
-        </ul>
+        <p class="wh-subtitle" data-lang="en">We validate projects for Incubators &amp; Accelerators, City Development Agencies and Chambers of Commerce.</p>
+        <p class="wh-subtitle" data-lang="de">Wir validieren Projekte für Inkubatoren &amp; Acceleratoren, Stadtentwicklungsgesellschaften und Industrie- und Handelskammern.</p>
       </div>
       <div class="who-card">
-        <div class="wh-bar"></div>
         <div class="wh-name" data-lang="en">Teams</div>
         <div class="wh-name" data-lang="de">Teams</div>
-        <p class="wh-subtitle" data-lang="en">We help you develop the next step.</p>
-        <p class="wh-subtitle" data-lang="de">Wir helfen Ihnen, den nächsten Schritt zu entwickeln.</p>
-        <ul class="wh-list">
-          <li data-lang="en">Product developers and craftsmen</li>
-          <li data-lang="de">Produktentwickler und Handwerker</li>
-          <li data-lang="en">Place operators</li>
-          <li data-lang="de">Standortbetreiber</li>
-          <li data-lang="en">Program Gurus</li>
-          <li data-lang="de">Programm-Experten</li>
-        </ul>
+        <p class="wh-subtitle" data-lang="en">We develop the next big step together with product developers, place operators and founders.</p>
+        <p class="wh-subtitle" data-lang="de">Wir entwickeln gemeinsam mit Produktentwicklern, Standortbetreibern und Gründern den nächsten großen Schritt.</p>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- ══ CONTACT ══ -->
   <section class="contact">
     <div class="reveal">
       <span class="section-tag" data-lang="en">Let's build something real</span>
       <span class="section-tag" data-lang="de">Lassen Sie uns etwas Reales aufbauen</span>
-      <h2 data-lang="en">Ready<br>to <em>start?</em></h2>
-      <h2 data-lang="de">Bereit<br><em>loszulegen?</em></h2>
-      <a href="mailto:veche.design@gmail.com" class="btn">
+      <h2 data-lang="en">Ready to <em>start?</em></h2>
+      <h2 data-lang="de">Bereit <em>loszulegen?</em></h2>
+      <a href="mailto:hello@veche.design" class="btn">
         <span data-lang="en">Get in touch</span>
         <span data-lang="de">Kontakt aufnehmen</span>
       </a>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ══ FOOTER ══ -->
   <footer>
-    <span class="ft-brand">veche.design</span>
+    <a href="#top" class="ft-brand" style="text-decoration:none;">veche.design</a>
     <div class="ft-links">
-      <a href="#" data-lang="en">Impressum</a>
-      <a href="#" data-lang="de">Impressum</a>
-      <a href="#" data-lang="en">Privacy Policy</a>
-      <a href="#" data-lang="de">Datenschutz</a>
+      <a href="impressum.html" data-lang="en">Impressum</a>
+      <a href="impressum.html" data-lang="de">Impressum</a>
+      <a href="privacy-policy.html" data-lang="en">Privacy Policy</a>
+      <a href="privacy-policy.html" data-lang="de">Datenschutz</a>
     </div>
   </footer>
 
   <script>
-    function setLang(l) {
-      document.body.className = 'lang-' + l;
-      document.getElementById('btn-en').classList.toggle('active', l === 'en');
-      document.getElementById('btn-de').classList.toggle('active', l === 'de');
+    function setLang(l){
+      document.body.className='lang-'+l;
+      document.getElementById('btn-en').classList.toggle('active', l==='en');
+      document.getElementById('btn-de').classList.toggle('active', l==='de');
     }
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-    const lb = document.getElementById('langBar');
-    const greySecs = document.querySelectorAll('.what, .who');
-    const lbObs = new IntersectionObserver(() => {
-      let onGrey = false;
-      greySecs.forEach(s => { const r = s.getBoundingClientRect(); if (r.top < 50 && r.bottom > 0) onGrey = true; });
-      lb.classList.toggle('on-grey', onGrey);
-    }, { threshold: 0, rootMargin: '-50px 0px 0px 0px' });
-    greySecs.forEach(s => lbObs.observe(s));
+    const obs=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    },{threshold:0.1});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
   </script>
 </body>
 </html>
