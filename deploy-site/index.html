@@ -3,349 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Design Challenges for Non-Digital Projects and AI Proof Jobs</title>
-<meta name="description" content="veche.design helps teams develop, communicate and fund non-digital projects and AI-proof jobs.">
-
-<!-- Favicon -->
+<link rel="stylesheet" href="./styles.css">
 <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
 <link rel="icon" type="image/svg+xml" href="./favicon/favicon.svg">
+<title>Database of Validated Businesses That Create AI-Resistant Jobs</title>
+<meta name="description" content="veche.design is a database of validated businesses and systems that create jobs resistant to AI disruption.">
 
-<!-- Open Graph / WhatsApp / Facebook / iMessage preview -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://veche.design/">
-<meta property="og:title" content="Design Challenges for Non-Digital Projects and AI Proof Jobs">
-<meta property="og:description" content="veche.design helps teams develop, communicate and fund non-digital projects and AI-proof jobs.">
+<meta property="og:title" content="Database of Validated Businesses That Create AI-Resistant Jobs">
+<meta property="og:description" content="veche.design is a database of validated businesses and systems that create jobs resistant to AI disruption.">
 <meta property="og:image" content="https://veche.design/images/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-
-<!-- Twitter / X Card (also used as fallback by several preview generators) -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Design Challenges for Non-Digital Projects and AI Proof Jobs">
-<meta name="twitter:description" content="veche.design helps teams develop, communicate and fund non-digital projects and AI-proof jobs.">
+<meta name="twitter:title" content="Database of Validated Businesses That Create AI-Resistant Jobs">
+<meta name="twitter:description" content="veche.design is a database of validated businesses and systems that create jobs resistant to AI disruption.">
 <meta name="twitter:image" content="https://veche.design/images/og-image.jpg">
-
-<style>
-/* Montserrat — self-hosted, correct static weights (no external requests) */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 300;
-  src: url(./fonts/montserrat-300.woff2) format('woff2');
-}
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 400;
-  src: url(./fonts/montserrat-400.woff2) format('woff2');
-}
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 500;
-  src: url(./fonts/montserrat-500.woff2) format('woff2');
-}
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 600;
-  src: url(./fonts/montserrat-600.woff2) format('woff2');
-}
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 700;
-  src: url(./fonts/montserrat-700.woff2) format('woff2');
-}
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 900;
-  src: url(./fonts/montserrat-900.woff2) format('woff2');
-}
-
-
-  /*
-    PALETTE — Broad-inspired, warm red instead of museum red:
-    #C8332B   red       — nav brand, headings, buttons, hero bg, accents
-    #111111   near-black— text on white, dark footer bg
-    #FFFFFF   white     — nav bg, section bg, button text
-    #F4F4F2   light grey— card backgrounds (the "Collection" section feel)
-    #6E6E6E   mid grey  — secondary text, nav lang toggle
-  */
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    font-family:'Montserrat',sans-serif;
-    background:#fff;color:#111111;
-    font-size:16px;line-height:1.65;
-    -webkit-font-smoothing:antialiased;
-  }
-
-  /* ══ NAV ══ */
-  nav{
-    position:sticky; top:0; z-index:300;
-    background:#ffffff;
-    border-bottom:1px solid rgba(17,17,17,0.08);
-    padding:18px 48px;
-    display:flex; align-items:center; justify-content:space-between;
-  }
-  .nav-brand{
-    display:inline-flex; align-items:center;
-    text-decoration:none;
-  }
-  .nav-brand svg{ height:18px; width:auto; display:block; }
-  .nav-right{ display:flex; align-items:center; gap:28px; }
-  .nav-links{ display:flex; gap:28px; }
-  .nav-links a{
-    font-size:0.82rem; font-weight:500; letter-spacing:0.02em;
-    color:#111111; text-decoration:none; transition:color 0.2s;
-  }
-  .nav-links a:hover{ color:#C8332B; }
-  .lang-toggle{ display:flex; gap:6px; }
-  .lang-toggle button{
-    background:none; border:1px solid rgba(110,110,110,0.3);
-    font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:0.1em;
-    text-transform:uppercase; cursor:pointer; padding:4px 10px;
-    color:#6E6E6E; transition:all 0.2s; font-weight:600;
-  }
-  .lang-toggle button.active,
-  .lang-toggle button:hover{ background:#6E6E6E; color:#fff; border-color:#6E6E6E; }
-
-  /* ══ LANG SWITCH ══ */
-  [data-lang]{display:none;}
-  body.lang-en [data-lang="en"], body.lang-de [data-lang="de"]{display:block;}
-  span[data-lang]{display:none;}
-  body.lang-en span[data-lang="en"], body.lang-de span[data-lang="de"]{display:inline;}
-
-  /* ══ BUTTON (pill, Broad-style) ══ */
-  .btn{
-    display:inline-flex; align-items:center; gap:10px;
-    background:#C8332B; color:#ffffff;
-    border:none; border-radius:999px;
-    font-family:'Montserrat',sans-serif;
-    font-size:13px; letter-spacing:0.04em; font-weight:600;
-    padding:15px 32px; cursor:pointer;
-    text-decoration:none; transition:background 0.2s, transform 0.15s;
-  }
-  .btn:hover{ background:#a82a23; transform:translateY(-1px); }
-  .btn-outline{
-    background:transparent; color:#ffffff;
-    border:1.5px solid rgba(255,255,255,0.6);
-  }
-  .btn-outline:hover{ background:rgba(255,255,255,0.12); border-color:#fff; }
-
-  /* ══ SECTION TAG ══ */
-  .section-tag{
-    font-size:12px; letter-spacing:0.16em; text-transform:uppercase;
-    color:#C8332B; margin-bottom:18px; display:block; font-weight:700;
-  }
-
-  /* ══ HERO — 2/3 red left, 1/3 white right ══ */
-  .hero{
-    display:grid; grid-template-columns:1fr 1fr;
-    min-height:calc(100vh - 73px);
-    padding:28px 28px 28px 0;
-    background:#ffffff;
-  }
-  .hero-left{
-    background:#C8332B; color:#ffffff;
-    display:flex; flex-direction:column; justify-content:center;
-    padding:64px 64px;
-  }
-  .hero-right{
-    background:#ffffff url('./images/hero.jpg') center center / cover no-repeat;
-  }
-  .hero h1{
-    font-weight:600;
-    font-size:clamp(1.5rem, 2.6vw, 2.4rem);
-    line-height:1.3; letter-spacing:-0.005em;
-    margin-bottom:40px; color:#ffffff;
-    opacity:0; animation:fadeUp 0.8s ease forwards 0.3s;
-  }
-  .hero h1 .highlight{ color:#ffffff; font-weight:700; text-transform:uppercase; }
-  .hero-cta{ opacity:0; animation:fadeUp 0.8s ease forwards 0.55s; }
-
-  /* ══ WHAT ══ */
-  .what{ background:#ffffff; padding:110px 64px; }
-  .big-title{
-    font-weight:900; font-size:clamp(1.6rem, 3vw, 2.8rem);
-    line-height:1.1; letter-spacing:-0.015em;
-    margin-bottom:60px; color:#111111;
-  }
-  .what-cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
-  .what-card{
-    background:#ffffff;
-    border:1px solid rgba(17,17,17,0.14);
-    padding:40px 32px 46px;
-    transition:box-shadow 0.3s, transform 0.3s, border-color 0.3s;
-    cursor:default;
-  }
-  .what-card:hover{
-    box-shadow:0 18px 40px rgba(17,17,17,0.1);
-    transform:translateY(-3px);
-    border-color:rgba(17,17,17,0.08);
-  }
-  .wc-name{
-    font-size:1.15rem; font-weight:700;
-    text-transform:uppercase; letter-spacing:0.04em;
-    color:#C8332B; margin-bottom:18px;
-  }
-  .wc-text{ font-size:0.94rem; line-height:1.8; color:#333333; }
-
-  /* ══ DESIGN CHALLENGE ══ */
-  .design-challenge{
-    display:grid; grid-template-columns:1fr 1fr;
-    min-height:560px;
-  }
-  .dc-image{ background:#ffffff url('./images/design-challenge.jpg') center center / cover no-repeat; }
-  .dc-content{
-    background:#ffffff;
-    display:flex; flex-direction:column; justify-content:center;
-    padding:80px 64px;
-  }
-  .dc-title{
-    font-weight:900; font-size:clamp(1.6rem, 3vw, 2.6rem);
-    line-height:1.1; letter-spacing:-0.015em;
-    color:#111111; margin-bottom:36px;
-  }
-  .dc-box{
-    background:#ffffff;
-    border:1px solid rgba(17,17,17,0.14);
-    padding:32px 30px;
-    max-width:460px;
-    transition:box-shadow 0.3s, transform 0.3s, border-color 0.3s;
-    cursor:default;
-  }
-  .dc-box:hover{
-    box-shadow:0 18px 40px rgba(17,17,17,0.1);
-    transform:translateY(-3px);
-    border-color:rgba(17,17,17,0.08);
-  }
-  .dc-box p{ font-size:0.94rem; line-height:1.85; color:#333333; }
-
-  /* ══ HOW ══ */
-  .how{ background:#ffffff; padding:110px 64px; }
-  .how-hd{ margin-bottom:56px; }
-  .how-hd h2{
-    font-weight:900; font-size:clamp(1.6rem, 3vw, 2.8rem);
-    line-height:1.1; letter-spacing:-0.015em;
-    margin-bottom:18px; color:#111111;
-  }
-  .how-sub{ color:#444444; font-size:0.92rem; max-width:560px; line-height:1.75; }
-
-  .sprints{ display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
-  .sprint{
-    background:#ffffff;
-    border:1px solid rgba(17,17,17,0.14);
-    padding:30px 22px 34px;
-    display:flex; flex-direction:column;
-    transition:box-shadow 0.3s, transform 0.3s;
-  }
-  .sprint:hover{
-    box-shadow:0 16px 36px rgba(17,17,17,0.1);
-    transform:translateY(-3px);
-  }
-  .sp-name{
-    font-size:0.8rem; font-weight:700; text-transform:uppercase;
-    letter-spacing:0.06em; color:#C8332B; margin-bottom:16px; line-height:1.4;
-  }
-  .sp-desc{ font-size:0.88rem; line-height:1.75; color:#333333; }
-
-  /* ══ WHO — grey "collection" section ══ */
-  .who{ background:#F4F4F2; padding:110px 64px; }
-  .who h2{
-    font-weight:900; font-size:clamp(1.6rem, 3vw, 2.8rem);
-    letter-spacing:-0.015em; margin-bottom:56px; line-height:1.1; color:#111111;
-  }
-  .who-cards{ display:grid; grid-template-columns:1fr 1fr; gap:28px; }
-  .who-card{
-    background:#ffffff;
-    border:1px solid rgba(17,17,17,0.12);
-    padding:48px 44px;
-    transition:box-shadow 0.3s, transform 0.3s;
-    cursor:default; min-height:180px;
-    display:flex; flex-direction:column; justify-content:center;
-  }
-  .who-card:hover{
-    box-shadow:0 18px 40px rgba(17,17,17,0.1);
-    transform:translateY(-3px);
-  }
-  .wh-name{
-    font-size:1.4rem; font-weight:700; text-transform:uppercase;
-    letter-spacing:0.03em; color:#C8332B; margin-bottom:14px;
-  }
-  .wh-subtitle{ font-size:1rem; font-weight:400; line-height:1.6; color:#222222; }
-
-  /* ══ CONTACT — dark footer-style section ══ */
-  .contact{
-    background:#111111; color:#ffffff;
-    padding:110px 64px; text-align:center;
-  }
-  .contact .section-tag{ color:#e36a62; }
-  .contact h2{
-    font-weight:900; font-size:clamp(2rem, 4.4vw, 4rem);
-    letter-spacing:-0.02em; line-height:1.05; margin-bottom:48px; color:#ffffff;
-  }
-  .contact h2 em{ font-style:normal; color:#e36a62; }
-  .contact .btn{ background:#C8332B; }
-  .contact .btn:hover{ background:#e36a62; }
-
-  /* ══ FOOTER — narrow white bar ══ */
-  footer{
-    background:#ffffff;
-    border-top:1px solid rgba(17,17,17,0.1);
-    padding:24px 48px;
-    display:flex; justify-content:space-between; align-items:center;
-    flex-wrap:wrap; gap:14px;
-  }
-  .ft-brand{ font-size:0.9rem; font-weight:700; color:#C8332B; }
-  .ft-links{ display:flex; gap:24px; }
-  .ft-links a{
-    font-size:10px; letter-spacing:0.1em; text-transform:uppercase;
-    color:#C8332B; text-decoration:none; transition:opacity 0.2s;
-  }
-  .ft-links a:hover{ opacity:0.65; }
-
-  /* ══ REVEAL ══ */
-  .reveal{ opacity:0; transform:translateY(20px); transition:opacity 0.7s ease, transform 0.7s ease; }
-  .reveal.visible{ opacity:1; transform:none; }
-  @keyframes fadeUp{ from{opacity:0;transform:translateY(14px);} to{opacity:1;transform:none;} }
-
-  /* ══ RESPONSIVE ══ */
-  @media (max-width:960px){
-    .hero{ display:flex; flex-direction:column; padding:0; }
-    .hero-right{ height:280px; order:-1; }
-    .hero-left{ padding:48px 28px; }
-    .what,.how,.who,.contact{ padding:80px 28px; }
-    footer{ padding:20px 28px; }
-    nav{ padding:16px 24px; }
-    .nav-links{ display:none; }
-    .sprints{ grid-template-columns:1fr 1fr; }
-    .what-cards{ grid-template-columns:1fr; }
-    .design-challenge{ grid-template-columns:1fr; min-height:auto; }
-    .dc-image{ height:240px; }
-    .dc-content{ padding:64px 28px; }
-    .who-cards{ grid-template-columns:1fr; }
-  }
-  @media (max-width:540px){
-    .sprints{ grid-template-columns:1fr; }
-  }
-</style>
 </head>
 <body class="lang-en" id="top">
 
-  <!-- ══ NAV ══ -->
-  <nav>
-    <a href="#top" class="nav-brand" aria-label="veche.design"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-60 -1028 7118 1339">
+<nav>
+  <a href="index.html" class="nav-brand" aria-label="veche.design"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-60 -1028 7118 1339">
 <g fill="#C8332B" transform="scale(1,-1)">
 <path transform="translate(0,0)" d="M218 0 -8 538H153L302 172L456 538H606L379 0Z"/>
 <path transform="translate(598,0)" d="M339 -8Q246 -8 177.0 28.0Q108 64 70.0 126.5Q32 189 32 269Q32 350 69.5 412.5Q107 475 172.0 510.5Q237 546 319 546Q398 546 461.5 512.0Q525 478 562.0 415.5Q599 353 599 267Q599 258 598.0 246.5Q597 235 596 225H189Q201 175 241.5 146.0Q282 117 343 117Q386 117 418.5 130.0Q451 143 478 169L561 79Q485 -8 339 -8ZM188 316H452Q444 367 408.5 397.5Q373 428 320 428Q267 428 231.5 397.5Q196 367 188 316Z"/>
@@ -361,146 +42,209 @@
 </g>
 <circle cx="3297" cy="-89" r="80" fill="#C8332B"/>
 </svg></a>
-    <div class="nav-right">
-      <div class="nav-links">
-        <!-- space reserved for future navigation items -->
-      </div>
-      <div class="lang-toggle">
-        <button class="active" onclick="setLang('en')" id="btn-en">EN</button>
-        <button onclick="setLang('de')" id="btn-de">DE</button>
-      </div>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="index.html" class="active"><span data-lang="en">Home</span><span data-lang="de">Start</span></a>
+      <a href="database.html"><span data-lang="en">Database</span><span data-lang="de">Datenbank</span></a>
     </div>
-  </nav>
+    <div class="lang-toggle">
+      <button class="active" onclick="setLang('en')" id="btn-en">EN</button>
+      <button onclick="setLang('de')" id="btn-de">DE</button>
+    </div>
+  </div>
+</nav>
 
-  <!-- ══ HERO ══ -->
+<main>
+
+  <!-- ══ 1. HERO — narrow, centered ══ -->
   <section class="hero">
     <div class="hero-left">
-      <h1 data-lang="en">We help teams develop, communicate and fund<br><span class="highlight">non-digital projects</span><br>and <span class="highlight">AI-proof jobs</span>.</h1>
-      <h1 data-lang="de">Wir helfen Teams,<br><span class="highlight">NICHT-DIGITALE PROJEKTE</span><br>und <span class="highlight">KI-SICHERE JOBS</span><br>zu entwickeln, kommunizieren und finanzieren.</h1>
+      <h1 data-lang="en">The database of validated businesses that create AI-resistant jobs.</h1>
+      <h1 data-lang="de">Die Datenbank validierter Businesses, die KI-sichere Jobs schaffen.</h1>
+      <p class="hero-sub" data-lang="en"><strong>Non-digital ventures</strong> ready to launch in the Rhine Main region.</p>
+      <p class="hero-sub" data-lang="de"><strong>Nicht-digitale Geschäftsmodelle</strong> startklar in der Region Rhein-Main.</p>
       <div class="hero-cta">
-        <a href="mailto:hello@veche.design" class="btn btn-outline">
-          <span data-lang="en">Get in touch</span>
-          <span data-lang="de">Kontakt aufnehmen</span>
+        <a href="database.html" class="btn btn-outline">
+          <span data-lang="en">Explore tested businesses</span>
+          <span data-lang="de">Getestete Firmen entdecken</span>
         </a>
       </div>
     </div>
-    <div class="hero-right"></div>
+    <div class="hero-right" style="background-image:url('./images/frankfurt.jpg')"></div>
   </section>
 
-  <!-- ══ WHAT ══ -->
-  <section class="what">
-    <div class="reveal">
-      <span class="section-tag" data-lang="en">What we work on</span>
-      <span class="section-tag" data-lang="de">Womit wir arbeiten</span>
-      <div class="big-title" data-lang="en">Things people can touch, taste &amp; experience.</div>
-      <div class="big-title" data-lang="de">Dinge, die man berühren, schmecken &amp; erleben kann.</div>
+  <!-- ══ 2. PROBLEM ══ -->
+  <section class="problem">
+    <div class="problem-head">
+      <span class="section-tag" data-lang="en">We turn</span>
+      <span class="section-tag" data-lang="de">Wir machen</span>
+      <h2 data-lang="en">The crises of today into opportunities.</h2>
+      <h2 data-lang="de">Chancen aus den Krisen von heute.</h2>
     </div>
-    <div class="what-cards reveal">
-      <div class="what-card">
-        <div class="wc-name" data-lang="en">Products</div>
-        <div class="wc-name" data-lang="de">Produkte</div>
-        <div class="wc-text" data-lang="en">Physical products such as consumer goods, foods, tech, circular economy and the crafts.</div>
-        <div class="wc-text" data-lang="de">Physische Produkte wie Konsumgüter, Lebensmittel, Technologie, Kreislaufwirtschaft und Handwerk.</div>
+    <div class="pboxes pboxes-3">
+      <div class="pbox">
+        <div class="p-big" data-lang="en">3 million unemployed</div>
+        <div class="p-big" data-lang="de">3 Millionen Arbeitslose</div>
+        <div class="p-reg" data-lang="en">include junior applicants, senior and technical managers</div>
+        <div class="p-reg" data-lang="de">darunter Berufseinsteiger und Führungskräfte auch im Mittelstand</div>
       </div>
-      <div class="what-card">
-        <div class="wc-name" data-lang="en">Methods</div>
-        <div class="wc-name" data-lang="de">Methoden</div>
-        <div class="wc-text" data-lang="en">Methods, analytical tools, event programs, training programs, incubators, policy proposals.</div>
-        <div class="wc-text" data-lang="de">Methoden, analytische Werkzeuge, Veranstaltungsprogramme, Trainingsprogramme, Inkubatoren, politische Vorschläge.</div>
+      <div class="pbox">
+        <div class="p-reg" data-lang="en">can found</div>
+        <div class="p-reg" data-lang="de">können</div>
+        <div class="p-big" data-lang="en">AI-resistant businesses</div>
+        <div class="p-big" data-lang="de">KI-resistente Unternehmen</div>
+        <div class="p-reg" data-lang="de">gründen</div>
       </div>
-      <div class="what-card">
-        <div class="wc-name" data-lang="en">Places</div>
-        <div class="wc-name" data-lang="de">Orte</div>
-        <div class="wc-text" data-lang="en">Spaces that facilitate growth and connection such as retail, community hubs or innovation parks.</div>
-        <div class="wc-text" data-lang="de">Räume, die Wachstum und Verbindung fördern — Einzelhandel, Community Hubs oder Innovationsparks.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ DESIGN CHALLENGE ══ -->
-  <section class="design-challenge">
-    <div class="dc-image"></div>
-    <div class="dc-content reveal">
-      <span class="section-tag" data-lang="en">Our key service</span>
-      <span class="section-tag" data-lang="de">Unser Kernangebot</span>
-      <div class="dc-title" data-lang="en">Design Challenge</div>
-      <div class="dc-title" data-lang="de">Design Challenge</div>
-      <div class="dc-box">
-        <p data-lang="en">A powerful way to develop.<br><br>First, we channel existing insights into a clear video brief and project docs.<br><br>Then we gather relevant external input &mdash; under NDA and if needed publicly &mdash; to push your projects further fast.</p>
-        <p data-lang="de">Eine kraftvolle Art zu entwickeln. Zunächst kanalisieren wir vorhandene Erkenntnisse in ein klares Videobriefing und Projektunterlagen.<br><br>Anschließend holen wir relevantes externes Feedback ein &mdash; unter NDA und bei Bedarf öffentlich &mdash;, um Ihre Projekte schnell weiterzubringen.</p>
+      <div class="pbox">
+        <div class="p-reg" data-lang="en">but of all new ventures</div>
+        <div class="p-reg" data-lang="de">aber von allen neuen Gründungen</div>
+        <div class="p-big" data-lang="en">43% fail due to poor product market fit</div>
+        <div class="p-big" data-lang="de">scheitern 43% am mangelnden Produkt-Markt-Fit</div>
       </div>
     </div>
   </section>
 
-  <!-- ══ HOW ══ -->
+  <!-- ══ 3. WE HELP BUILD ══ -->
+  <section class="build">
+    <div class="build-head">
+      <span class="section-tag" data-lang="en">We help build</span>
+      <span class="section-tag" data-lang="de">Wir entwickeln</span>
+      <h2 data-lang="en">Things people can touch, taste and experience.</h2>
+      <h2 data-lang="de">Dinge, die man anfassen, schmecken und erleben kann.</h2>
+    </div>
+    <div class="categories">
+      <div class="category">
+        <div class="cat-name" data-lang="en">Consumer goods, circular hardware and crafts</div>
+        <div class="cat-name" data-lang="de">Konsumgüter, Kreislauf-Hardware und Handwerk</div>
+        <div class="cat-img" style="background-image:url('./images/crafts.jpg')"></div>
+      </div>
+      <div class="category">
+        <div class="cat-name" data-lang="en">Food products and restaurants</div>
+        <div class="cat-name" data-lang="de">Lebensmittelprodukte und Restaurants</div>
+        <div class="cat-img" style="background-image:url('./images/foods.jpg')"></div>
+      </div>
+      <div class="category">
+        <div class="cat-name" data-lang="en">Systems, methods and exhibitions</div>
+        <div class="cat-name" data-lang="de">Systeme, Methoden und Ausstellungen</div>
+        <div class="cat-img" style="background-image:url('./images/systems.jpg')"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 4. DATABASE PREVIEW ══ -->
+  <section class="db-section">
+    <div class="db-head">
+      <span class="section-tag" data-lang="en">The database</span>
+      <span class="section-tag" data-lang="de">Die Datenbank</span>
+      <h2 data-lang="en">Validated businesses with AI-resistant jobs.</h2>
+      <h2 data-lang="de">Validierte Geschäftsmodelle mit KI-sicheren Jobs.</h2>
+      <div class="db-sub2" data-lang="en">Non-digital ventures ready to launch.</div>
+      <div class="db-sub2" data-lang="de">Startklare, nicht-digitale Unternehmen.</div>
+    </div>
+
+    <div class="preview-grid">
+      <div class="preview-box">
+        <div class="preview-img"><span data-lang="en">Image to follow</span><span data-lang="de">Bild folgt</span></div>
+        <div class="preview-title" data-lang="en">Dumpling Restaurant Chain</div>
+        <div class="preview-title" data-lang="de">Dumpling-Restaurantkette</div>
+      </div>
+      <div class="preview-box">
+        <div class="preview-img"><span data-lang="en">Image to follow</span><span data-lang="de">Bild folgt</span></div>
+        <div class="preview-title" data-lang="en">Bareshoe Store</div>
+        <div class="preview-title" data-lang="de">Bareshoe Store</div>
+      </div>
+      <div class="preview-box">
+        <div class="preview-img"><span data-lang="en">Image to follow</span><span data-lang="de">Bild folgt</span></div>
+        <div class="preview-title" data-lang="en">A City of Clusters</div>
+        <div class="preview-title" data-lang="de">A City of Clusters</div>
+      </div>
+    </div>
+
+    <div class="db-cta">
+      <a href="database.html" class="btn btn-lg">
+        <span data-lang="en">Explore tested businesses</span>
+        <span data-lang="de">Getestete Unternehmen entdecken</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══ 5. HOW WE WORK ══ -->
   <section class="how">
-    <div class="how-hd reveal">
+    <div class="how-head">
       <span class="section-tag" data-lang="en">How we work</span>
       <span class="section-tag" data-lang="de">Wie wir arbeiten</span>
-      <h2 data-lang="en">From first idea to funded project.</h2>
-      <h2 data-lang="de">Von der ersten Idee zum finanzierten Projekt.</h2>
-      <p class="how-sub" data-lang="en">You can start at any stage.</p>
-      <p class="how-sub" data-lang="de">Du kannst in jeder Phase einsteigen.</p>
+      <h2 data-lang="en">Launching a business is safer with us.</h2>
+      <h2 data-lang="de">Mit uns ist die Unternehmensgründung sicherer.</h2>
+      <p data-lang="en">We validate professionally with AI tools, real consumers and experts.</p>
+      <p data-lang="de">Wir validieren professionell mit relevanten Experten sowie echten Konsumenten und KI-Tools.</p>
     </div>
-    <div class="sprints reveal">
-      <div class="sprint">
-        <div class="sp-name" data-lang="en">Internal Audit Sprint</div>
-        <div class="sp-name" data-lang="de">Internal Audit Sprint</div>
-        <div class="sp-desc" data-lang="en">We build a plan based on what you have.</div>
-        <div class="sp-desc" data-lang="de">Wir entwickeln einen Plan auf Basis dessen, was du hast.</div>
+    <div class="hboxes">
+      <div class="hbox">
+        <div class="hbox-name" data-lang="en">Business Ideas</div>
+        <div class="hbox-name" data-lang="de">Geschäftsideen</div>
+        <p data-lang="en">that work well elsewhere or suggested by industry insights.</p>
+        <p data-lang="de">die anderswo gut funktionieren oder aus Branchen Insidern entstehen.</p>
       </div>
-      <div class="sprint">
-        <div class="sp-name" data-lang="en">External Validation Sprint</div>
-        <div class="sp-name" data-lang="de">External Validation Sprint</div>
-        <div class="sp-desc" data-lang="en">We test your project with real users and experts.</div>
-        <div class="sp-desc" data-lang="de">Wir testen dein Projekt mit echten Nutzern und Experten.</div>
+      <div class="hbox">
+        <div class="hbox-name" data-lang="en">AI Feedback Round</div>
+        <div class="hbox-name" data-lang="de">KI-Feedbackrunde</div>
+        <p data-lang="en">simulates input from Consumers and Board of Governors.</p>
+        <p data-lang="de">simuliert Input von Konsumenten und dem Board of Governors.</p>
       </div>
-      <div class="sprint">
-        <div class="sp-name" data-lang="en">Fundable Concept Sprint</div>
-        <div class="sp-name" data-lang="de">Fundable Concept Sprint</div>
-        <div class="sp-desc" data-lang="en">We get your project ready for funding.</div>
-        <div class="sp-desc" data-lang="de">Wir bereiten dein Projekt für die Finanzierung vor.</div>
+      <div class="hbox">
+        <div class="hbox-name" data-lang="en">Human Feedback Rounds</div>
+        <div class="hbox-name" data-lang="de">Menschliche Feedbackrunden</div>
+        <p data-lang="en">test products and numbers with real consumers and relevant experts.</p>
+        <p data-lang="de">testen Produkte und Kennzahlen mit echten Konsumenten und relevanten Experten.</p>
       </div>
-      <div class="sprint">
-        <div class="sp-name" data-lang="en">Funding Support Sprint</div>
-        <div class="sp-name" data-lang="de">Funding Support Sprint</div>
-        <div class="sp-desc" data-lang="en">We identify funders, support applications and prepare for due diligence.</div>
-        <div class="sp-desc" data-lang="de">Wir identifizieren Förderer, unterstützen Anträge und bereiten auf Due Diligence vor.</div>
+      <div class="hbox">
+        <div class="hbox-name" data-lang="en">Validated Business Plans</div>
+        <div class="hbox-name" data-lang="de">Validierte Geschäftspläne</div>
+        <p data-lang="en">include financials and explainer videos to make launching easier.</p>
+        <p data-lang="de">enthalten Finanzierung und Erklärvideos, die den Start erleichtern.</p>
       </div>
     </div>
   </section>
 
-  <!-- ══ WHO ══ -->
+  <!-- ══ 5. WHO IT'S FOR ══ -->
   <section class="who">
-    <div class="reveal">
-      <span class="section-tag" data-lang="en">Who we work with</span>
-      <span class="section-tag" data-lang="de">Mit wem wir arbeiten</span>
-      <h2 data-lang="en">Ecosystem builders and the teams they support.</h2>
-      <h2 data-lang="de">Für Ökosystem-Akteure<br>und die Teams, die sie unterstützen.</h2>
+    <div class="who-head">
+      <span class="section-tag" data-lang="en">We work with</span>
+      <span class="section-tag" data-lang="de">Wir arbeiten mit</span>
+      <h2 data-lang="en">All players building businesses.</h2>
+      <h2 data-lang="de">Allen, die Unternehmen aufbauen.</h2>
+      <p data-lang="en">in the Rhine Main region.</p>
+      <p data-lang="de">in der Region Rhein-Main.</p>
     </div>
-    <div class="who-cards reveal">
-      <div class="who-card">
-        <div class="wh-name" data-lang="en">Ecosystem Builders</div>
-        <div class="wh-name" data-lang="de">Ökosystem-Akteure</div>
-        <p class="wh-subtitle" data-lang="en">We validate projects for Incubators &amp; Accelerators, City Development Agencies and Chambers of Commerce.</p>
-        <p class="wh-subtitle" data-lang="de">Wir validieren Projekte für Inkubatoren &amp; Acceleratoren, Stadtentwicklungsgesellschaften und Industrie- und Handelskammern.</p>
+    <div class="who-boxes">
+      <div class="who-box">
+        <span class="who-name" data-lang="en">Ecosystem</span>
+        <span class="who-name" data-lang="de">Ökosystem</span>
+        <span class="who-desc" data-lang="en">City Development Agencies, Incubators, Employment Agencies and Chambers of Commerce</span>
+        <span class="who-desc" data-lang="de">Wirtschaftsförderung, Inkubatoren, Arbeitsagenturen und Industrie- und Handelskammern</span>
       </div>
-      <div class="who-card">
-        <div class="wh-name" data-lang="en">Teams</div>
-        <div class="wh-name" data-lang="de">Teams</div>
-        <p class="wh-subtitle" data-lang="en">We develop the next big step together with product developers, place operators and founders.</p>
-        <p class="wh-subtitle" data-lang="de">Wir entwickeln gemeinsam mit Produktentwicklern, Standortbetreibern und Gründern den nächsten großen Schritt.</p>
+      <div class="who-box">
+        <span class="who-name" data-lang="en">Teams</span>
+        <span class="who-name" data-lang="de">Teams</span>
+        <span class="who-desc" data-lang="en">who work on an early stage project or want to launch a tested business</span>
+        <span class="who-desc" data-lang="de">die an einem frühen Projekt arbeiten oder ein getestetes Unternehmen starten möchten</span>
+      </div>
+      <div class="who-box">
+        <span class="who-name" data-lang="en">Investors</span>
+        <span class="who-name" data-lang="de">Investoren</span>
+        <span class="who-desc" data-lang="en">Funds and Angel Investors interested in safer returns and long-term co-development</span>
+        <span class="who-desc" data-lang="de">Fonds und Business Angels, die sicherere Rendite schätzen</span>
       </div>
     </div>
   </section>
 
-  <!-- ══ CONTACT ══ -->
+  <!-- ══ 6. CONTACT ══ -->
   <section class="contact">
-    <div class="reveal">
-      <span class="section-tag" data-lang="en">Let's build something real</span>
-      <span class="section-tag" data-lang="de">Lassen Sie uns etwas Reales aufbauen</span>
-      <h2 data-lang="en">Ready to <em>start?</em></h2>
-      <h2 data-lang="de">Bereit <em>loszulegen?</em></h2>
+    <div>
+      <span class="section-tag" data-lang="en">Get in touch</span>
+      <span class="section-tag" data-lang="de">Kontakt</span>
+      <h2 data-lang="en">Let's build something <em>real.</em></h2>
+      <h2 data-lang="de">Lass uns etwas <em>Reales</em> bauen.</h2>
       <a href="mailto:hello@veche.design" class="btn">
         <span data-lang="en">Get in touch</span>
         <span data-lang="de">Kontakt aufnehmen</span>
@@ -508,27 +252,21 @@
     </div>
   </section>
 
-  <!-- ══ FOOTER ══ -->
-  <footer>
-    <a href="#top" class="ft-brand" style="text-decoration:none;">veche.design</a>
-    <div class="ft-links">
-      <a href="impressum.html" data-lang="en">Impressum</a>
-      <a href="impressum.html" data-lang="de">Impressum</a>
-      <a href="privacy-policy.html" data-lang="en">Privacy Policy</a>
-      <a href="privacy-policy.html" data-lang="de">Datenschutz</a>
-    </div>
-  </footer>
+</main>
 
-  <script>
-    function setLang(l){
-      document.body.className='lang-'+l;
-      document.getElementById('btn-en').classList.toggle('active', l==='en');
-      document.getElementById('btn-de').classList.toggle('active', l==='de');
-    }
-    const obs=new IntersectionObserver(entries=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
-    },{threshold:0.1});
-    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-  </script>
+<footer>
+  <a href="index.html" class="ft-brand">veche.design</a>
+  <div class="ft-links">
+    <a href="impressum.html"><span data-lang="en">Impressum</span><span data-lang="de">Impressum</span></a>
+    <a href="privacy-policy.html"><span data-lang="en">Privacy Policy</span><span data-lang="de">Datenschutz</span></a>
+  </div>
+</footer>
+<script>
+function setLang(l){
+  document.body.className='lang-'+l;
+  document.getElementById('btn-en').classList.toggle('active', l==='en');
+  document.getElementById('btn-de').classList.toggle('active', l==='de');
+}
+</script>
 </body>
 </html>
