@@ -35,3 +35,10 @@ project.inlang/*
 
 # Local backup of the SvelteKit source (artifacts/main-web/)
 /artifacts
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
