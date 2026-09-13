@@ -22,7 +22,7 @@ concurrency:
 jobs:
   reset-contribution:
     if: |
-      github.repository == 'mirasen-io/cloudflare-site' &&
+      github.repository == 'veche-design/cloudflare-site' &&
       github.event.pull_request.merged == true &&
       github.event.pull_request.head.ref == 'contribution' &&
       github.event.pull_request.base.ref == 'main'

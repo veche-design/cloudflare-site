@@ -183,7 +183,7 @@ jobs:
             npm run test
 
   cloudflare:
-    if: github.repository == 'mirasen-io/cloudflare-site' && github.event_name == 'pull_request' && needs.config.outputs.cloudflare == 'true'
+    if: github.repository == 'veche-design/cloudflare-site' && github.event_name == 'pull_request' && needs.config.outputs.cloudflare == 'true'
     needs:
       - config
       - check

@@ -21,7 +21,7 @@ concurrency:
 jobs:
   detect-pr-source:
     # prevents this action from running on forks
-    if: github.repository == 'mirasen-io/cloudflare-site'
+    if: github.repository == 'veche-design/cloudflare-site'
     runs-on: ubuntu-latest
     outputs:
       skip: ${{ steps.decide.outputs.skip }}
@@ -58,7 +58,7 @@ jobs:
   update-pull:
     needs: detect-pr-source
     if: |
-      github.repository == 'mirasen-io/cloudflare-site' &&
+      github.repository == 'veche-design/cloudflare-site' &&
       needs.detect-pr-source.outputs.skip != 'true'
     runs-on: ubuntu-latest
     steps:

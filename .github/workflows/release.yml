@@ -38,7 +38,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     if: >-
-      github.repository == 'mirasen-io/cloudflare-site' &&
+      github.repository == 'veche-design/cloudflare-site' &&
       (
         github.event_name == 'workflow_dispatch' ||
         (github.event_name == 'workflow_run' &&
