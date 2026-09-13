@@ -4,6 +4,11 @@ landing page
 
 Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
+## Commands
+
+- `npm run dev` - run local server
+- `npm run format` - format all files before git push/sync
+
 ## Creating a project
 
 If you're seeing this, you've probably already done this step. Congrats!
