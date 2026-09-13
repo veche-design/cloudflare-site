@@ -33,6 +33,7 @@
 			image: rabiaImage,
 			imageAlt: m.home_database_rabia_image_alt(),
 			currentPhase: 'Discover',
+			href: '/dashboard/rabia',
 			phases: [
 				{ name: 'Discover', count: 3, state: 'current' },
 				{ name: 'Feasibility', count: 1, state: 'future' },
@@ -68,6 +69,7 @@
 			image: herbalPharmacyImage,
 			imageAlt: m.home_database_herbal_pharmacy_image_alt(),
 			currentPhase: 'Operate',
+			href: '/dashboard/herbal-pharmacy',
 			phases: [
 				{ name: 'Gate', count: 2, state: 'completed' },
 				{ name: 'Discover', count: 2, state: 'completed' },
