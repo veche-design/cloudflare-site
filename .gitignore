@@ -1,1 +1,37 @@
+node_modules
+
+# Output
+.output
+.vercel
+.netlify
+.wrangler
+/.svelte-kit
+/build
+
+# OS
 .DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.*
+!.env.example
+!.env.test
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+# Playwright
+test-results
+# Paraglide
+src/lib/paraglide
+project.inlang/*
+!project.inlang/settings.json
+
+# Claude
+.claude/settings.local.json
+.claude/cache/
+.claude/sessions/
+
+# Local backup of the SvelteKit source (artifacts/main-web/)
+/artifacts
