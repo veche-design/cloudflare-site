@@ -8,6 +8,8 @@ Everything you need to build a Svelte project, powered by [`sv`](https://github.
 
 - `npm run dev` - run local server
 - `npm run format` - format all files before git push/sync
+- `./scripts/push-update.sh "<comment>"` - format and push the changes to the current branch
+- `./scripts/kirill.sh` - pull the latest changes, install the dependencies, build, and run the local server
 
 ## Creating a project
 

@@ -1,3 +1,13 @@
+## Project Context
+
+This repository serves two purposes:
+
+- The public website for veche.design.
+- A UI prototype for the future veche.design app.
+
+Prioritize UI implementation, visual consistency, and fast iteration.
+Automated tests are outside the scope of this repository.
+
 ## Project Configuration
 
 - **Language**: TypeScript
@@ -6,10 +16,14 @@
 
 ## Validation Workflow
 
-- Do not write development or unit tests
-- Do not run `npm run test`, `npm run format`, `npm run lint`, `npm run check`, or `npm run build` unless the user explicitly asks you to.
-- After making code changes, remind the user to run these checks locally and review their output.
-- If the user provides failing output, use it to diagnose and fix the issues.
+- Do not create, modify, or generate automated tests of any kind, including unit, integration, end-to-end, snapshot, or visual regression tests.
+- Do not add test files, test fixtures, testing dependencies, or test infrastructure.
+- The presence of Vitest, Playwright, or existing tests does not imply that testing work is required.
+- Do not suggest adding tests or treat missing tests as unfinished work.
+- Run `npm run format` after making changes.
+- Do not run `npm run test`, `npm run lint`, `npm run check`, or `npm run build`, or equivalent commands, unless the user explicitly asks you to.
+- In the final response, briefly report whether formatting completed. Remind the user to run `npm run lint`, `npm run check`, and `npm run build` locally before committing and review their output.
+- If the user provides failing output, use it to diagnose and fix the issues without adding tests.
 
 ## Styling Reuse
 
