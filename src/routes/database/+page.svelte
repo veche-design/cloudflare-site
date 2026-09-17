@@ -2,9 +2,12 @@
 	import { resolve } from '$app/paths';
 	import type { Pathname } from '$app/types';
 	import barefootStoreImage from '$lib/assets/images/barefoot-store.jpg';
+	import dumplingsImage from '$lib/assets/images/dumplings.jpg';
+	import eisenbahnImage from '$lib/assets/images/eisenbahn.jpg';
 	import herbalPharmacyImage from '$lib/assets/images/herbal-pharmacy.jpg';
 	import ogImage from '$lib/assets/images/og-image.jpg';
 	import rabiaImage from '$lib/assets/images/rabia.jpg';
+	import romantasyBookStoreImage from '$lib/assets/images/romantasy-book-store.jpg';
 	import DatabaseEntryCard from '$lib/components/DatabaseEntryCard.svelte';
 	import { m } from '$lib/paraglide/messages.js';
 	import { localizeHref } from '$lib/paraglide/runtime';
@@ -41,7 +44,12 @@
 			imageAlt: m.home_database_herbal_pharmacy_image_alt(),
 			href: '/database/herbal-pharmacy'
 		},
-		{ title: 'Dumpling Restaurant Franchise', industryTags: [m.database_industry_gastro()] },
+		{
+			title: 'Dumpling Restaurant Franchise',
+			industryTags: [m.database_industry_gastro()],
+			image: dumplingsImage,
+			imageAlt: 'Dumpling restaurant chain'
+		},
 		{ title: 'Soup Restaurant Franchise', industryTags: [m.database_industry_gastro()] },
 		{ title: 'Village Store Franchise', industryTags: [m.database_industry_retail()] },
 		{ title: 'Muslim Fashion House', industryTags: [m.database_industry_retail()] },
@@ -53,8 +61,10 @@
 		{ title: 'Kiosk Chain', industryTags: [m.database_industry_retail()] },
 		{ title: 'Mushroom Farm', industryTags: [m.database_industry_food()] },
 		{
-			title: 'Model Eisenbahn Store / Nerd & Board Game Cluster',
-			industryTags: [m.database_industry_retail()]
+			title: 'Model Eisenbahn Store and Maker Club',
+			industryTags: [m.database_industry_retail()],
+			image: eisenbahnImage,
+			imageAlt: 'Model Eisenbahn Store and Maker Club'
 		},
 		{ title: 'Ethiopian Food Brand', industryTags: [m.database_industry_food()] },
 		{
@@ -62,7 +72,12 @@
 			industryTags: [m.database_industry_food(), m.database_industry_gastro()]
 		},
 		{ title: 'Central Ticket Shop for Frankfurt', industryTags: [m.database_industry_arts()] },
-		{ title: 'Romantasy Book Store ++', industryTags: [m.database_industry_retail()] },
+		{
+			title: 'Romantasy Book Store & Bar',
+			industryTags: [m.database_industry_retail(), m.database_industry_gastro()],
+			image: romantasyBookStoreImage,
+			imageAlt: 'Romantasy Book Store & Bar'
+		},
 		{ title: 'Muslim Female Club', industryTags: [m.database_industry_community()] },
 		{
 			title: 'Microbiom Store',
@@ -76,7 +91,8 @@
 		},
 		{ title: 'Korean Jjimjilbang', industryTags: [m.database_industry_health()] },
 		{ title: 'Telemedicine Cabin', industryTags: [m.database_industry_health()] },
-		{ title: 'Digital Detox / Focus Lounge', industryTags: [m.database_industry_health()] }
+		{ title: 'Digital Detox / Focus Lounge', industryTags: [m.database_industry_health()] },
+		{ title: 'Life Skills School for Kids', industryTags: [m.database_industry_community()] }
 	];
 
 	const homeHref = resolve(localizeHref('/') as Pathname);
