@@ -2,9 +2,11 @@
 	import { resolve } from '$app/paths';
 	import type { Pathname } from '$app/types';
 	import barefootStoreImage from '$lib/assets/images/barefoot-store.jpg';
+	import circularEconomyMallImage from '$lib/assets/images/circular-economy-mall.jpg';
 	import dumplingsImage from '$lib/assets/images/dumplings.jpg';
 	import eisenbahnImage from '$lib/assets/images/eisenbahn.jpg';
 	import herbalPharmacyImage from '$lib/assets/images/herbal-pharmacy.jpg';
+	import muslimFashionHouseImage from '$lib/assets/images/muslim-fashion-house.jpg';
 	import ogImage from '$lib/assets/images/og-image.jpg';
 	import rabiaImage from '$lib/assets/images/rabia.jpg';
 	import romantasyBookStoreImage from '$lib/assets/images/romantasy-book-store.jpg';
@@ -52,11 +54,18 @@
 		},
 		{ title: 'Soup Restaurant Franchise', industryTags: [m.database_industry_gastro()] },
 		{ title: 'Village Store Franchise', industryTags: [m.database_industry_retail()] },
-		{ title: 'Muslim Fashion House', industryTags: [m.database_industry_retail()] },
+		{
+			title: 'Muslim Fashion House',
+			industryTags: [m.database_industry_retail()],
+			image: muslimFashionHouseImage,
+			imageAlt: 'Muslim Fashion House'
+		},
 		{ title: 'Walla Supermarket Franchise', industryTags: [m.database_industry_retail()] },
 		{
 			title: 'Circular Economy Mall',
-			industryTags: [m.database_industry_crafts(), m.database_industry_retail()]
+			industryTags: [m.database_industry_crafts(), m.database_industry_retail()],
+			image: circularEconomyMallImage,
+			imageAlt: 'Circular Economy Mall'
 		},
 		{ title: 'Kiosk Chain', industryTags: [m.database_industry_retail()] },
 		{ title: 'Mushroom Farm', industryTags: [m.database_industry_food()] },
