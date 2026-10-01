@@ -1,6 +1,6 @@
 ---
 name: design-to-svelte
-description: Implement approved visual designs into this existing SvelteKit codebase with high visual fidelity and minimal architectural drift. Use this skill whenever the user asks to implement, port, apply, reproduce, translate, or sync a design/prototype into the site; provides Claude Design exports, screenshots, HTML/CSS/JS prototypes, Figma references, or files under /design; or asks to make production Svelte match an approved design, even if they do not explicitly request this skill.
+description: Implement approved visual designs into this existing SvelteKit codebase with high visual fidelity and minimal architectural drift. Use this skill whenever the user asks to implement, port, apply, reproduce, translate, or sync a design/prototype into the site; provides design input such as Claude Design exports, screenshots, HTML/CSS/JS prototypes, Figma references, or files under /design; or asks to make production Svelte match an approved design, even if they do not explicitly request this skill.
 compatibility: Claude Code with repository access. Use Svelte MCP as required by AGENTS.md. Prefer Claude Preview/browser tooling for localhost visual verification; fall back to a background dev server plus available browser tooling.
 ---
 
@@ -101,8 +101,9 @@ Do not require the user to start the site manually unless the environment preven
    - use the actual localhost URL/port returned by Vite;
    - open the exact route being implemented.
 2. Otherwise start `npm run dev` as a background process from the repository root and use available browser tooling against the reported localhost URL.
-3. Confirm the server is actually responding before relying on it.
-4. Do not run `npm run build` merely to perform visual verification.
+3. If no Preview/browser integration is available, use the repository's existing Playwright dependency only as an ad-hoc browser inspection mechanism (for example, a one-off command or temporary file outside the repo). Do not create Playwright tests, fixtures, snapshots, or committed verification scripts.
+4. Confirm the server is actually responding before relying on it.
+5. Do not run `npm run build` merely to perform visual verification.
 
 ### Restart policy
 
