@@ -24,6 +24,10 @@ Examples of `<surface>` are `homepage`, `database`, or a named product flow.
 
 Use Git history for normal versioning rather than accumulating `v1`, `v2`, `v3` folders indefinitely. Keep explorations only when they remain useful references.
 
+## Implementation focus
+
+Implementation agents should start with the relevant `approved/` directory. Do not read `explorations/` unless the user asks, the approved material references it, or required implementation information is missing.
+
 ## Rules
 
 - Treat everything here as reference material, not runtime production code.
