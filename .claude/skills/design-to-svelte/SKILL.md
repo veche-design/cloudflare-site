@@ -105,8 +105,15 @@ Do not require the user to start the site manually unless the environment preven
 
 Use Playwright MCP as the primary browser tool for this workflow.
 
-- Use `browser_snapshot` to inspect page structure, accessible content, element references, and bounding boxes. Prefer it for navigation and deterministic interaction.
-- Use `browser_take_screenshot` when visual appearance must be compared with the approved design. Use full-page capture when page-level composition matters.
+The project config disables automatic snapshots with `--snapshot-mode=none` to conserve context. This does **not** disable the explicit `browser_snapshot` tool.
+
+During implementation, minimize browser-output volume:
+
+- Do not request full-page accessibility snapshots or screenshots after routine edits.
+- Prefer source inspection and targeted browser operations.
+- When structure or element geometry must be inspected, call `browser_snapshot` explicitly and keep it narrow when possible using `target` and/or `depth`.
+- Use `browser_take_screenshot` only when visual appearance actually needs to be checked.
+- Reserve full-page screenshots primarily for final visual verification, or for diagnosing a specific visual discrepancy that cannot be resolved from source/targeted inspection.
 - Do not create Playwright tests, fixtures, snapshots, or committed verification scripts for this workflow.
 - Do not add generated verification screenshots to the repository.
 
@@ -149,10 +156,9 @@ For each slice:
 
 1. implement or adapt the production Svelte code;
 2. format/check the edited Svelte with the required Svelte tooling;
-3. render the route on localhost;
-4. inspect the actual output;
-5. compare it with the approved reference;
-6. correct meaningful discrepancies before moving on.
+3. keep the local route available for spot checks;
+4. use targeted browser inspection only when needed to resolve uncertainty;
+5. defer expensive full visual comparison until final verification unless a specific discrepancy requires it earlier.
 
 Useful slices are typically hero/header, major content sections, repeated cards/grids, calls to action, and footer/navigation changes.
 
