@@ -1,7 +1,7 @@
 ---
 name: design-to-svelte
 description: Implement approved visual designs into this existing SvelteKit codebase with high visual fidelity and minimal architectural drift. Use this skill whenever the user asks to implement, port, apply, reproduce, translate, or sync a design/prototype into the site; provides design input such as Claude Design exports, screenshots, HTML/CSS/JS prototypes, Figma references, or files under /design; or asks to make production Svelte match an approved design, even if they do not explicitly request this skill.
-compatibility: Claude Code with repository access. Use Svelte MCP as required by AGENTS.md. Use the project Playwright MCP declared in /.mcp.json for localhost browser inspection and visual verification.
+compatibility: Claude Code with repository access. Follow AGENTS.md and use relevant Svelte tooling/skills. For browser verification, prefer the playwright-cli skill when available; otherwise use Playwright CLI directly when installed.
 ---
 
 # Design to Svelte
@@ -16,10 +16,10 @@ When sources disagree, follow this order:
 
 1. The user's current instruction.
 2. The approved visual reference for appearance and intended behavior.
-3. Existing production architecture, shared styles, reusable components, localization, accessibility, routing, and project conventions.
+3. Existing production architecture, shared styles, reusable components, localization, routing, semantics, accessibility, and required application behavior.
 4. Generated prototype HTML/CSS/JS as implementation clues only.
 
-Preserve the approved visual result while expressing it through the existing SvelteKit architecture.
+The approved design controls visual intent, but visual fidelity must not degrade semantic HTML, keyboard behavior, accessibility, localization, or required application behavior.
 
 ## Treat design artifacts as reference material
 
@@ -34,16 +34,28 @@ Files under `/design` are design/reference inputs, not production source.
 
 Read `design/README.md` when the design bundle lives under `/design`.
 
+### Approved-first rule
+
+Start with the relevant `/design/<surface>/approved` material.
+
+Do **not** inspect `explorations/` by default. Read exploration material only when:
+
+- the user explicitly asks for it;
+- the approved design references it; or
+- information required to implement the approved design is missing.
+
+This keeps the implementation focused and avoids spending context on discarded concepts.
+
 ## Establish the implementation target
 
 Before editing production code:
 
 1. Identify the approved design artifact and the route/page/component it applies to.
-2. Inspect all relevant design material:
-   - rendered design or screenshots;
+2. Inspect the approved material that is actually needed:
+   - notes about behavior/responsive states;
    - HTML/CSS/JS prototype when present;
-   - assets;
-   - notes about behavior, responsive states, or interactions.
+   - production-worthy assets;
+   - visual reference/screenshots.
 3. Inspect the current implementation and nearby reusable code:
    - target route;
    - existing components;
@@ -61,7 +73,7 @@ Do not start by mechanically translating prototype markup.
 
 ## Extract design facts before coding
 
-Build a compact mental model of the approved design:
+Build a compact implementation model from the approved design:
 
 - page structure and section order;
 - container widths and alignment;
@@ -74,23 +86,32 @@ Build a compact mental model of the approved design:
 - interactive states;
 - component repetition and reusable patterns.
 
-Prefer measured/explicit values from the design artifacts over guesses.
+Prefer explicit/measured values from design artifacts over guesses.
 
-If the design contains several explorations, implement only the approved one unless the user explicitly asks to compare alternatives.
+Use prototype markup/styles to extract implementation facts. Treat the approved rendered reference as the authority for final visual comparison.
 
-## Use the existing Svelte system
+## Compose with specialized skills and tools
 
-Follow `AGENTS.md` and the existing Svelte skills.
+This skill orchestrates the handoff; do not duplicate specialized tool instructions when an appropriate skill is available.
 
-In particular:
+### Svelte
 
-- Inspect and reuse shared styles before adding component-local CSS.
-- Reuse existing components when they already express the required structure or behavior.
-- Adapt an existing component when that creates a cleaner result than creating a near-duplicate.
-- Keep component boundaries meaningful; do not turn the entire page into one monolithic component just because the prototype is one HTML file.
-- Preserve Paraglide/localized copy instead of hardcoding visible strings when corresponding messages exist.
-- Follow Svelte 5/SvelteKit conventions and run the required Svelte autofixer on changed Svelte files.
+Follow `AGENTS.md`.
+
+- If a relevant Svelte skill is available in the current environment, use it.
+- Otherwise follow the Svelte MCP/CLI workflow required by `AGENTS.md`.
+- Run the required Svelte autofixer on changed Svelte files.
 - Do not add tests or visual-regression infrastructure.
+
+### Browser verification
+
+When browser verification is needed:
+
+1. If the `playwright-cli` skill is available, use it and follow its current instructions.
+2. Otherwise, if Playwright CLI is installed, use it directly and consult `playwright-cli --help` or `npx playwright cli --help` instead of guessing commands.
+3. If neither the skill nor Playwright CLI is available, continue the code implementation where possible, skip browser-dependent claims, and tell the user that final visual verification could not be performed.
+
+Do not require Playwright CLI merely to begin implementation.
 
 ## Manage the local dev server autonomously
 
@@ -98,28 +119,11 @@ Do not require the user to start the site manually unless the environment preven
 
 1. Start `npm run dev` from the repository root as a background process.
 2. Wait for Vite to report the actual localhost URL/port and confirm the server responds.
-3. Use the project Playwright MCP declared in `/.mcp.json` to open the exact route being implemented.
+3. Use that exact localhost URL for browser checks.
 4. Do not run `npm run build` merely to perform visual verification.
 
-### Browser tool priority
-
-Use Playwright MCP as the primary browser tool for this workflow.
-
-The project config disables automatic snapshots with `--snapshot-mode=none` to conserve context. This does **not** disable the explicit `browser_snapshot` tool.
-
-During implementation, minimize browser-output volume:
-
-- Do not request full-page accessibility snapshots or screenshots after routine edits.
-- Prefer source inspection and targeted browser operations.
-- When structure or element geometry must be inspected, call `browser_snapshot` explicitly and keep it narrow when possible using `target` and/or `depth`.
-- Use `browser_take_screenshot` only when visual appearance actually needs to be checked.
-- Reserve full-page screenshots primarily for final visual verification, or for diagnosing a specific visual discrepancy that cannot be resolved from source/targeted inspection.
-- Do not create Playwright tests, fixtures, snapshots, or committed verification scripts for this workflow.
-- Do not add generated verification screenshots to the repository.
-
-If Playwright MCP is unavailable, first check whether the project MCP configuration in `/.mcp.json` has been trusted/enabled by Claude Code. Do not silently replace the workflow with a different browser stack.
-
 If you cannot start the dev server yourself, give the user these concise recovery steps:
+
 1. In VS Code, open **Terminal → New Terminal**.
 2. Make sure the terminal is in the repository root.
 3. Run `npm run dev`.
@@ -137,7 +141,7 @@ Restart the dev server when any of these are true:
 - HMR reports an error or fails to reflect a change;
 - a sequence of substantial UI changes has accumulated.
 
-Even when HMR appears healthy, perform a **fresh dev-server restart before the final visual verification**. This reduces false comparisons against stale module state.
+Even when HMR appears healthy, perform a **fresh dev-server restart before the final visual verification**.
 
 When restarting:
 
@@ -148,6 +152,28 @@ When restarting:
 
 Do not leave duplicate dev servers running on different ports.
 
+## Keep browser work token-efficient
+
+Browser inspection is a verification tool, not the default implementation loop.
+
+During routine coding:
+
+- Prefer source/design inspection over browser automation.
+- Do not take screenshots after routine edits.
+- Do not repeatedly read full-page snapshots.
+- Use browser checks only to resolve uncertainty or verify a meaningful state.
+
+When using Playwright CLI:
+
+- Prefer `playwright-cli find` for locating relevant nodes in a large page.
+- Prefer targeted snapshots of an element/selector/ref over full-page snapshots.
+- Limit snapshot depth when a partial tree is enough.
+- Prefer `--raw` for commands where the result value is sufficient and page status/snapshot metadata is unnecessary.
+- Read generated snapshot files only when their content is actually needed.
+- Keep CLI-generated snapshots/screenshots temporary and untracked; remove verification artifacts before finishing.
+
+Do not create Playwright tests, fixtures, baselines, or committed verification scripts for this workflow.
+
 ## Implement in visual slices
 
 For a substantial page, work in logical visual slices rather than generating everything in one pass.
@@ -155,7 +181,7 @@ For a substantial page, work in logical visual slices rather than generating eve
 For each slice:
 
 1. implement or adapt the production Svelte code;
-2. format/check the edited Svelte with the required Svelte tooling;
+2. run the required Svelte autofixer/check for the edited Svelte;
 3. keep the local route available for spot checks;
 4. use targeted browser inspection only when needed to resolve uncertainty;
 5. defer expensive full visual comparison until final verification unless a specific discrepancy requires it earlier.
@@ -164,19 +190,32 @@ Useful slices are typically hero/header, major content sections, repeated cards/
 
 For a small component or small visual adjustment, one implementation/verification pass is sufficient.
 
-## Verify visually from localhost
+## Final visual verification
 
 Use the running local site as the implementation truth.
 
-Use Playwright MCP against the live localhost page. Use structured snapshots for DOM/layout inspection and screenshots for visual comparison with the approved reference.
+Before declaring a design implementation visually complete:
 
-Verification captures are temporary working artifacts:
+1. restart the dev server fresh;
+2. open the exact target route;
+3. verify a representative wide viewport;
+4. verify a representative narrow/mobile viewport when the design is responsive;
+5. compare the rendered result with the approved visual reference;
+6. correct meaningful discrepancies;
+7. perform only the additional visual check(s) needed to confirm those corrections.
 
-- do not ask the user to create them for you;
-- do not add screenshot files or visual-regression baselines to the repository;
-- keep temporary captures outside the repo or remove them after use.
+### Screenshot budget
 
-Check at least:
+By default:
+
+- routine implementation: **0 full-page screenshots**;
+- final page verification: **1 representative wide screenshot**;
+- responsive page verification: **+1 representative narrow/mobile screenshot**;
+- component-only work: prefer an element screenshot instead of a full-page screenshot.
+
+Take additional screenshots only when a specific discrepancy cannot be verified reliably otherwise.
+
+Check:
 
 - overall composition and section ordering;
 - widths, alignment, and major spacing;
@@ -185,10 +224,12 @@ Check at least:
 - borders/radii/shadows;
 - image sizing/cropping;
 - repeated component consistency;
-- responsive behavior at the relevant narrow and wide viewport states;
+- responsive behavior;
 - visible interaction states relevant to the design.
 
 Do not chase meaningless sub-pixel differences. Fix discrepancies a user would notice or that alter the design's hierarchy, rhythm, behavior, or brand expression.
+
+Do not claim pixel-perfect fidelity unless the rendered output was actually compared visually.
 
 ## Avoid architecture drift
 
@@ -203,20 +244,16 @@ A design handoff is not permission to rewrite unrelated parts of the site.
 
 If faithfully reproducing the design conflicts with an important existing technical constraint, preserve the constraint and report the difference.
 
-## Final verification
+## Finish
 
 Before declaring the implementation complete:
 
-1. restart the dev server fresh;
-2. open the target route on localhost;
-3. perform a full-page visual pass against the approved design;
-4. check the relevant responsive state(s);
-5. run the Svelte autofixer on all changed Svelte files until it is clean;
-6. run `npm run format`;
-7. report:
+1. run the Svelte autofixer on all changed Svelte files until it is clean;
+2. run `npm run format`;
+3. remove temporary browser-verification artifacts created by this workflow;
+4. report:
    - what was implemented;
    - any intentional differences from the approved design;
+   - whether browser verification was performed and at which representative viewport(s);
    - whether formatting completed;
    - that the user should run `npm run lint`, `npm run check`, and `npm run build` locally before committing, as required by `AGENTS.md`.
-
-Do not claim pixel-perfect fidelity unless the rendered output was actually compared visually.
