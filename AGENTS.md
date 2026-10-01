@@ -14,6 +14,15 @@ Automated tests are outside the scope of this repository.
 - **Package Manager**: npm
 - **Add-ons**: prettier, eslint, vitest, playwright, tailwindcss, sveltekit-adapter, paraglide, ai-tools
 
+## Session Bootstrap
+
+Before the first task in a new agent session that requires running or modifying the application:
+
+- Run `npm install --no-audit --no-fund` once from the repository root to reconcile local dependencies with `package.json` and `package-lock.json`.
+- Do not repeat this dependency install during the same session unless `package.json` or `package-lock.json` changes.
+- Skip the install for tasks that only read or discuss repository content and do not require local application/tool execution.
+- Do not run `npm ci` unless the user explicitly asks for a clean install or the local dependency tree is clearly broken.
+
 ## Validation Workflow
 
 - Do not create, modify, or generate automated tests of any kind, including unit, integration, end-to-end, snapshot, or visual regression tests.
