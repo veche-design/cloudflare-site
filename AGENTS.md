@@ -42,7 +42,7 @@ Automated tests are outside the scope of this repository.
 - Never degrade semantic HTML, keyboard behavior, accessibility, localization, or required application behavior purely for visual fidelity.
 - Reuse existing components, shared styles, assets, localization, and project conventions before introducing new ones.
 - Do not copy generated prototype HTML/CSS/JS wholesale into production and do not introduce React or another UI framework for a design handoff.
-- When using Claude Code to implement material from `/design`, use the project-local `design-to-svelte` skill.
+- When implementing material from `/design`, use the project-local `design-to-svelte` skill when available.
 
 ---
 
