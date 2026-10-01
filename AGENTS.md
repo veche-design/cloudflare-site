@@ -34,6 +34,15 @@ Automated tests are outside the scope of this repository.
 - Keep component-local CSS for component-specific layout and behavior only.
 - Add or change a global/shared style only when the pattern is genuinely reusable across the site.
 
+## Design Handoffs
+
+- Design and prototype artifacts live under `/design` and are reference material, not production source.
+- Production UI remains under `/src`.
+- Preserve an approved design's visual intent while integrating it into the existing SvelteKit architecture.
+- Reuse existing components, shared styles, assets, localization, and project conventions before introducing new ones.
+- Do not copy generated prototype HTML/CSS/JS wholesale into production and do not introduce React or another UI framework for a design handoff.
+- When using Claude Code to implement material from `/design`, use the project-local `design-to-svelte` skill.
+
 ---
 
 You are able to use the Svelte MCP server, where you have access to comprehensive Svelte 5 and SvelteKit documentation. Here's how to use the available tools effectively:
