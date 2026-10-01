@@ -36,4 +36,4 @@ Implementation agents should start with the relevant `approved/` directory. Do n
 - Keep only the design material needed to understand and reproduce the intended result.
 - When a design is approved, make that state unambiguous under the surface's `approved/` directory.
 
-Claude Code should use the project-local `design-to-svelte` skill when translating approved material from this directory into the SvelteKit application.
+Implementation agents should use the project-local `design-to-svelte` skill when available when translating approved material from this directory into the SvelteKit application.
