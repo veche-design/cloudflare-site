@@ -1,7 +1,7 @@
 ---
 name: design-to-svelte
 description: Implement approved visual designs into this existing SvelteKit codebase with high visual fidelity and minimal architectural drift. Use this skill whenever the user asks to implement, port, apply, reproduce, translate, or sync a design/prototype into the site; provides design input such as Claude Design exports, screenshots, HTML/CSS/JS prototypes, Figma references, or files under /design; or asks to make production Svelte match an approved design, even if they do not explicitly request this skill.
-compatibility: Claude Code with repository access. Use Svelte MCP as required by AGENTS.md. Prefer Claude Preview/browser tooling for localhost visual verification; fall back to a background dev server plus available browser tooling.
+compatibility: Claude Code with repository access. Use Svelte MCP as required by AGENTS.md. Use the project Playwright MCP declared in /.mcp.json for localhost browser inspection and visual verification.
 ---
 
 # Design to Svelte
@@ -96,14 +96,28 @@ In particular:
 
 Do not require the user to start the site manually unless the environment prevents you from doing so.
 
-1. Prefer Claude Preview when available and reliable:
-   - start the project with `npm run dev`;
-   - use the actual localhost URL/port returned by Vite;
-   - open the exact route being implemented.
-2. Otherwise start `npm run dev` as a background process from the repository root and use available browser tooling against the reported localhost URL.
-3. If no Preview/browser integration is available, use the repository's existing Playwright dependency only as an ad-hoc browser inspection mechanism (for example, a one-off command or temporary file outside the repo). Do not create Playwright tests, fixtures, snapshots, or committed verification scripts.
-4. Confirm the server is actually responding before relying on it.
-5. Do not run `npm run build` merely to perform visual verification.
+1. Start `npm run dev` from the repository root as a background process.
+2. Wait for Vite to report the actual localhost URL/port and confirm the server responds.
+3. Use the project Playwright MCP declared in `/.mcp.json` to open the exact route being implemented.
+4. Do not run `npm run build` merely to perform visual verification.
+
+### Browser tool priority
+
+Use Playwright MCP as the primary browser tool for this workflow.
+
+- Use `browser_snapshot` to inspect page structure, accessible content, element references, and bounding boxes. Prefer it for navigation and deterministic interaction.
+- Use `browser_take_screenshot` when visual appearance must be compared with the approved design. Use full-page capture when page-level composition matters.
+- Do not create Playwright tests, fixtures, snapshots, or committed verification scripts for this workflow.
+- Do not add generated verification screenshots to the repository.
+
+If Playwright MCP is unavailable, first check whether the project MCP configuration in `/.mcp.json` has been trusted/enabled by Claude Code. Do not silently replace the workflow with a different browser stack.
+
+If you cannot start the dev server yourself, give the user these concise recovery steps:
+1. In VS Code, open **Terminal → New Terminal**.
+2. Make sure the terminal is in the repository root.
+3. Run `npm run dev`.
+4. Leave that terminal running.
+5. Ask the user to tell you when it is started, then continue from the reported localhost URL.
 
 ### Restart policy
 
@@ -148,7 +162,7 @@ For a small component or small visual adjustment, one implementation/verificatio
 
 Use the running local site as the implementation truth.
 
-Prefer browser/Preview tools that can inspect the live DOM and rendered page. Use visual captures when supported so you can compare what the browser actually rendered with the approved reference.
+Use Playwright MCP against the live localhost page. Use structured snapshots for DOM/layout inspection and screenshots for visual comparison with the approved reference.
 
 Verification captures are temporary working artifacts:
 
