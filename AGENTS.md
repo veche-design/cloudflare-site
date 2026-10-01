@@ -39,6 +39,7 @@ Automated tests are outside the scope of this repository.
 - Design and prototype artifacts live under `/design` and are reference material, not production source.
 - Production UI remains under `/src`.
 - Preserve an approved design's visual intent while integrating it into the existing SvelteKit architecture.
+- Never degrade semantic HTML, keyboard behavior, accessibility, localization, or required application behavior purely for visual fidelity.
 - Reuse existing components, shared styles, assets, localization, and project conventions before introducing new ones.
 - Do not copy generated prototype HTML/CSS/JS wholesale into production and do not introduce React or another UI framework for a design handoff.
 - When using Claude Code to implement material from `/design`, use the project-local `design-to-svelte` skill.
