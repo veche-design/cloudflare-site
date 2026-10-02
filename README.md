@@ -1,51 +1,83 @@
-# cloudflare-site
+# veche.design
 
-landing page
+The public veche.design website and UI prototype for the future product.
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+The production application is built with SvelteKit. Design exports are kept separately under `/design` and are used as reference material when implementing approved UI changes.
+
+## Design to Svelte workflow
+
+Use Claude Design to explore and approve the visual design, then hand the approved result to Claude Code for implementation in the production SvelteKit application.
+
+```mermaid
+flowchart TD
+    A[Claude Design] --> B[Approve the design]
+    B --> C[Export or save the design bundle]
+    C --> D[Put it in design/&lt;surface&gt;/approved/]
+    D --> E[Commit and push the design files]
+    E --> F[Open the repository in Claude Code]
+    F --> G[Start a new Claude Code chat]
+    G --> H[Run /design-to-svelte]
+    H --> I[Claude implements the design in /src]
+    I --> J[Claude verifies it locally with Playwright CLI]
+    J --> K[Review the result]
+```
+
+### 1. Create and approve the design
+
+Work in Claude Design as usual. The GitHub connection can be used there as context for the existing veche.design codebase and visual system.
+
+Once the design is approved, export or save the complete design bundle. If it is downloaded as an archive, unpack it first.
+
+Do not clean up or convert the generated HTML, CSS, JavaScript, or assets manually.
+
+### 2. Put the approved design in the repository
+
+Place the complete exported design under:
+
+```text
+design/<surface>/approved/
+```
+
+For example:
+
+```text
+design/homepage/approved/
+├── index.html
+├── styles.css
+├── assets/
+├── reference.png
+└── notes.md
+```
+
+Not every export will contain all of these files. Keep whatever Claude Design produced that is useful for understanding the approved result.
+
+Use `design/<surface>/explorations/` only for alternatives that are still worth keeping. Normal version history belongs in Git rather than in `v1`, `v2`, `v3` folders.
+
+Commit and push the design files before starting the implementation handoff.
+
+### 3. Implement it with Claude Code
+
+Open the repository in Claude Code and start a new chat.
+
+Run:
+
+```text
+/design-to-svelte Implement the approved design from design/<surface>/approved into the production SvelteKit site.
+```
+
+For example:
+
+```text
+/design-to-svelte Implement the approved design from design/homepage/approved into the production SvelteKit site.
+```
+
+The `design-to-svelte` skill handles the implementation workflow. It treats the exported design as reference material, reuses the existing SvelteKit components/styles/localization, writes production code under `/src`, starts the local development server when needed, and performs browser verification with Playwright CLI.
+
+The files under `/design` are never the production source of truth. Production UI remains under `/src`.
 
 ## Commands
 
-- `npm run dev` - run local server
-- `npm run format` - format all files before git push/sync
-- `./scripts/push-update.sh "<comment>"` - format and push the changes to the current branch
-- `./scripts/kirill.sh` - pull the latest changes, install the dependencies, build, and run the local server
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```sh
-# create a new project
-npx sv create my-app
-```
-
-To recreate this project with the same configuration:
-
-```sh
-# recreate this project
-npx sv@0.17.0 create --template minimal --types ts --add prettier eslint vitest="usages:unit,component" playwright tailwindcss="plugins:typography,forms" sveltekit-adapter="adapter:static" paraglide="languageTags:en, de+demo:no" --install npm cloudflare-site-new
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+- `npm run dev` — run the local development server.
+- `npm run format` — format all files before Git push/sync.
+- `./scripts/push-update.sh "<comment>"` — format and push changes to the current branch.
+- `./scripts/kirill.sh` — pull the latest changes, install dependencies, build, and run the local server.
