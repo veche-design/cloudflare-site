@@ -2,8 +2,8 @@ name: Dependabot auto-merge
 on: pull_request
 
 env:
-  # Mirrors ci.yml so the lockfile regen below runs on the same earliest Node
-  # as CI uses to validate it. Override per-repo via vars.MATRIX_NODE_VERSION.
+  # Mirrors ci.yml so lockfile regeneration runs on the same earliest Node
+  # that CI uses to validate the repository.
   DEFAULT_MATRIX_NODE_VERSION: '["22", "24", "26"]'
 
 permissions:
@@ -15,24 +15,9 @@ jobs:
     if: github.event.pull_request.user.login == 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
-      # Why we regenerate the lockfile here, BEFORE dependabot-auto-merge:
-      #
-      # Dependabot runs on Node 24 / npm 11 (see dependabot-core's
-      # npm_and_yarn/Dockerfile) and emits a package-lock.json that npm 11's
-      # resolver dedups aggressively — it strips nested entries (e.g.
-      # node_modules/svelte-check/node_modules/picomatch) that npm 10 still
-      # needs. CI on Node 22 then fails `npm ci` with
-      #     Missing: picomatch@4.0.4 from lock file
-      #
-      # We re-run `npm install --package-lock-only` on the earliest Node from
-      # the matrix (= oldest npm = npm 10) so the resulting lockfile is
-      # readable by every Node in the matrix. Same trick as in release.yml.
-      #
-      # We push with the default GITHUB_TOKEN on purpose: pushes from it do
-      # NOT trigger downstream workflows, so this commit lands silently and
-      # the dependabot-auto-merge action below picks it up via its own
-      # `actions/checkout@v6` (which clean-resets to the remote HEAD we just
-      # advanced).
+      # Dependabot can generate a package-lock.json with a newer npm version.
+      # Regenerate it with the earliest Node/npm from the CI matrix so the
+      # lockfile remains compatible with every supported matrix entry.
       - name: Checkout PR branch
         uses: actions/checkout@v6
         with:
@@ -65,9 +50,53 @@ jobs:
           git commit -m "Regenerate package-lock.json on earliest Node"
           git push origin HEAD:${{ github.head_ref }}
 
-      - uses: kt-workflows/actions/dependabot-auto-merge@main
+      - id: app-token
+        name: Create token for auto-merge
+        uses: kt-workflows/actions/create-github-app-token@main
         with:
           app-id: ${{ secrets.WORKFLOW_APP_ID }}
           private-key: ${{ secrets.WORKFLOW_APP_PRIVATE_KEY }}
-          approve-app-id: ${{ secrets.APPROVE_APP_ID }}
-          approve-private-key: ${{ secrets.APPROVE_APP_PRIVATE_KEY }}
+          configure-git: false
+          default-to-github-token: false
+
+      - id: metadata
+        name: Fetch Dependabot metadata
+        uses: dependabot/fetch-metadata@v3
+        with:
+          github-token: ${{ steps.app-token.outputs.token }}
+
+      # Enable auto-merge first. GitHub will merge only after required CI checks
+      # and branch protection requirements have passed.
+      - name: Enable auto-merge
+        if: |
+          steps.metadata.outputs.update-type == 'version-update:semver-minor' ||
+          steps.metadata.outputs.update-type == 'version-update:semver-patch'
+        shell: bash
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          echo "Enabling auto-merge for $PR_URL"
+          gh pr merge --auto --squash "$PR_URL"
+
+      - id: approve-app-token
+        name: Create token for approving PR
+        if: |
+          steps.metadata.outputs.update-type == 'version-update:semver-minor' ||
+          steps.metadata.outputs.update-type == 'version-update:semver-patch'
+        uses: kt-workflows/actions/create-github-app-token@main
+        with:
+          app-id: ${{ secrets.APPROVE_APP_ID }}
+          private-key: ${{ secrets.APPROVE_APP_PRIVATE_KEY }}
+          configure-git: false
+          default-to-github-token: false
+
+      - name: Approve Dependabot PR
+        if: steps.approve-app-token.outputs.token != ''
+        shell: bash
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ steps.approve-app-token.outputs.token }}
+        run: |
+          echo "Approving $PR_URL"
+          gh pr review --approve --body "Approved! Servus! 🤖" "$PR_URL"
