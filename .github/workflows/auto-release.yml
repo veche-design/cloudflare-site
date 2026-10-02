@@ -12,7 +12,7 @@ permissions:
 jobs:
   # prevents this action from running on forks
   auto-release:
-    if: github.repository == 'mirasen-io/cloudflare-site'
+    if: github.repository == 'veche-design/cloudflare-site'
     runs-on: ubuntu-latest
     steps:
       - uses: kt-workflows/actions/dependabot-auto-release@main
