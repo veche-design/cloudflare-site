@@ -77,6 +77,16 @@ The files under `/design` are never the production source of truth. Production U
 
 ## Commands
 
+Open **Terminal → New Terminal** in VS Code and make sure the terminal is in the repository root before running these commands.
+
+- `git checkout <branch-name>` — switch to an existing branch.
+
+  For example, to try the current design-to-Svelte workflow branch:
+
+  ```sh
+  git checkout feat/design-to-svelte-skill
+  ```
+
 - `npm run dev` — run the local development server.
 - `npm run format` — format all files before Git push/sync.
 - `./scripts/push-update.sh "<comment>"` — format and push changes to the current branch.
