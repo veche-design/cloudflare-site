@@ -47,10 +47,10 @@
 			<h3>{m.library_benchmarks()}</h3>
 			<p class="small">{m.workspace_reference_note()}</p>
 			<div class="benchmarks">
-				{#each herbalPharmacyReferences as business (business.name)}<a
-						href={business.url}
-						target="_blank"
-						rel="noreferrer"><strong>{business.name}</strong><span>{business.location} ↗</span></a
+				{#each herbalPharmacyReferences as business (business.name)}
+					<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- Benchmark URLs are external HTTPS websites, not application routes. -->
+					<a href={business.url} target="_blank" rel="noreferrer"
+						><strong>{business.name}</strong><span>{business.location} ↗</span></a
 					>{/each}
 			</div>
 		</section>

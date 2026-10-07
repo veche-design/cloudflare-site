@@ -143,6 +143,7 @@
 					<span class="tag-pill">{business.location}</span>
 					<h4>{business.name}</h4>
 					<p>{descriptions[i]}</p>
+					<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- Benchmark URLs are external HTTPS websites, not application routes. -->
 					<a href={business.url} target="_blank" rel="noreferrer">{m.workspace_website()}</a>
 				</article>{/each}
 		</div>
