@@ -7,18 +7,20 @@ description: Implement approved visual designs into this existing SvelteKit code
 
 Implement an approved design in the existing veche.design SvelteKit application.
 
-Optimize for **faithful visual integration into the existing codebase**, not automatic code conversion and not redesign.
+Preserve the approved visual language while integrating into the existing codebase. Visual fidelity and structural fidelity are separate concerns: when the user requests recomposition, adapt navigation, page boundaries, grouping, section order, and layout to the requested product structure; otherwise preserve the approved structure.
 
 ## Source precedence
 
-When sources disagree, follow this order:
+Resolve authority by concern:
 
-1. The user's current instruction.
-2. The approved visual reference for appearance and intended behavior.
-3. Existing production architecture, shared styles, reusable components, localization, routing, semantics, accessibility, and required application behavior.
-4. Generated prototype HTML/CSS/JS as implementation clues only.
+- Explicit task instructions govern scope and requested product structure, including intentional departures from the prototype.
+- Approved references govern visual facts and visual language: typography, palette, surfaces, spacing rhythm, imagery, and component treatments.
+- The existing SvelteKit application governs production architecture, routing conventions, shared components/styles, localization, and existing structured domain data.
+- Prototype markup and runtime code provide appearance and interaction clues, not production architecture.
 
-The approved design controls visual intent, but visual fidelity must not degrade semantic HTML, keyboard behavior, accessibility, localization, or required application behavior.
+Follow reference interactions where they remain relevant to the requested flow. Prototype route maps and structure do not override requested recomposition. Resolve conflicts covered by these rules directly; ask only when an unresolved choice materially affects the product flow.
+
+Visual fidelity must not degrade semantic HTML, keyboard behavior, accessibility, localization, or required application behavior.
 
 ## Treat design artifacts as reference material
 
@@ -27,7 +29,7 @@ Files under `/design` are design/reference inputs, not production source.
 - Do not import runtime code or styles directly from `/design`.
 - Do not serve prototype HTML from `/design`.
 - Do not copy generated HTML/CSS/JS wholesale into production.
-- Treat prototype JavaScript as an interaction specification, not trusted production code.
+- Treat prototype JavaScript as clues to reference interactions, not trusted production code.
 - Copy only production-worthy assets into the appropriate `src/lib/assets` location and give them clear names.
 - Do not introduce React or another UI framework to implement the handoff.
 
@@ -49,7 +51,7 @@ This keeps the implementation focused and avoids spending context on discarded c
 
 Before editing production code:
 
-1. Identify the approved design artifact and the route/page/component it applies to.
+1. Identify the requested product flow and affected production routes/components. Map relevant approved sections to that flow: one prototype page may supply patterns to several production views, and one production view may combine material from several reference pages.
 2. Inspect the approved material that is actually needed:
    - notes about behavior/responsive states;
    - HTML/CSS/JS prototype when present;
@@ -61,12 +63,13 @@ Before editing production code:
    - `src/lib/styles/veche.css`;
    - relevant assets;
    - Paraglide messages/localization;
-   - layout and navigation conventions.
-4. Separate:
-   - components/styles that can be reused unchanged;
-   - existing code that should be adapted;
-   - genuinely new code that must be created.
-5. Preserve current behavior that the design does not intentionally replace.
+   - layout and navigation conventions;
+   - structured domain data and its consumers;
+   - shared CSS selectors that may unintentionally affect new elements.
+4. Record a compact mapping of requested views to reference patterns, existing components/styles/routes/data, and necessary new code. Distinguish visual treatments to preserve from structure intentionally changed. Reuse or adapt existing code where it fits; do not force unsuitable components merely to claim reuse.
+5. Preserve current behavior that the requested flow does not intentionally replace.
+
+Protect domain semantics during recomposition. Do not silently reinterpret questions, methods, evidence, benchmarks, statuses, or pending results. Keep draft values and illustrative evidence identified as such. Do not infer validated hypotheses or learnings solely from phase completion. Reconcile overlapping prototype and production content without creating duplicate sources of truth.
 
 Do not start by mechanically translating prototype markup.
 
@@ -74,7 +77,7 @@ Do not start by mechanically translating prototype markup.
 
 Build a compact implementation model from the approved design:
 
-- page structure and section order;
+- reference structure and section order, distinguishing what the task preserves from what it recomposes;
 - container widths and alignment;
 - spacing rhythm;
 - typography hierarchy;
@@ -87,7 +90,9 @@ Build a compact implementation model from the approved design:
 
 Prefer explicit/measured values from design artifacts over guesses.
 
-Use prototype markup/styles to extract implementation facts. Treat the approved rendered reference as the authority for final visual comparison.
+Use prototype markup/styles to extract visual facts. Treat the approved rendered reference as the authority for comparing visual treatments, and the requested product structure as the authority for composition.
+
+For layouts absent from the reference, derive visual treatments from approved patterns and identify new layout decisions as adaptations. For multi-column workspaces, define column roles, readable widths, scrolling, narrowing/collapse behavior, and continued access to navigation and auxiliary content. Choose responsive transitions from content fit rather than unrelated prototype breakpoints. Preserve required shared state across view switches and responsive panel changes.
 
 ## Compose with specialized skills and tools
 
@@ -104,7 +109,7 @@ Follow `AGENTS.md`.
 
 ### Browser verification
 
-When browser verification is needed:
+For substantial design implementation, require browser verification when the tooling is available. Use this tool selection order:
 
 1. If the `playwright-cli` skill is available, use it and follow its current instructions.
 2. Otherwise, if Playwright CLI is installed, use it directly and consult `playwright-cli --help` or `npx playwright cli --help` instead of guessing commands.
@@ -175,17 +180,17 @@ Do not create Playwright tests, fixtures, baselines, or committed verification s
 
 ## Implement in visual slices
 
-For a substantial page, work in logical visual slices rather than generating everything in one pass.
+For a substantial interface, work in logical visual slices rather than generating everything in one pass.
 
 For each slice:
 
 1. implement or adapt the production Svelte code;
-2. run the required Svelte autofixer/check for the edited Svelte;
+2. run the required Svelte autofixer on the edited Svelte;
 3. keep the local route available for spot checks;
 4. use targeted browser inspection only when needed to resolve uncertainty;
-5. defer expensive full visual comparison until final verification unless a specific discrepancy requires it earlier.
+5. for substantial recomposition, visually compare the first coherent workspace slice with the approved reference before repeating its treatment across the remaining views; otherwise defer full comparison until final verification unless a discrepancy requires it earlier.
 
-Useful slices are typically hero/header, major content sections, repeated cards/grids, calls to action, and footer/navigation changes.
+Choose slices around the requested interface: major sections or repeated components for a page; shell/navigation, one complete primary view, and an auxiliary panel for a workspace. Subsequent corrections should normally adapt the implementation; rewrite a slice only when a concrete layout or behavior problem requires it.
 
 For a small component or small visual adjustment, one implementation/verification pass is sufficient.
 
@@ -196,27 +201,20 @@ Use the running local site as the implementation truth.
 Before declaring a design implementation visually complete:
 
 1. restart the dev server fresh;
-2. open the exact target route;
-3. verify a representative wide viewport;
-4. verify a representative narrow/mobile viewport when the design is responsive;
-5. compare the rendered result with the approved visual reference;
-6. correct meaningful discrepancies;
-7. perform only the additional visual check(s) needed to confirm those corrections.
+2. open the affected target routes;
+3. inspect representative wide and narrow widths, plus intermediate widths where the layout meaningfully changes;
+4. compare reused visual treatments with corresponding rendered approved sections at comparable widths and states; for recomposed areas, evaluate the requested hierarchy/flow and preservation of the approved visual language;
+5. exercise materially different views and states as needed, including expanded content and required state continuity across view switches; verify scrolling, overflow, and access to navigation and auxiliary content;
+6. correct meaningful discrepancies with targeted edits;
+7. recheck affected views, states, and widths to confirm those corrections.
 
-### Screenshot budget
+### Targeted visual inspection
 
-By default:
-
-- routine implementation: **0 full-page screenshots**;
-- final page verification: **1 representative wide screenshot**;
-- responsive page verification: **+1 representative narrow/mobile screenshot**;
-- component-only work: prefer an element screenshot instead of a full-page screenshot.
-
-Take additional screenshots only when a specific discrepancy cannot be verified reliably otherwise.
+Capture materially different layouts or states needed for reference comparison and correction; prefer element or region captures where sufficient. Avoid routine screenshots after every edit. Screenshot counts are not a coverage target or limit, and DOM snapshots do not substitute for visual inspection.
 
 Check:
 
-- overall composition and section ordering;
+- composition and hierarchy against the requested structure, and visual treatments against the approved reference;
 - widths, alignment, and major spacing;
 - typography scale/weight/line length;
 - colors and backgrounds;
@@ -234,12 +232,13 @@ Do not claim pixel-perfect fidelity unless the rendered output was actually comp
 
 A design handoff is not permission to rewrite unrelated parts of the site.
 
-- Keep changes scoped to the target design.
+- Keep changes scoped to the requested product flow and affected surfaces. Add only the components, state, and route/layout changes needed to integrate that flow into the existing app.
 - Do not replace working infrastructure without a design-driven reason.
 - Do not add a second styling system for convenience.
 - Do not duplicate shared tokens/styles with slightly different local values.
 - Do not change unrelated copy or behavior.
-- Do not "improve" the approved design unless the user explicitly asks for design judgment.
+- Requested structural recomposition does not authorize unrelated visual redesign. Adapt approved treatments only where the task or application constraints require it, unless the user asks for design judgment.
+- A demo UI does not imply backend services, authentication, persistence, real search, AI integration, generic frameworks, or unrelated platform work. Introduce these only when requested; avoid abstractions beyond demonstrated reuse needs.
 
 If faithfully reproducing the design conflicts with an important existing technical constraint, preserve the constraint and report the difference.
 
@@ -255,4 +254,4 @@ Before declaring the implementation complete:
    - any intentional differences from the approved design;
    - whether browser verification was performed and at which representative viewport(s);
    - whether formatting completed;
-   - that the user should run `npm run lint`, `npm run check`, and `npm run build` locally before committing, as required by `AGENTS.md`.
+   - any validation reminders required by `AGENTS.md`; follow its command restrictions without adding implementation checks.
