@@ -111,11 +111,13 @@ Follow `AGENTS.md`.
 
 ### Browser verification
 
+Prefer browser tooling already provided by the repository over machine-global tooling. A `playwright-cli` skill provides usage instructions; its availability does not establish that the executable is installed. When the repository supplies Playwright CLI, use that local installation (for example, `./node_modules/.bin/playwright-cli` from an npm project root) for all CLI commands, including those shown in the specialized skill. Do not require a global installation or silently install missing browser tooling or change dependency manifests for verification. If declared dependencies are simply not installed, follow the repository's normal dependency/setup workflow.
+
 For substantial design implementation, require browser verification when the tooling is available. Use this tool selection order:
 
 1. If the `playwright-cli` skill is available, use it and follow its current instructions.
-2. Otherwise, if Playwright CLI is installed, use it directly and consult `playwright-cli --help` or `npx playwright cli --help` instead of guessing commands.
-3. If neither the skill nor Playwright CLI is available, continue the code implementation where possible, skip browser-dependent claims, and tell the user that final visual verification could not be performed.
+2. Otherwise, if Playwright CLI is installed, use it directly and consult the selected executable's `--help` instead of guessing commands.
+3. If the Playwright CLI executable remains unavailable, even when its skill is available, continue the code implementation where possible, skip browser-dependent claims, and tell the user that final visual verification could not be performed.
 
 Do not require Playwright CLI merely to begin implementation.
 
