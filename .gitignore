@@ -44,3 +44,5 @@ project.inlang/*
 !.env.example
 # Playwright CLI output (may contain credentials)
 .playwright-cli/
+
+.venv
