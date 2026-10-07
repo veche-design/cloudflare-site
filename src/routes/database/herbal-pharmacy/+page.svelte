@@ -2,10 +2,13 @@
 	import { resolve } from '$app/paths';
 	import type { Pathname } from '$app/types';
 	import herbalPharmacyImage from '$lib/assets/images/herbal-pharmacy.jpg';
+	import BusinessMaterial from '$lib/components/BusinessMaterial.svelte';
+	import { getBusinesses } from '$lib/database/businesses';
 	import SplitHero from '$lib/components/SplitHero.svelte';
 	import { m } from '$lib/paraglide/messages.js';
 	import { localizeHref } from '$lib/paraglide/runtime';
 
+	const business = getBusinesses().find((item) => item.id === 'herbal')!;
 	const projectUrl = new URL(
 		resolve(localizeHref('/database/herbal-pharmacy') as Pathname),
 		'https://veche.design'
@@ -32,8 +35,24 @@
 </svelte:head>
 
 <SplitHero
+	variant="narrow"
 	title={m.home_database_herbal_pharmacy()}
-	description={m.database_project_herbal_pharmacy_description()}
+	description={m.dashboard_herbal_pharmacy_subtitle()}
 	image={herbalPharmacyImage}
 	imageAlt={m.home_database_herbal_pharmacy_image_alt()}
 />
+
+<section class="business-page"><BusinessMaterial {business} /></section>
+
+<style>
+	.business-page {
+		max-width: 1000px;
+		padding: 56px 64px;
+		margin: 0 auto;
+	}
+	@media (max-width: 700px) {
+		.business-page {
+			padding: 36px 24px;
+		}
+	}
+</style>

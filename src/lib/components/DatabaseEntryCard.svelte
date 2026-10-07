@@ -12,9 +12,20 @@
 		industryTags?: readonly string[];
 		status?: string;
 		href?: Pathname;
+		onselect?: () => void;
+		credit?: string;
 	};
 
-	let { title, image, imageAlt, industryTags = [], status, href }: Props = $props();
+	let {
+		title,
+		image,
+		imageAlt,
+		industryTags = [],
+		status,
+		href,
+		onselect,
+		credit
+	}: Props = $props();
 </script>
 
 {#snippet content()}
@@ -24,6 +35,7 @@
 		{:else}
 			{m.image_place_holder()}
 		{/if}
+		{#if credit}<span class="image-credit">{credit}</span>{/if}
 	</div>
 
 	{#if industryTags.length > 0 || status}
@@ -48,10 +60,15 @@
 		{:else}
 			{@render title()}
 		{/if}
+		{#if onselect}<span class="more">{m.library_more()}</span>{/if}
 	</div>
 {/snippet}
 
-{#if href}
+{#if onselect}
+	<button type="button" class="database-entry-card preview-box lift-card" onclick={onselect}
+		>{@render content()}</button
+	>
+{:else if href}
 	<a
 		class="database-entry-card preview-box lift-card"
 		href={resolve(localizeHref(href) as Pathname)}
@@ -71,6 +88,41 @@
 		text-decoration: none;
 	}
 
+	button.database-entry-card {
+		width: 100%;
+		font-family: inherit;
+		text-align: left;
+		cursor: pointer;
+	}
+	.preview-img {
+		position: relative;
+	}
+	.image-credit {
+		position: absolute;
+		right: 6px;
+		bottom: 6px;
+		background: rgba(17, 17, 17, 0.6);
+		color: white;
+		font-size: 0.6rem;
+		padding: 3px 6px;
+	}
+	button .preview-title {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 10px;
+	}
+	.more {
+		display: block;
+		font-size: 0.75rem;
+		font-weight: 700;
+		color: #c8332b;
+		white-space: nowrap;
+	}
+	.database-entry-card:focus-visible {
+		outline: 3px solid #c8332b;
+		outline-offset: 4px;
+	}
 	.preview-img img {
 		display: block;
 		width: 100%;

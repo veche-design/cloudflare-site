@@ -1,168 +1,29 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import type { Pathname } from '$app/types';
-	import barefootStoreImage from '$lib/assets/images/barefoot-store.jpg';
-	import circularEconomyMallImage from '$lib/assets/images/circular-economy-mall.jpg';
-	import digitalDetoxLoungeImage from '$lib/assets/images/digital-detox-lounge.jpg';
-	import dumplingsImage from '$lib/assets/images/dumplings.jpg';
-	import eisenbahnImage from '$lib/assets/images/eisenbahn.jpg';
-	import ethiopianFoodBrandImage from '$lib/assets/images/ethiopian-food-brand.jpg';
-	import functionalBeverageBarImage from '$lib/assets/images/functional-beverage-bar.jpg';
-	import gesundheitskioskImage from '$lib/assets/images/gesundheitskiosk.jpg';
-	import herbalPharmacyImage from '$lib/assets/images/herbal-pharmacy.jpg';
-	import kioskChainImage from '$lib/assets/images/kiosk-chain.jpg';
-	import koreanJjimjilbangImage from '$lib/assets/images/korean-jjimjilbang.jpg';
-	import lifeSkillsSchoolImage from '$lib/assets/images/life-skills-school.jpg';
-	import microbiomStoreImage from '$lib/assets/images/microbiom-store.jpg';
-	import mushroomFarmImage from '$lib/assets/images/mushroom-farm.jpg';
-	import muslimFashionHouseImage from '$lib/assets/images/muslim-fashion-house.jpg';
-	import muslimFemaleClubImage from '$lib/assets/images/muslim-female-club.jpg';
+	import foodsImage from '$lib/assets/images/foods.jpg';
 	import ogImage from '$lib/assets/images/og-image.jpg';
-	import rabiaImage from '$lib/assets/images/rabia.jpg';
-	import romantasyBookStoreImage from '$lib/assets/images/romantasy-book-store.jpg';
-	import ukrainianFoodBrandImage from '$lib/assets/images/ukrainian-food-brand.jpg';
-	import villageStoreFranchiseImage from '$lib/assets/images/village-store-franchise.jpg';
 	import DatabaseEntryCard from '$lib/components/DatabaseEntryCard.svelte';
+	import BusinessDetail from '$lib/components/BusinessDetail.svelte';
+	import SplitHero from '$lib/components/SplitHero.svelte';
+	import { getBusinesses, getBusinessTags, type DatabaseProject } from '$lib/database/businesses';
 	import { m } from '$lib/paraglide/messages.js';
 	import { localizeHref } from '$lib/paraglide/runtime';
-
-	type DatabaseProject = {
-		title: string;
-		industryTags: readonly string[];
-		image?: string;
-		imageAlt?: string;
-		href?: Pathname;
-	};
-
-	// Provisional public list from Experiment_Library_v2.xlsx / Ventures.
-	// Replace/reconcile it when the dedicated project-list workbook arrives.
-	const projects: DatabaseProject[] = [
-		{
-			title: m.home_database_rabia(),
-			industryTags: [m.database_industry_food()],
-			image: rabiaImage,
-			imageAlt: m.home_database_rabia_image_alt(),
-			href: '/database/rabia'
-		},
-		{
-			title: m.home_database_barefoot(),
-			industryTags: [m.database_industry_retail()],
-			image: barefootStoreImage,
-			imageAlt: m.home_database_barefoot_image_alt(),
-			href: '/database/barefoot-store'
-		},
-		{
-			title: m.home_database_herbal_pharmacy(),
-			industryTags: [m.database_industry_health(), m.database_industry_retail()],
-			image: herbalPharmacyImage,
-			imageAlt: m.home_database_herbal_pharmacy_image_alt(),
-			href: '/database/herbal-pharmacy'
-		},
-		{
-			title: 'Dumpling Restaurant Franchise',
-			industryTags: [m.database_industry_gastro()],
-			image: dumplingsImage,
-			imageAlt: 'Dumpling restaurant chain'
-		},
-		{
-			title: 'Village Store Franchise',
-			industryTags: [m.database_industry_retail()],
-			image: villageStoreFranchiseImage,
-			imageAlt: 'Village Store Franchise'
-		},
-		{
-			title: 'Muslim Fashion House',
-			industryTags: [m.database_industry_retail()],
-			image: muslimFashionHouseImage,
-			imageAlt: 'Muslim Fashion House'
-		},
-		{
-			title: 'Circular Economy Mall',
-			industryTags: [m.database_industry_crafts(), m.database_industry_retail()],
-			image: circularEconomyMallImage,
-			imageAlt: 'Circular Economy Mall'
-		},
-		{
-			title: 'Kiosk Chain',
-			industryTags: [m.database_industry_retail()],
-			image: kioskChainImage,
-			imageAlt: 'Kiosk Chain'
-		},
-		{
-			title: 'Mushroom Farm',
-			industryTags: [m.database_industry_food()],
-			image: mushroomFarmImage,
-			imageAlt: 'Mushroom Farm'
-		},
-		{
-			title: 'Model Eisenbahn Store and Maker Club',
-			industryTags: [m.database_industry_retail()],
-			image: eisenbahnImage,
-			imageAlt: 'Model Eisenbahn Store and Maker Club'
-		},
-		{
-			title: 'Ethiopian Food Brand',
-			industryTags: [m.database_industry_food()],
-			image: ethiopianFoodBrandImage,
-			imageAlt: 'Ethiopian Food Brand'
-		},
-		{
-			title: 'Ukrainian Food Brand',
-			industryTags: [m.database_industry_food(), m.database_industry_gastro()],
-			image: ukrainianFoodBrandImage,
-			imageAlt: 'Ukrainian Food Brand'
-		},
-		{
-			title: 'Romantasy Book Store & Bar',
-			industryTags: [m.database_industry_retail(), m.database_industry_gastro()],
-			image: romantasyBookStoreImage,
-			imageAlt: 'Romantasy Book Store & Bar'
-		},
-		{
-			title: 'Muslim Female Club',
-			industryTags: [m.database_industry_community()],
-			image: muslimFemaleClubImage,
-			imageAlt: 'Muslim Female Club'
-		},
-		{
-			title: 'Microbiom Store',
-			industryTags: [m.database_industry_health(), m.database_industry_retail()],
-			image: microbiomStoreImage,
-			imageAlt: 'Microbiom Store'
-		},
-		{
-			title: 'Gesundheitskiosk',
-			industryTags: [m.database_industry_health()],
-			image: gesundheitskioskImage,
-			imageAlt: 'Gesundheitskiosk'
-		},
-		{
-			title: 'Functional Beverage Bar',
-			industryTags: [m.database_industry_gastro(), m.database_industry_health()],
-			image: functionalBeverageBarImage,
-			imageAlt: 'Functional Beverage Bar'
-		},
-		{
-			title: 'Korean Jjimjilbang',
-			industryTags: [m.database_industry_health()],
-			image: koreanJjimjilbangImage,
-			imageAlt: 'Korean Jjimjilbang'
-		},
-		{
-			title: 'Digital Detox / Focus Lounge',
-			industryTags: [m.database_industry_health()],
-			image: digitalDetoxLoungeImage,
-			imageAlt: 'Digital Detox / Focus Lounge'
-		},
-		{
-			title: 'Life Skills School for Kids',
-			industryTags: [m.database_industry_community()],
-			image: lifeSkillsSchoolImage,
-			imageAlt: 'Life Skills School for Kids'
-		},
-		{ title: 'Walla Supermarket Franchise', industryTags: [m.database_industry_retail()] }
-	];
-
+	const projects = getBusinesses();
+	const tags = getBusinessTags();
+	let activeTags = $state<string[]>([]);
+	let detail = $state<DatabaseProject | null>(null);
+	const visibleProjects = $derived(
+		projects.filter(
+			(project) => activeTags.length === 0 || activeTags.some((tag) => project.tags.includes(tag))
+		)
+	);
+	function toggleTag(tag: string) {
+		activeTags = activeTags.includes(tag)
+			? activeTags.filter((item) => item !== tag)
+			: [...activeTags, tag];
+	}
+	const dashboardHref = resolve(localizeHref('/dashboard') as Pathname);
 	const homeHref = resolve(localizeHref('/') as Pathname);
 	const databaseUrl = new URL(
 		resolve(localizeHref('/database') as Pathname),
@@ -189,24 +50,92 @@
 	<meta name="twitter:image" content={ogImageUrl} />
 </svelte:head>
 
-<section class="doc database-doc">
-	<div class="doc-wrap">
-		<span class="section-tag">{m.database_page_tag()}</span>
-		<h1>{m.database_page_title()}</h1>
-		<p class="database-intro">{m.database_page_subtitle()}</p>
-
-		<div class="preview-grid preview-grid-4 database-grid">
-			{#each projects as project (project.title)}
-				<DatabaseEntryCard
-					title={project.title}
-					image={project.image ?? null}
-					imageAlt={project.imageAlt ?? project.title}
-					industryTags={project.industryTags}
-					href={project.href}
-				/>
-			{/each}
-		</div>
-
-		<a href={homeHref} class="back-link database-back-link">{m.database_back_home()}</a>
+<SplitHero
+	variant="narrow"
+	title={m.database_page_title()}
+	description={m.database_page_subtitle()}
+	image={foodsImage}
+	imageAlt={m.home_category_food()}
+/>
+<section class="library">
+	<div class="library-filters" role="group" aria-label={m.library_filters()}>
+		<button
+			class="tag-pill"
+			class:active={activeTags.length === 0}
+			aria-pressed={activeTags.length === 0}
+			onclick={() => (activeTags = [])}>{m.library_all()}</button
+		>{#each tags as tag (tag.id)}<button
+				class="tag-pill"
+				class:active={activeTags.includes(tag.id)}
+				aria-pressed={activeTags.includes(tag.id)}
+				onclick={() => toggleTag(tag.id)}>{tag.label}</button
+			>{/each}<span class="count" aria-live="polite"
+			>{visibleProjects.length} {m.library_count()}</span
+		>
+	</div>
+	<div class="library-grid">
+		{#each visibleProjects as project (project.id)}<DatabaseEntryCard
+				title={project.title}
+				image={project.image ?? null}
+				imageAlt={project.imageAlt ?? project.title}
+				industryTags={tags.filter((tag) => project.tags.includes(tag.id)).map((tag) => tag.label)}
+				credit={project.credit}
+				onselect={() => (detail = project)}
+			/>{/each}
+	</div>
+	{#if visibleProjects.length === 0}<p class="db-notice">{m.library_empty()}</p>{/if}
+	<a href={homeHref} class="back-link database-back-link">{m.database_back_home()}</a>
+</section>
+{#if detail}<BusinessDetail business={detail} onclose={() => (detail = null)} />{/if}
+<section class="contact">
+	<div>
+		<h2>{m.library_cta()}<br /><em>{m.library_cta_sub()}</em></h2>
+		<a class="btn" href={dashboardHref}>{m.nav_dashboard()} →</a>
 	</div>
 </section>
+
+<style>
+	.library {
+		padding: clamp(56px, 7vw, 88px) 64px;
+		background: #fff;
+	}
+	.library-filters {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 10px;
+		margin-bottom: 32px;
+	}
+	.library-filters button {
+		font-family: inherit;
+		cursor: pointer;
+		padding: 10px 18px;
+		color: #111;
+		border-color: rgba(17, 17, 17, 0.2);
+	}
+	.library-filters button.active {
+		background: #c8332b;
+		color: white;
+		border-color: #c8332b;
+	}
+	.count {
+		margin-left: auto;
+		font-size: 0.85rem;
+		font-weight: 500;
+		color: #6e6e6e;
+	}
+	.library-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+		gap: 20px;
+	}
+	button:focus-visible {
+		outline: 3px solid #c8332b;
+		outline-offset: 4px;
+	}
+	@media (max-width: 900px) {
+		.library {
+			padding: 48px 24px;
+		}
+	}
+</style>

@@ -7,12 +7,17 @@
 		actions?: Snippet;
 		image: string;
 		imageAlt: string;
+		variant?: 'default' | 'home' | 'narrow';
 	};
 
-	let { title, description, actions, image, imageAlt }: Props = $props();
+	let { title, description, actions, image, imageAlt, variant = 'default' }: Props = $props();
 </script>
 
-<section class="split-hero">
+<section
+	class="split-hero"
+	class:split-hero--home={variant === 'home'}
+	class:split-hero--narrow={variant === 'narrow'}
+>
 	<div class="split-hero__content">
 		<div class="split-hero__title">
 			{#if typeof title === 'string'}
@@ -102,12 +107,53 @@
 		object-fit: cover;
 	}
 
+	.split-hero--home {
+		min-height: 340px;
+	}
+	.split-hero--home .split-hero__content {
+		padding: clamp(32px, 4vw, 56px) clamp(20px, 3.8vw, 72px);
+	}
+	.split-hero--home .split-hero__image {
+		/* The approved rendered hero follows the Frankfurt asset proportions. */
+		aspect-ratio: 9 / 11;
+		min-height: 340px;
+	}
+	.split-hero--narrow {
+		min-height: 200px;
+		height: clamp(200px, 22vw, 260px);
+	}
+	.split-hero--narrow .split-hero__content {
+		padding: 32px clamp(20px, 3.8vw, 72px);
+	}
+	.split-hero--narrow .split-hero__title h1 {
+		font-size: clamp(1.3rem, 2.6vw, 2.2rem);
+		font-weight: 900;
+		text-transform: uppercase;
+		max-width: 720px;
+		line-height: 1.15;
+	}
+	.split-hero--narrow .split-hero__description {
+		margin-top: 14px;
+	}
+	.split-hero--narrow .split-hero__image {
+		min-height: 0;
+	}
 	@media (max-width: 900px) {
 		.split-hero {
 			grid-template-columns: 1fr;
 			min-height: auto;
 		}
 
+		.split-hero--narrow {
+			height: auto;
+		}
+		.split-hero--home .split-hero__image {
+			aspect-ratio: auto;
+			min-height: 240px;
+		}
+		.split-hero--narrow .split-hero__image {
+			min-height: 180px;
+		}
 		.split-hero__content {
 			padding: 44px 24px 48px;
 		}
