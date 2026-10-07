@@ -8,6 +8,11 @@
 	import { m } from '$lib/paraglide/messages.js';
 	import { localizeHref } from '$lib/paraglide/runtime';
 	type Mode = 'validation' | 'design';
+	type ConversationMessage = {
+		role: 'user' | 'guide';
+		text: string;
+		context: string;
+	};
 	let mode = $state<Mode>('validation');
 	let validationSection = $state('explore');
 	let designSection = $state('customer');
@@ -39,11 +44,11 @@
 			messageLog = undefined;
 		};
 	}
-	function append(...messages: typeof thread) {
+	function append(...messages: ConversationMessage[]) {
 		thread.push(...messages);
 		void tick().then(() => messageLog?.scrollTo({ top: messageLog.scrollHeight }));
 	}
-	let thread = $state([
+	let thread = $state<ConversationMessage[]>([
 		{ role: 'user', text: m.workspace_initial_question(), context: m.workspace_explore() },
 		{ role: 'guide', text: m.workspace_initial_reply(), context: m.workspace_explore() }
 	]);

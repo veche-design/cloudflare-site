@@ -29,7 +29,7 @@
 		m.workspace_alt_5(),
 		m.workspace_alt_6()
 	];
-	let question = $state(m.workspace_initial_question());
+	let question = $state<string>(m.workspace_initial_question());
 	let activePrompt = $state(2);
 	let industry = $state('health');
 	let foodFunction = $state('herbal');
