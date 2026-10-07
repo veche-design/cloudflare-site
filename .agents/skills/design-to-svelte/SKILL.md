@@ -27,7 +27,7 @@ Visual fidelity must not degrade semantic HTML, keyboard behavior, accessibility
 Files under `/design` are design/reference inputs, not production source.
 
 - Do not import runtime code or styles directly from `/design`.
-- Do not serve prototype HTML from `/design`.
+- Do not expose prototype HTML from `/design` as production application routes or deploy it with the site. A temporary local preview of approved reference files may be used for visual comparison; stop any reference server you started when verification is complete.
 - Do not copy generated HTML/CSS/JS wholesale into production.
 - Treat prototype JavaScript as clues to reference interactions, not trusted production code.
 - Copy only production-worthy assets into the appropriate `src/lib/assets` location and give them clear names.
