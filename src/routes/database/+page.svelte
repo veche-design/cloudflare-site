@@ -90,7 +90,7 @@
 <section class="contact">
 	<div>
 		<h2>{m.library_cta()}<br /><em>{m.library_cta_sub()}</em></h2>
-		<a class="btn" href={dashboardHref}>{m.nav_dashboard()} →</a>
+		<a class="btn" href={dashboardHref}>{m.home_hero_test_business()} →</a>
 	</div>
 </section>
 
