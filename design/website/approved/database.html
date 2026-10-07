@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#fff;color:#111111;font-family:'Montserrat',sans-serif;-webkit-font-smoothing:antialiased}a{color:#111111}a:hover{color:#C8332B}h1,h2,h3,p{margin:0}html{scroll-behavior:smooth}</style>
+</helmet>
+<header data-screen-label="Nav" style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px 48px;flex-wrap:wrap;border-bottom:1px solid rgba(17,17,17,0.08);position:sticky;top:0;z-index:300;background:#fff">
+<a href="index.html" style="display:inline-flex;align-items:center;text-decoration:none"><img src="assets/logo.svg" alt="veche.design" style="height:18px;width:auto;display:block"></a>
+<nav style="display:flex;gap:28px;align-items:center;font-size:0.8rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;flex-wrap:wrap">
+<a href="index.html" style="text-decoration:none;padding-bottom:4px">Home</a>
+<a href="scout.html" style="text-decoration:none;padding-bottom:4px">SCOUT</a>
+<a href="database.html" style="color:#C8332B;text-decoration:none;padding-bottom:4px;border-bottom:2px solid #C8332B">DATABASE</a>
+<a href="test.html" style="text-decoration:none;padding-bottom:4px">TEST</a>
+<div style="display:flex;gap:6px;margin-left:8px;font-size:10px;font-weight:600;letter-spacing:0.1em"><span style="background:#6e6e6e;color:#fff;border:1px solid #6e6e6e;padding:4px 10px">EN</span><span style="border:1px solid rgba(110,110,110,0.3);color:#6e6e6e;padding:4px 10px">DE</span></div>
+</nav>
+</header>
+<section data-screen-label="Hero" style="display:grid;grid-template-columns:2fr 1fr;grid-template-rows:minmax(0,1fr);height:clamp(200px,22vw,260px);overflow:hidden;background:#C8332B">
+<div style="display:flex;flex-direction:column;justify-content:center;gap:14px;padding:32px clamp(20px,3.8vw,72px);color:#fff">
+<h1 style="font-size:clamp(1.3rem,2.6vw,2.2rem);line-height:1.15;font-weight:900;letter-spacing:-0.015em;text-transform:uppercase;max-width:720px">Explore prevalidated businesses</h1>
+<p style="font-size:clamp(1rem,1.4vw,1.15rem);line-height:1.5;max-width:560px;color:rgba(255,255,255,0.9)">food businesses ready to launch in the Rhine Main region</p>
+</div>
+<img src="assets/foods.jpg" alt="Food" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;background:#bbb">
+</section>
+<section id="database" data-screen-label="Database" style="display:flex;flex-direction:column;gap:32px;padding:clamp(56px,7vw,88px) 64px">
+<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+<sc-for list="{{ filters }}" as="f" hint-placeholder-count="7">
+<button type="button" onClick="{{ f.toggle }}" style="font-family:'Montserrat',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:11px 20px;border-radius:999px;border:1.5px solid {{ f.border }};background:{{ f.bg }};color:{{ f.color }};cursor:pointer">{{ f.label }}</button>
+</sc-for>
+<span style="font-size:0.8rem;color:#6e6e6e;font-weight:600;margin-left:6px">{{ countLabel }}</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px">
+<sc-for list="{{ projects }}" as="p" hint-placeholder-count="11">
+<div data-card="{{ p.id }}" onClick="{{ p.open }}" style="display:{{ p.display }};flex-direction:column;padding:16px 16px 22px;background:#fff;border:1px solid rgba(17,17,17,0.14);color:#111111;cursor:pointer" style-hover="border-color:#C8332B">
+<sc-if value="{{ p.img }}" hint-placeholder-val="{{ true }}"><div style="position:relative;margin-bottom:16px"><img src="{{ p.img }}" alt="{{ p.name }}" style="width:100%;height:200px;object-fit:cover;display:block;background:#e6e3dc"><sc-if value="{{ p.credit }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;right:6px;bottom:6px;font-size:0.6rem;font-weight:600;color:#fff;background:rgba(17,17,17,0.6);padding:3px 6px">{{ p.credit }}</span></sc-if></div></sc-if>
+<sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ false }}"><div style="height:200px;margin-bottom:16px;background:#e6e3dc;display:flex;align-items:center;justify-content:center;color:#9a948b;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase">Image to follow</div></sc-if>
+<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">
+<sc-for list="{{ p.tagList }}" as="t" hint-placeholder-count="2"><span style="font-size:0.65rem;font-weight:700;letter-spacing:0.06em;line-height:1;text-transform:uppercase;border:1px solid rgba(17,17,17,0.14);border-radius:999px;color:#6e6e6e;padding:6px 9px">{{ t }}</span></sc-for>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px"><p style="font-size:0.98rem;font-weight:700;line-height:1.3">{{ p.name }}</p><span style="font-size:0.75rem;font-weight:700;color:#C8332B;flex:none">More +</span></div>
+</div>
+</sc-for>
+</div>
+</section>
+<sc-if value="{{ detailOpen }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ close }}" style="position:fixed;inset:0;z-index:400;background:rgba(17,17,17,0.45)"></div>
+<aside data-screen-label="Project detail" style="position:fixed;top:0;right:0;bottom:0;z-index:401;width:min(600px,100%);background:#fff;overflow-y:auto;display:flex;flex-direction:column">
+<div style="position:relative;height:220px;flex:none;background:#e6e3dc">
+<sc-if value="{{ d.img }}" hint-placeholder-val="{{ true }}"><img src="{{ d.img }}" alt="{{ d.name }}" style="width:100%;height:100%;object-fit:cover;display:block"></sc-if>
+<sc-if value="{{ d.credit }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;left:12px;bottom:10px;font-size:0.65rem;font-weight:600;color:#fff;background:rgba(17,17,17,0.6);padding:4px 8px">{{ d.credit }}</span></sc-if>
+<button type="button" onClick="{{ close }}" style="font-family:'Montserrat',sans-serif;position:absolute;top:16px;right:16px;width:44px;height:44px;border-radius:50%;border:none;background:#fff;color:#111111;font-size:1.1rem;font-weight:700;cursor:pointer">✕</button>
+</div>
+<div style="display:flex;flex-direction:column;gap:28px;padding:32px 36px 40px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ d.tagList }}" as="t" hint-placeholder-count="2"><span style="font-size:0.65rem;font-weight:700;letter-spacing:0.06em;line-height:1;text-transform:uppercase;border:1px solid rgba(17,17,17,0.14);border-radius:999px;color:#6e6e6e;padding:6px 9px">{{ t }}</span></sc-for></div>
+<h2 style="font-size:clamp(1.4rem,2.4vw,2rem);line-height:1.15;font-weight:900;letter-spacing:-0.015em">{{ d.name }}</h2>
+</div>
+<sc-if value="{{ d.full }}" hint-placeholder-val="{{ true }}">
+<p style="font-size:0.95rem;line-height:1.65;color:#333;text-wrap:pretty">{{ d.desc }}</p>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:rgba(17,17,17,0.14);border:1px solid rgba(17,17,17,0.14)">
+<sc-for list="{{ d.figures }}" as="k" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;gap:6px;padding:18px 16px;background:#fff"><span style="font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6e6e6e;line-height:1.35">{{ k.label }}</span><span style="font-size:1.15rem;font-weight:900;color:#C8332B">{{ k.value }}</span></div>
+</sc-for>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#6e6e6e">Success factors</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ d.factors }}" as="s" hint-placeholder-count="5"><span style="font-size:0.8rem;font-weight:700;padding:9px 16px;border-radius:999px;background:#FBEDEC;color:#C8332B">{{ s }}</span></sc-for></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#6e6e6e">Benchmarks</p>
+<div style="display:flex;flex-direction:column;border-top:1px solid rgba(17,17,17,0.1)">
+<sc-for list="{{ d.benchmarks }}" as="b" hint-placeholder-count="5">
+<a href="{{ b.url }}" target="_blank" rel="noopener" style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid rgba(17,17,17,0.1);text-decoration:none"><span style="font-size:0.9rem;font-weight:700">{{ b.name }}</span><span style="font-size:0.8rem;color:#6e6e6e;font-weight:500">{{ b.location }} ↗</span></a>
+</sc-for>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#6e6e6e">Available documents</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px"><sc-for list="{{ d.docs }}" as="doc" hint-placeholder-count="2"><a href="#" style="font-size:0.8rem;font-weight:700;padding:12px 20px;border-radius:999px;border:1.5px solid #111111;text-decoration:none">↓ {{ doc }}</a></sc-for></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px;padding:26px;background:#111111;color:#fff">
+<p style="font-size:1.05rem;font-weight:800;line-height:1.35">Want to launch this business? Join the testing programme.</p>
+<div style="display:flex"><a href="test.html" style="color:#fff;background:#C8332B;padding:16px 36px;border-radius:999px;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:0.06em">JOIN THE TESTING PROGRAMME</a></div>
+</div>
+</sc-if>
+<sc-if value="{{ d.partial }}" hint-placeholder-val="{{ false }}">
+<p style="font-size:0.95rem;line-height:1.65;color:#6e6e6e">Details for this business are being prepared. See Herbal Pharmacy for the full example.</p>
+</sc-if>
+</div>
+</aside>
+</sc-if>
+<section data-screen-label="CTA" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:28px;padding:clamp(72px,9vw,110px) 64px;background:#111111;color:#fff">
+<h2 style="font-size:clamp(1.8rem,4vw,3.4rem);line-height:1.05;font-weight:900;letter-spacing:-0.025em;margin-bottom:12px;max-width:1000px">Found a business idea? <span style="color:#E36A62"><br>Validate with us and get funding.</span></h2>
+<a href="test.html" style="color:#fff;background:#C8332B;padding:16px 40px;border-radius:999px;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:0.04em">Test your business idea</a>
+</section>
+<footer data-screen-label="Footer" style="display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding:24px 48px;border-top:1px solid rgba(17,17,17,0.1)">
+<a href="index.html" style="color:#C8332B;font-weight:700;font-size:0.9rem;text-decoration:none">veche.design</a>
+<div style="display:flex;gap:24px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase"><a href="#" style="color:#C8332B;text-decoration:none">Impressum</a><a href="#" style="color:#C8332B;text-decoration:none">Privacy Policy</a></div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const TAGS = ['Scouted', 'Insider tip', 'Gastro', 'Food product', 'Food health', 'Retail', 'Social project', 'Innovation infrastructure'];
+const P = [
+  { id: 'afghan', name: 'Afghan Food Brand', img: 'assets/rabia.jpg', tags: ['Insider tip', 'Food product'] },
+  { id: 'herbal', name: 'Herbal Pharmacy', img: 'assets/herbal-pharmacy.jpg', tags: ['Scouted', 'Food health'], full: true },
+  { id: 'microbiom', name: 'Microbiom Store', img: 'assets/microbiom-store.png', tags: ['Scouted', 'Food health'] },
+  { id: 'dumpling', name: 'Dumpling Restaurant Franchise', img: 'assets/soup-kitchen.png', tags: ['Insider tip', 'Gastro'] },
+  { id: 'mushroom', name: 'Mushroom Farm', img: 'assets/mushroom-farm.png', tags: ['Scouted', 'Food product'] },
+  { id: 'ethiopian', name: 'Ethiopian Food Brand', img: 'assets/ethiopian-food-brand.png', tags: ['Insider tip', 'Food product'] },
+  { id: 'ukrainian', name: 'Ukrainian Food Brand', img: 'assets/ukrainian-food-brand.png', tags: ['Insider tip', 'Food product'] },
+  { id: 'beverage', name: 'Functional Beverage Bar', img: 'assets/functional-drink-bar.png', tags: ['Scouted', 'Gastro', 'Food health'] },
+  { id: 'walla', name: 'Walla Supermarket Franchise', img: 'assets/walla-supermarket-chain.png', tags: ['Insider tip', 'Retail'] },
+  { id: 'foodlab', name: 'Food Lab', img: 'assets/food-lab-frankfurt.png', tags: ['Scouted', 'Innovation infrastructure'] },
+  { id: 'kitchens', name: 'Neighbourhood Kitchens', img: 'assets/stadtteilkueche-diana-djeddi.jpg', credit: '© Diana Djeddi', tags: ['Social project', 'Gastro'] }
+];
+const HERBAL = {
+  desc: 'A specialist pharmacy for medicinal herbs: loose herbs, custom blends and expert advice in one shop. The business model can be varied to include Traditional Chinese Medicine (TCM), Ayurveda, ancestral and legal psychedelic plants, or in-store treatments.',
+  figures: [
+    { label: 'Est. annual revenue', value: '€450–700k' },
+    { label: 'Potential jobs', value: '4–6' },
+    { label: 'Est. investment needed', value: '€150–250k' }
+  ],
+  factors: ['Legal check', 'Location', 'Team', 'Supplier network', 'Expert advice'],
+  benchmarks: [
+    { name: 'Die Kräuterdrogerie', location: 'Vienna', url: 'https://www.kraeuterdrogerie.at/' },
+    { name: 'Dr. Kottas', location: 'Vienna', url: 'https://kottas.at/' },
+    { name: 'Zieten-Apotheke', location: 'Berlin', url: 'https://www.zietenapotheke.de/' },
+    { name: 'Herbamed Plus', location: 'Poland', url: 'https://herbamedplus.pl/' },
+    { name: 'Headshop', location: 'Amsterdam', url: 'https://www.headshop.nl/smartshop/herbs/medicinal-herbs/' }
+  ],
+  docs: ['Prefilled Business Model Canvas', 'Financial Projections']
+};
+class Component extends DCLogic {
+  state = { active: [], detail: null };
+  setFilter(active) {
+    const before = {};
+    document.querySelectorAll('[data-card]').forEach(el => { if (el.offsetParent) before[el.dataset.card] = el.getBoundingClientRect(); });
+    this.setState({ active }, () => requestAnimationFrame(() => {
+      document.querySelectorAll('[data-card]').forEach(el => {
+        if (!el.offsetParent) return;
+        const r = el.getBoundingClientRect(), o = before[el.dataset.card];
+        if (o) el.animate([{ transform: `translate(${o.left - r.left}px,${o.top - r.top}px)` }, { transform: 'none' }], { duration: 420, easing: 'cubic-bezier(.2,.7,.2,1)' });
+        else el.animate([{ opacity: 0, transform: 'scale(.95)' }, { opacity: 1, transform: 'none' }], { duration: 320, easing: 'ease-out' });
+      });
+    }));
+  }
+  renderVals() {
+    const { active, detail } = this.state;
+    const match = p => active.length === 0 || active.some(t => p.tags.includes(t));
+    const allOn = active.length === 0;
+    const filters = [{ label: 'All', on: allOn, toggle: () => this.setFilter([]) }]
+      .concat(TAGS.map(t => ({ label: t, on: active.includes(t), toggle: () => this.setFilter(active.includes(t) ? active.filter(x => x !== t) : [...active, t]) })))
+      .map(f => ({ ...f, bg: f.on ? '#C8332B' : '#fff', color: f.on ? '#fff' : '#111111', border: f.on ? '#C8332B' : 'rgba(17,17,17,0.2)' }));
+    const n = P.filter(match).length;
+    const dp = P.find(p => p.id === detail);
+    return {
+      filters,
+      countLabel: n + (n === 1 ? ' business' : ' businesses'),
+      projects: P.map(p => ({ ...p, tagList: p.tags, noImg: !p.img, display: match(p) ? 'flex' : 'none', open: () => this.setState({ detail: p.id }) })),
+      detailOpen: !!dp,
+      d: dp ? { name: dp.name, img: dp.img, credit: dp.credit, tagList: dp.tags, full: !!dp.full, partial: !dp.full, ...(dp.full ? HERBAL : {}) } : { tagList: [] },
+      close: () => this.setState({ detail: null })
+    };
+  }
+}
+</script>
+</body>
+</html>

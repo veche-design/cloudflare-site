@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#fff;color:#111111;font-family:'Montserrat',sans-serif;-webkit-font-smoothing:antialiased}a{color:#111111}a:hover{color:#C8332B}h1,h2,h3,p{margin:0}html{scroll-behavior:smooth}</style>
+</helmet>
+<header data-screen-label="Nav" style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px 48px;flex-wrap:wrap;border-bottom:1px solid rgba(17,17,17,0.08);position:sticky;top:0;z-index:300;background:#fff">
+<a href="index.html" style="display:inline-flex;align-items:center;text-decoration:none"><img src="assets/logo.svg" alt="veche.design" style="height:18px;width:auto;display:block"></a>
+<nav style="display:flex;gap:28px;align-items:center;font-size:0.8rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;flex-wrap:wrap">
+<a href="index.html" style="text-decoration:none;padding-bottom:4px">Home</a>
+<a href="scout.html" style="color:#C8332B;text-decoration:none;padding-bottom:4px;border-bottom:2px solid #C8332B">SCOUT</a>
+<a href="database.html" style="text-decoration:none;padding-bottom:4px">DATABASE</a>
+<a href="test.html" style="text-decoration:none;padding-bottom:4px">TEST</a>
+<div style="display:flex;gap:6px;margin-left:8px;font-size:10px;font-weight:600;letter-spacing:0.1em"><span style="background:#6e6e6e;color:#fff;border:1px solid #6e6e6e;padding:4px 10px">EN</span><span style="border:1px solid rgba(110,110,110,0.3);color:#6e6e6e;padding:4px 10px">DE</span></div>
+</nav>
+</header>
+<section data-screen-label="Hero" style="display:grid;grid-template-columns:2fr 1fr;grid-template-rows:minmax(0,1fr);height:clamp(200px,22vw,260px);overflow:hidden;background:#C8332B">
+<div style="display:flex;flex-direction:column;justify-content:center;gap:14px;padding:32px clamp(20px,3.8vw,72px);color:#fff">
+<h1 style="font-size:clamp(1.3rem,2.6vw,2.2rem);line-height:1.15;font-weight:900;letter-spacing:-0.015em;text-transform:uppercase;max-width:720px">Scout successful food, gastro and health businesses</h1>
+<p style="font-size:clamp(1rem,1.4vw,1.15rem);line-height:1.5;max-width:560px;color:rgba(255,255,255,0.9)">what works worldwide, can work in the Rhine Main region</p>
+</div>
+<img src="assets/systems.jpg" alt="Scouting" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;background:#bbb">
+</section>
+<section id="scout" data-screen-label="Scouting tool" style="display:flex;flex-direction:column;gap:32px;padding:clamp(56px,7vw,88px) 64px;background:#F4F4F2">
+<div style="display:flex;flex-direction:column;gap:18px"><p style="font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#C8332B">SCOUT WORLDWIDE</p><h2 style="font-size:clamp(1.4rem,2.6vw,2.2rem);line-height:1.2;font-weight:900;letter-spacing:-0.015em;max-width:760px">Find business opportunities in your region</h2></div>
+<div style="display:flex;flex-direction:column;gap:20px;padding:28px;background:#fff;border:1px solid rgba(17,17,17,0.14)">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px">
+<sc-for list="{{ fields }}" as="f" hint-placeholder-count="6">
+<button type="button" onClick="{{ f.toggle }}" style="font-family:'Montserrat',sans-serif;display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;padding:12px 20px;border-radius:999px;border:1.5px solid {{ f.border }};background:{{ f.bg }};cursor:pointer;min-width:0">
+<span style="display:flex;flex-direction:column;gap:3px;min-width:0"><span style="font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:{{ f.color }}">{{ f.label }}</span><span style="font-size:0.88rem;font-weight:600;color:#111111;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ f.summary }}</span></span>
+<span style="font-size:0.8rem;color:{{ f.color }};flex:none">{{ f.caret }}</span>
+</button>
+</sc-for>
+</div>
+<sc-if value="{{ panelOpen }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:14px;padding:20px 22px;border-radius:24px;background:{{ panel.tint }};border:1px solid {{ panel.line }}">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:{{ panel.color }}">{{ panel.label }} · pick any</span><button type="button" onClick="{{ closePanel }}" style="font-family:'Montserrat',sans-serif;background:transparent;border:none;font-size:0.75rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#6e6e6e;cursor:pointer;padding:4px">Done</button></div>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ panel.tags }}" as="t" hint-placeholder-count="5">
+<button type="button" onClick="{{ t.toggle }}" style="font-family:'Montserrat',sans-serif;font-size:0.8rem;font-weight:600;padding:9px 16px;border-radius:999px;border:1.5px solid {{ t.border }};background:{{ t.bg }};color:{{ t.color }};cursor:pointer">{{ t.name }}</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-top:4px">
+<button type="button" onClick="{{ toggleCompare }}" style="font-family:'Montserrat',sans-serif;display:flex;align-items:center;gap:12px;background:transparent;border:none;cursor:pointer;padding:0">
+<span style="width:44px;height:24px;border-radius:999px;background:{{ cmpTrack }};position:relative;flex:none"><span style="position:absolute;top:3px;left:{{ cmpKnob }};width:18px;height:18px;border-radius:50%;background:#fff"></span></span>
+<span style="font-size:0.88rem;font-weight:700;color:#111111">Compare to Rhine Main</span>
+</button>
+<button type="button" onClick="{{ scout }}" style="font-family:'Montserrat',sans-serif;background:#C8332B;color:#fff;border:none;border-radius:999px;padding:17px 56px;font-weight:700;font-size:13px;letter-spacing:0.08em;cursor:pointer">SCOUT</button>
+</div>
+</div>
+<a href="database.html" style="font-size:0.85rem;font-weight:600;color:#6e6e6e;text-decoration:none">Or browse pre-validated businesses in the Database →</a>
+</section>
+<sc-if value="{{ scouted }}" hint-placeholder-val="{{ false }}">
+<section id="results" data-screen-label="Results: elsewhere" style="display:flex;flex-direction:column;gap:32px;padding:clamp(56px,7vw,88px) 64px">
+<div style="display:flex;flex-direction:column;gap:14px"><p style="font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#C8332B">01 · Successful elsewhere</p><h2 style="font-size:clamp(1.4rem,2.6vw,2.2rem);line-height:1.2;font-weight:900;letter-spacing:-0.015em">Herbal pharmacies</h2><p style="font-size:0.9rem;color:#6e6e6e;font-weight:500">{{ querySummary }}</p></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px">
+<sc-for list="{{ examples }}" as="e" hint-placeholder-count="5">
+<div style="display:flex;flex-direction:column;background:#fff;border:1px solid rgba(17,17,17,0.14)">
+
+<div style="display:flex;flex-direction:column;gap:10px;padding:18px 18px 20px;flex:1">
+<div style="display:flex"><span style="font-size:0.65rem;font-weight:700;letter-spacing:0.06em;line-height:1;text-transform:uppercase;border:1px solid rgba(17,17,17,0.14);border-radius:999px;color:#6e6e6e;padding:6px 9px">{{ e.location }}</span></div>
+<p style="font-size:1rem;font-weight:800;line-height:1.3">{{ e.name }}</p>
+<p style="font-size:0.88rem;line-height:1.6;color:#555;flex:1;text-wrap:pretty">{{ e.desc }}</p>
+<div style="display:flex;padding-top:6px"><a href="{{ e.url }}" target="_blank" rel="noopener" style="color:#C8332B;border:1.5px solid #C8332B;border-radius:999px;padding:10px 22px;text-decoration:none;font-weight:700;font-size:12px;letter-spacing:0.04em">Open website ↗</a></div>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+<sc-if value="{{ showGap }}" hint-placeholder-val="{{ true }}">
+<section data-screen-label="Results: Rhine Main gap" style="display:flex;flex-direction:column;gap:40px;padding:clamp(56px,7vw,88px) 64px;background:#F4F4F2">
+<div style="display:flex;flex-direction:column;gap:14px"><p style="font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#C8332B">02 · Compared to Rhine Main</p><h2 style="font-size:clamp(1.4rem,2.6vw,2.2rem);line-height:1.2;font-weight:900;letter-spacing:-0.015em">Does it exist here?</h2></div>
+<div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:22px 28px;background:#C8332B;color:#fff;border-radius:999px">
+<span style="font-size:0.7rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;background:#fff;color:#C8332B;padding:7px 14px;border-radius:999px">Gap found</span>
+<p style="font-size:clamp(1rem,1.6vw,1.25rem);font-weight:800;line-height:1.3">No dedicated Kräuterapotheke in Rhine Main</p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px;align-items:stretch">
+<div style="display:flex;flex-direction:column;gap:12px;min-width:0">
+<p style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#6e6e6e">Google Maps search: "Kräuterapotheke Frankfurt"</p>
+<iframe src="https://www.google.com/maps?q=Kr%C3%A4uterapotheke&amp;ll=50.11,8.68&amp;z=10&amp;output=embed" title="Google Maps: Kräuterapotheke Frankfurt" loading="lazy" style="width:100%;height:420px;border:1px solid rgba(17,17,17,0.14);display:block;background:#e6e3dc"></iframe>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;min-width:0">
+<p style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#6e6e6e">What the search returns</p>
+<div style="display:flex;flex-direction:column;background:#fff;border:1px solid rgba(17,17,17,0.14)">
+<sc-for list="{{ mapResults }}" as="m" hint-placeholder-count="8">
+<div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:13px 18px;border-bottom:1px solid rgba(17,17,17,0.08)">
+<div style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font-size:0.9rem;font-weight:700">{{ m.name }}</span><span style="font-size:0.8rem;color:#6e6e6e;line-height:1.45">{{ m.why }}</span></div>
+<span style="font-size:0.62rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border:1px solid rgba(200,51,43,0.4);color:#C8332B;border-radius:999px;padding:5px 9px;white-space:nowrap">Not a match</span>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap">
+<p style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#6e6e6e">Similar businesses in Rhine Main, compared to a Kräuterapotheke</p>
+<div style="display:flex;gap:16px;font-size:0.75rem;color:#555;font-weight:600;flex-wrap:wrap">
+<span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:50%;background:#111111"></span>Yes</span>
+<span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:50%;border:1.5px solid #111111;background:conic-gradient(#111111 0 50%,transparent 0);box-sizing:border-box"></span>Half</span>
+<span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:50%;border:1.5px solid #111111;background:conic-gradient(#111111 0 25%,transparent 0);box-sizing:border-box"></span>Quarter</span>
+<span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:50%;border:1.5px solid rgba(17,17,17,0.25);box-sizing:border-box"></span>No</span>
+</div>
+</div>
+<div style="overflow-x:auto;background:#fff;border:1px solid rgba(17,17,17,0.14)">
+<div style="min-width:900px;display:flex;flex-direction:column">
+<div style="display:grid;grid-template-columns:220px repeat(7,minmax(0,1fr));align-items:end;border-bottom:1px solid rgba(17,17,17,0.14)">
+<span style="padding:16px 18px"></span>
+<sc-for list="{{ cols }}" as="c" hint-placeholder-count="8"><span style="padding:16px 8px;font-size:0.66rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#6e6e6e;text-align:center;line-height:1.35">{{ c }}</span></sc-for>
+</div>
+<sc-for list="{{ rows }}" as="r" hint-placeholder-count="7">
+<div style="display:grid;grid-template-columns:220px repeat(7,minmax(0,1fr));align-items:center;background:{{ r.bg }};border-bottom:1px solid rgba(17,17,17,0.08)">
+<span style="padding:16px 18px;font-size:0.9rem;font-weight:{{ r.weight }};color:{{ r.color }}">{{ r.name }}</span>
+<sc-for list="{{ r.cells }}" as="x" hint-placeholder-count="8">
+<span style="display:flex;justify-content:center;align-items:center;padding:14px 8px;font-size:0.85rem;font-weight:700;color:#555"><span style="display:{{ x.dotDisplay }};width:16px;height:16px;border-radius:50%;box-sizing:border-box;border:1.5px solid {{ x.border }};background:{{ x.bg }}"></span>{{ x.text }}</span>
+</sc-for>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+<div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding-top:8px">
+<a href="test.html" style="color:#fff;background:#C8332B;padding:18px 44px;border-radius:999px;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:0.06em">TEST THIS BUSINESS</a>
+<span style="font-size:0.88rem;color:#555;font-weight:500">See the validation programme for a Herbal Pharmacy</span>
+</div>
+</section>
+</sc-if>
+</sc-if>
+<section data-screen-label="CTA" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:28px;padding:clamp(72px,9vw,110px) 64px;background:#111111;color:#fff">
+<h2 style="font-size:clamp(1.8rem,4vw,3.4rem);line-height:1.05;font-weight:900;letter-spacing:-0.025em;margin-bottom:12px;max-width:1000px">Found a business idea? <span style="color:#E36A62"><br>Validate with us and get funding.</span></h2>
+<a href="test.html" style="color:#fff;background:#C8332B;padding:16px 40px;border-radius:999px;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:0.04em">Test your business idea</a>
+</section>
+<footer data-screen-label="Footer" style="display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding:24px 48px;border-top:1px solid rgba(17,17,17,0.1)">
+<a href="index.html" style="color:#C8332B;font-weight:700;font-size:0.9rem;text-decoration:none">veche.design</a>
+<div style="display:flex;gap:24px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase"><a href="#" style="color:#C8332B;text-decoration:none">Impressum</a><a href="#" style="color:#C8332B;text-decoration:none">Privacy Policy</a></div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const CATS = [
+  { key: 'industry', label: 'Industry', color: '#C8332B', tint: '#FBEDEC', tags: ['Gastro', 'Food brand', 'Food health', 'Food retail'] },
+  { key: 'model', label: 'Business model', color: '#A86A12', tint: '#FBF3E6', tags: ['Shop / retail', 'Online shop', 'Franchise', 'Subscription', 'Workshops & courses', 'B2B supply'] },
+  { key: 'cuisine', label: 'Cuisine', color: '#3A7A4C', tint: '#EDF5EF', tags: ['Afghan', 'Ethiopian', 'Ukrainian', 'Vietnamese', 'Korean', 'Levantine', 'Austrian'] },
+  { key: 'function', label: 'Food function', color: '#2D5C8C', tint: '#ECF2F8', tags: ['Herbal medicine', 'Gut health', 'Functional drinks', 'Plant protein', 'Fermentation'] },
+  { key: 'launch', label: 'New launches', color: '#7A3E6E', tint: '#F5EDF3', tags: ['Last 12 months', 'Last 3 years', 'Established 10+ years'] },
+  { key: 'region', label: 'Region', color: '#555555', tint: '#F1F1EF', tags: ['Europe', 'Asia', 'Africa', 'North America', 'South America'] }
+];
+const EXAMPLES = [
+  { name: 'Die Kräuterdrogerie', location: 'Vienna, Austria', url: 'https://www.kraeuterdrogerie.at/', domain: 'kraeuterdrogerie.at', desc: 'Specialist herb drugstore selling loose medicinal herbs, teas and its own blends, with in-store advice and an online shop.' },
+  { name: 'Dr. Kottas', location: 'Vienna, Austria', url: 'https://kottas.at/', domain: 'kottas.at', desc: 'Viennese maker of medicinal teas and herbal remedies, sold through pharmacies and its own channels.' },
+  { name: 'Zieten-Apotheke', location: 'Berlin, Germany', url: 'https://www.zietenapotheke.de/', domain: 'zietenapotheke.de', desc: 'Pharmacy specialised in herbal medicine that mixes individual herb blends next to the regular pharmacy offer.' },
+  { name: 'Herbamed Plus', location: 'Poland', url: 'https://herbamedplus.pl/', domain: 'herbamedplus.pl', desc: 'Online herbal store with dried herbs, herbal blends and natural supplements, shipped nationwide.' },
+  { name: 'Headshop', location: 'Amsterdam, Netherlands', url: 'https://www.headshop.nl/smartshop/herbs/medicinal-herbs/', domain: 'headshop.nl', desc: 'Smartshop with a large online range of medicinal herbs sold by weight, next to teas and extracts.' }
+];
+const MAP_RESULTS = [
+  { name: 'Regular pharmacies', why: 'Prescription and OTC medicine, no herbal specialisation' },
+  { name: 'Kräutergärten', why: 'Herb gardens to visit, not a shop with advice' },
+  { name: 'Kräuterschule', why: 'Courses only, no products' },
+  { name: 'Kräuterfrau', why: 'Individual herbalists, no store' },
+  { name: 'Kräuterdrogerie / Kräuterapotheke', why: 'Exists, but far outside the region' },
+  { name: 'Heilpraktiker', why: 'Treatment practices, no retail' },
+  { name: 'TeeGschwendner', why: 'Tea retail chain, not medicinal' },
+  { name: 'Gewürzhäuser', why: 'Spices for cooking' }
+];
+const COLS = ['Herbal medicine expertise', 'Custom blends', 'Pharmacist advice', 'Product focus (TCM, Ayurveda, ancestral herbs)', 'Price level', 'Online shop', 'Instore experience (infusions, tea café, etc.)'];
+const ROWS = [
+  ['Kräuterapotheke', [1, 1, 1, 1, '€€', 1, 1], true],
+  ['Kräutergarten', [0.5, 1, 0, 0, '€', 0, 1]],
+  ['Reformhaus', [0.5, 0, 0, 0.5, '€€', 0.5, 0]],
+  ['dm Drogerie', [0, 0, 0, 0, '€', 1, 0]],
+  ['Traditionelle Apotheke', [0.5, 0, 1, 0, '€€€', 1, 0]],
+  ['Gewürzhaus', [0.25, 0.5, 0, 0, '€€', 1, 0.5]],
+  ['Teehaus', [0.25, 0.5, 0, 0, '€€', 1, 0.5]]
+];
+class Component extends DCLogic {
+  state = { sel: { industry: ['Food health'], function: ['Herbal medicine'] }, open: null, compare: true, scouted: false };
+  toggleTag(key, tag) {
+    this.setState(s => {
+      const cur = s.sel[key] || [];
+      const next = cur.includes(tag) ? cur.filter(t => t !== tag) : [...cur, tag];
+      return { sel: { ...s.sel, [key]: next } };
+    });
+  }
+  renderVals() {
+    const { sel, open, compare, scouted } = this.state;
+    const fields = CATS.map(c => {
+      const picked = sel[c.key] || [];
+      const active = open === c.key;
+      return {
+        label: c.label, color: c.color,
+        summary: picked.length === 0 ? 'Any' : picked.length === 1 ? picked[0] : picked[0] + ' +' + (picked.length - 1),
+        border: active || picked.length ? c.color : 'rgba(17,17,17,0.2)',
+        bg: active ? c.tint : '#fff',
+        caret: active ? '▴' : '▾',
+        toggle: () => this.setState({ open: active ? null : c.key })
+      };
+    });
+    const pc = CATS.find(c => c.key === open);
+    const panel = pc ? {
+      label: pc.label, color: pc.color, tint: pc.tint, line: pc.color + '33',
+      tags: pc.tags.map(t => {
+        const on = (sel[pc.key] || []).includes(t);
+        return { name: t, bg: on ? pc.color : '#fff', color: on ? '#fff' : pc.color, border: on ? pc.color : pc.color + '66', toggle: () => this.toggleTag(pc.key, t) };
+      })
+    } : { tags: [] };
+    const all = CATS.flatMap(c => sel[c.key] || []);
+    return {
+      fields, panel, panelOpen: !!pc,
+      closePanel: () => this.setState({ open: null }),
+      cmpTrack: compare ? '#C8332B' : 'rgba(17,17,17,0.2)',
+      cmpKnob: compare ? '23px' : '3px',
+      toggleCompare: () => this.setState({ compare: !compare }),
+      scout: () => {
+        this.setState({ scouted: true, open: null });
+        setTimeout(() => { const el = document.getElementById('results'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 60, behavior: 'smooth' }); }, 80);
+      },
+      scouted, showGap: compare,
+      querySummary: (all.length ? 'Results for: ' + all.join(' · ') : 'Results for: all categories') + ' · demo shows Herbal Pharmacy',
+      examples: EXAMPLES, mapResults: MAP_RESULTS, cols: COLS,
+      rows: ROWS.map(([name, vals, target]) => ({
+        name, bg: target ? '#FBEDEC' : '#fff', weight: target ? 800 : 600, color: target ? '#C8332B' : '#111111',
+        cells: vals.map(v => typeof v === 'string'
+          ? { text: v, dotDisplay: 'none', border: 'transparent', bg: 'transparent' }
+          : { text: '', dotDisplay: 'block', border: v ? '#111111' : 'rgba(17,17,17,0.25)', bg: v === 1 ? '#111111' : v ? 'conic-gradient(#111111 0 ' + (v * 100) + '%,transparent 0)' : 'transparent' })
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>
