@@ -71,6 +71,8 @@ Before editing production code:
 
 Protect domain semantics during recomposition. Do not silently reinterpret questions, methods, evidence, benchmarks, statuses, or pending results. Keep draft values and illustrative evidence identified as such. Do not infer validated hypotheses or learnings solely from phase completion. Reconcile overlapping prototype and production content without creating duplicate sources of truth.
 
+Preserve the semantic status of product information (such as draft, illustrative evidence, results pending, or needs verification) without exposing design-handoff or implementation provenance. Design annotations, handoff metadata, and reference provenance are implementation guidance unless the approved product UI intentionally exposes them. Do not introduce labels such as “approved reference”, “prototype”, or “demo response” merely because they describe the source material. When approved user-facing copy already communicates uncertainty adequately, preserve it instead of adding stronger implementation-derived disclaimers; for example, keep “Source and timeframe to follow.” without an “Approved reference statistic” prefix.
+
 Do not start by mechanically translating prototype markup.
 
 ## Extract design facts before coding
