@@ -27,7 +27,7 @@
 	</div>
 	<h2>{business.title}</h2>
 	{#if business.id === 'herbal'}
-		<p>{m.workspace_idea_copy()}</p>
+		<p>{m.library_herbal_concept()}</p>
 		<div>
 			<p class="draft-note">{m.library_draft()}</p>
 			<dl class="figures">

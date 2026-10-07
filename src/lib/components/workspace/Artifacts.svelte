@@ -111,7 +111,12 @@
 			: [...expanded, name];
 	}
 	const signals = [experiment('Discover'), experiment('Concept'), experiment('Deliver')];
-	const unresolved = [experiment('Gate', 1), experiment('Operate'), experiment('Economics')];
+	const unresolved = [
+		experiment('Gate', 1),
+		experiment('Operate'),
+		experiment('Concept', 1),
+		experiment('Economics')
+	];
 	function phaseLabel(state: string) {
 		return state === 'completed'
 			? m.workspace_phase_completed()
@@ -226,6 +231,53 @@
 						>
 					</h3>
 					<div class="module-content" id={`module-${i}`} hidden={!expanded.includes(phase.name)}>
+						{#if phase.name === 'Economics'}
+							<section class="programme-material">
+								<span class="eyebrow">{m.programme_methods()}</span>
+								<h4>{m.programme_financials()}</h4>
+								<p>{m.programme_financials_copy()}</p>
+								<div class="method-options">
+									<div>
+										<h4>{m.programme_traffic()}</h4>
+										<p>{m.programme_traffic_copy()}</p>
+									</div>
+									<div><h4>{m.programme_costs()}</h4></div>
+									<div><h4>{m.programme_revenue()}</h4></div>
+								</div>
+							</section>
+						{:else if phase.name === 'Operate'}
+							<section class="programme-material">
+								<span class="eyebrow">{m.programme_methods()}</span>
+								<h4>{m.programme_pilot()}</h4>
+								<p>{m.programme_pilot_copy()}</p>
+								<div class="method-options">
+									<div>
+										<h4>{m.programme_stand()}</h4>
+										<p>{m.programme_stand_copy()}</p>
+									</div>
+									<div>
+										<h4>{m.programme_popup()}</h4>
+										<p>{experiment('Operate').question}</p>
+									</div>
+									<div>
+										<h4>{m.programme_website()}</h4>
+										<p>{experiment('Concept', 1).question}</p>
+									</div>
+								</div>
+							</section>
+						{:else if phase.name === 'Concept'}
+							<section class="programme-material">
+								<span class="eyebrow">{m.programme_methods()}</span>
+								<h4>{m.programme_communications()}</h4>
+								<p>{m.programme_communications_copy()}</p>
+								<div class="method-options">
+									{#each [m.programme_pr(), m.programme_digital(), m.programme_events()] as method (method)}<div
+										>
+											<h4>{method}</h4>
+										</div>{/each}
+								</div>
+							</section>
+						{/if}
 						{#each phase.experiments as item (item.method)}<div>
 								<p class="status">
 									{item.resultsPending
@@ -250,6 +302,7 @@
 		</header>
 		<section class="learning">
 			<h3>{m.workspace_support()}</h3>
+			<span class="eyebrow">{m.workspace_illustrative()}</span>
 			<p>{m.workspace_support_note()}</p>
 			{#each signals as signal (signal.method)}<div class="signal">
 					<h4>{signal.method}</h4>
@@ -257,14 +310,14 @@
 				</div>{/each}
 		</section>
 		<section class="learning">
-			<h3>{m.workspace_contradict()}</h3>
-			<p>{m.workspace_contradict_note()}</p>
-		</section>
-		<section class="learning">
 			<h3>{m.workspace_unresolved()}</h3>
 			{#each unresolved as item (item.method)}<div class="unresolved">
 					<span class="eyebrow"
-						>{item.resultsPending ? m.workspace_pending() : m.workspace_no_evidence()}</span
+						>{item.resultsPending
+							? m.workspace_pending()
+							: item.evidence
+								? m.workspace_illustrative()
+								: m.workspace_no_evidence()}</span
 					>
 					<p>{item.question}</p>
 					<button class="text-action" onclick={() => onnavigate('experiments')}
@@ -478,6 +531,28 @@
 		margin-bottom: 8px;
 		color: #c8332b;
 	}
+	.programme-material {
+		padding: 20px;
+		background: #f4f4f2;
+	}
+	.programme-material > h4 {
+		margin: 8px 0;
+		font-size: 1rem;
+	}
+	.method-options {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 20px;
+		margin-top: 20px;
+	}
+	.method-options > div {
+		border-left: 2px solid #c8332b;
+		padding-left: 12px;
+	}
+	.method-options p {
+		font-size: 0.75rem;
+		margin-top: 8px;
+	}
 	.learning > p {
 		margin-top: 12px;
 	}
@@ -499,6 +574,9 @@
 		outline-offset: 4px;
 	}
 	@media (max-width: 580px) {
+		.method-options {
+			grid-template-columns: 1fr;
+		}
 		.working-artifact,
 		.learning,
 		.hypothesis,

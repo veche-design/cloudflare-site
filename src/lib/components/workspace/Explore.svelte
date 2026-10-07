@@ -150,11 +150,13 @@
 	</section>
 	{#if compare}<section>
 			<span class="section-tag">{m.workspace_gap_label()}</span>
+			<h3>{m.workspace_gap_question()}</h3>
 			<div class="gap">
 				<span>{m.workspace_gap_badge()}</span>
 				<h3>{m.workspace_gap_title()}</h3>
 			</div>
 			<p>{m.workspace_gap_text()}</p>
+			<p class="small">{m.workspace_gap_verification()}</p>
 			<div class="local-evidence">
 				<h3>{m.explore_local()}</h3>
 				<p>{m.explore_local_copy()}</p>
@@ -172,19 +174,19 @@
 					<thead
 						><tr
 							><th scope="col">{m.workspace_alternative()}</th
-							>{#each [m.workspace_expertise(), m.workspace_blends(), m.workspace_advice(), m.workspace_experience()] as label (label)}<th
+							>{#each [m.workspace_expertise(), m.workspace_blends(), m.workspace_advice(), m.workspace_product_focus(), m.workspace_price_level(), m.workspace_online(), m.workspace_experience()] as label (label)}<th
 									scope="col">{label}</th
 								>{/each}</tr
 						></thead
 					><tbody
 						>{#each herbalPharmacyCoverage as row, i (i)}<tr class:target={i === 0}
 								><th scope="row">{alternatives[i]}</th>{#each row as value, j (j)}<td
-										><span
-											class="dot"
-											style:--coverage={`${value * 100}%`}
-											aria-label={coverage(value)}
-											role="img"
-										></span></td
+										>{#if typeof value === 'string'}{value}{:else}<span
+												class="dot"
+												style:--coverage={`${value * 100}%`}
+												aria-label={coverage(value)}
+												role="img"
+											></span>{/if}</td
 									>{/each}</tr
 							>{/each}</tbody
 					>
@@ -433,6 +435,7 @@
 		margin-top: 28px;
 	}
 	.table-scroll {
+		max-width: 100%;
 		overflow-x: auto;
 		border: 1px solid rgba(17, 17, 17, 0.14);
 		margin-top: 16px;
@@ -440,7 +443,8 @@
 	table {
 		border-collapse: collapse;
 		width: 100%;
-		min-width: 540px;
+		min-width: 900px;
+		table-layout: fixed;
 		background: white;
 	}
 	th,
@@ -454,6 +458,9 @@
 		letter-spacing: 0.06em;
 		line-height: 1.4;
 		color: #6e6e6e;
+	}
+	thead th:first-child {
+		width: 220px;
 	}
 	tbody th {
 		font-size: 0.78rem;

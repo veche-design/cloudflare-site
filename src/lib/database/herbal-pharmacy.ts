@@ -16,13 +16,13 @@ export const herbalPharmacyReferences = [
 	}
 ] as const;
 export const herbalPharmacyCoverage = [
-	[1, 1, 1, 1],
-	[0.5, 1, 0, 1],
-	[0.5, 0, 0, 0],
-	[0, 0, 0, 0],
-	[0.5, 0, 1, 0],
-	[0.25, 0.5, 0, 0.5],
-	[0.25, 0.5, 0, 0.5]
+	[1, 1, 1, 1, '€€', 1, 1],
+	[0.5, 1, 0, 0, '€', 0, 1],
+	[0.5, 0, 0, 0.5, '€€', 0.5, 0],
+	[0, 0, 0, 0, '€', 1, 0],
+	[0.5, 0, 1, 0, '€€€', 1, 0],
+	[0.25, 0.5, 0, 0, '€€', 1, 0.5],
+	[0.25, 0.5, 0, 0, '€€', 1, 0.5]
 ] as const;
 
 // Draft figures from the approved Database detail. Not verified financial projections.
