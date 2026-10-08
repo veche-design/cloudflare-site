@@ -158,8 +158,7 @@
 				class:active={mode === 'financing'}
 				aria-pressed={mode === 'financing'}
 				onclick={() => (mode = 'financing')}
-				>{#if mode !== 'financing'}<span>{m.workspace_next_stage()}</span
-					>{/if}{m.workspace_get_financing()}</button
+				><span>{m.workspace_next_stage()}</span>{m.workspace_get_financing()}</button
 			>
 		</div>
 		<a class="conversation-jump" href="#conversation">{m.workspace_conversation()} ↓</a><span
@@ -338,6 +337,9 @@
 	.financing-stage.active {
 		background: #111;
 		color: white;
+	}
+	.financing-stage.active span {
+		visibility: hidden;
 	}
 	button,
 	textarea {
