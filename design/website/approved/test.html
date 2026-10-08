@@ -1,0 +1,1573 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="./support.js"></script>
+	</head>
+	<body>
+		<x-dc>
+			<helmet>
+				<link rel="preconnect" href="https://fonts.googleapis.com" />
+				<link
+					href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&amp;display=swap"
+					rel="stylesheet"
+				/>
+				<style>
+					body {
+						margin: 0;
+						background: #fff;
+						color: #111111;
+						font-family: 'Montserrat', sans-serif;
+						-webkit-font-smoothing: antialiased;
+					}
+					a {
+						color: #111111;
+					}
+					a:hover {
+						color: #c8332b;
+					}
+					h1,
+					h2,
+					h3,
+					p {
+						margin: 0;
+					}
+					html {
+						scroll-behavior: smooth;
+					}
+				</style>
+			</helmet>
+			<header
+				data-screen-label="Nav"
+				style="
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					gap: 24px;
+					padding: 18px 48px;
+					flex-wrap: wrap;
+					border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+					position: sticky;
+					top: 0;
+					z-index: 300;
+					background: #fff;
+				"
+			>
+				<a
+					href="index.html"
+					style="display: inline-flex; align-items: center; text-decoration: none"
+					><img
+						src="assets/logo.svg"
+						alt="veche.design"
+						style="height: 18px; width: auto; display: block"
+				/></a>
+				<nav
+					style="
+						display: flex;
+						gap: 28px;
+						align-items: center;
+						font-size: 0.8rem;
+						font-weight: 600;
+						letter-spacing: 0.04em;
+						text-transform: uppercase;
+						flex-wrap: wrap;
+					"
+				>
+					<a href="index.html" style="text-decoration: none; padding-bottom: 4px">Home</a>
+					<a href="scout.html" style="text-decoration: none; padding-bottom: 4px">SCOUT</a>
+					<a href="database.html" style="text-decoration: none; padding-bottom: 4px">DATABASE</a>
+					<a
+						href="test.html"
+						style="
+							color: #c8332b;
+							text-decoration: none;
+							padding-bottom: 4px;
+							border-bottom: 2px solid #c8332b;
+						"
+						>TEST</a
+					>
+					<div
+						style="
+							display: flex;
+							gap: 6px;
+							margin-left: 8px;
+							font-size: 10px;
+							font-weight: 600;
+							letter-spacing: 0.1em;
+						"
+					>
+						<span
+							style="background: #6e6e6e; color: #fff; border: 1px solid #6e6e6e; padding: 4px 10px"
+							>EN</span
+						><span
+							style="border: 1px solid rgba(110, 110, 110, 0.3); color: #6e6e6e; padding: 4px 10px"
+							>DE</span
+						>
+					</div>
+				</nav>
+			</header>
+			<section
+				data-screen-label="Hero"
+				style="
+					display: grid;
+					grid-template-columns: 2fr 1fr;
+					grid-template-rows: minmax(0, 1fr);
+					height: clamp(200px, 22vw, 260px);
+					overflow: hidden;
+					background: #c8332b;
+				"
+			>
+				<div
+					style="
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						gap: 14px;
+						padding: 32px clamp(20px, 3.8vw, 72px);
+						color: #fff;
+					"
+				>
+					<h1
+						style="
+							font-size: clamp(1.3rem, 2.6vw, 2.2rem);
+							line-height: 1.15;
+							font-weight: 900;
+							letter-spacing: -0.015em;
+							text-transform: uppercase;
+							max-width: 720px;
+						"
+					>
+						Test your business before launching
+					</h1>
+					<p
+						style="
+							font-size: clamp(1rem, 1.4vw, 1.15rem);
+							line-height: 1.5;
+							max-width: 560px;
+							color: rgba(255, 255, 255, 0.9);
+						"
+					>
+						Increase chances of success and get funding
+					</p>
+				</div>
+				<img
+					src="assets/hero.jpg"
+					alt="Validation"
+					style="
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+						object-position: center;
+						display: block;
+						background: #bbb;
+					"
+				/>
+			</section>
+			<section
+				data-screen-label="How validation works"
+				style="
+					display: flex;
+					flex-direction: column;
+					gap: 28px;
+					padding: clamp(40px, 5vw, 56px) 64px;
+				"
+			>
+				<div style="display: flex; flex-direction: column; gap: 14px">
+					<p
+						style="
+							font-size: 12px;
+							font-weight: 700;
+							letter-spacing: 0.18em;
+							text-transform: uppercase;
+							color: #c8332b;
+						"
+					>
+						How validation works
+					</p>
+					<h2
+						style="
+							font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+							line-height: 1.2;
+							font-weight: 900;
+							letter-spacing: -0.015em;
+							max-width: 760px;
+						"
+					>
+						We make testing easy and powerful
+					</h2>
+				</div>
+				<div
+					style="
+						display: grid;
+						grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+						gap: 20px 48px;
+						max-width: 1000px;
+					"
+				>
+					<div style="display: flex; flex-direction: column; gap: 20px">
+						<div style="display: flex; align-items: center; gap: 16px">
+							<span
+								style="
+									width: 32px;
+									height: 32px;
+									flex: none;
+									border-radius: 50%;
+									background: #c8332b;
+									color: #fff;
+									display: flex;
+									align-items: center;
+									justify-content: center;
+									font-size: 0.85rem;
+									font-weight: 900;
+								"
+								>✓</span
+							>
+							<p
+								style="
+									font-size: clamp(1.05rem, 1.7vw, 1.35rem);
+									font-weight: 800;
+									line-height: 1.25;
+									letter-spacing: -0.01em;
+								"
+							>
+								Real life tests, no theory
+							</p>
+						</div>
+						<div style="display: flex; align-items: center; gap: 16px">
+							<span
+								style="
+									width: 32px;
+									height: 32px;
+									flex: none;
+									border-radius: 50%;
+									background: #c8332b;
+									color: #fff;
+									display: flex;
+									align-items: center;
+									justify-content: center;
+									font-size: 0.85rem;
+									font-weight: 900;
+								"
+								>✓</span
+							>
+							<p
+								style="
+									font-size: clamp(1.05rem, 1.7vw, 1.35rem);
+									font-weight: 800;
+									line-height: 1.25;
+									letter-spacing: -0.01em;
+								"
+							>
+								Work with experienced coaches
+							</p>
+						</div>
+					</div>
+					<div style="display: flex; flex-direction: column; gap: 20px">
+						<div style="display: flex; align-items: center; gap: 16px">
+							<span
+								style="
+									width: 32px;
+									height: 32px;
+									flex: none;
+									border-radius: 50%;
+									background: #c8332b;
+									color: #fff;
+									display: flex;
+									align-items: center;
+									justify-content: center;
+									font-size: 0.85rem;
+									font-weight: 900;
+								"
+								>✓</span
+							>
+							<p
+								style="
+									font-size: clamp(1.05rem, 1.7vw, 1.35rem);
+									font-weight: 800;
+									line-height: 1.25;
+									letter-spacing: -0.01em;
+								"
+							>
+								Test against real data
+							</p>
+						</div>
+						<div style="display: flex; align-items: center; gap: 16px">
+							<span
+								style="
+									width: 32px;
+									height: 32px;
+									flex: none;
+									border-radius: 50%;
+									background: #c8332b;
+									color: #fff;
+									display: flex;
+									align-items: center;
+									justify-content: center;
+									font-size: 0.85rem;
+									font-weight: 900;
+								"
+								>✓</span
+							>
+							<p
+								style="
+									font-size: clamp(1.05rem, 1.7vw, 1.35rem);
+									font-weight: 800;
+									line-height: 1.25;
+									letter-spacing: -0.01em;
+								"
+							>
+								Track your results in seconds
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section
+				id="programme"
+				data-screen-label="Example programme"
+				style="
+					display: flex;
+					flex-direction: column;
+					gap: 28px;
+					padding: clamp(40px, 5vw, 56px) 64px;
+					background: #f4f4f2;
+				"
+			>
+				<div
+					style="
+						display: grid;
+						grid-template-columns: minmax(0, 1fr) minmax(180px, 26%);
+						gap: clamp(24px, 4vw, 40px);
+						align-items: center;
+					"
+				>
+					<div style="display: flex; flex-direction: column; gap: 12px">
+						<p
+							style="
+								font-size: 12px;
+								font-weight: 700;
+								letter-spacing: 0.18em;
+								text-transform: uppercase;
+								color: #c8332b;
+							"
+						>
+							Example programme
+						</p>
+						<h2
+							style="
+								font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+								line-height: 1.2;
+								font-weight: 900;
+								letter-spacing: -0.015em;
+							"
+						>
+							Herbal Pharmacy
+						</h2>
+						<p
+							style="
+								font-size: 0.92rem;
+								line-height: 1.65;
+								color: #333;
+								max-width: 760px;
+								text-wrap: pretty;
+							"
+						>
+							A specialist pharmacy for medicinal herbs: loose herbs, custom blends and expert
+							advice in one shop. The business model can be varied to include Traditional Chinese
+							Medicine (TCM), Ayurveda, ancestral and legal psychedelic plants, or in-store
+							treatments.
+						</p>
+					</div>
+					<img
+						src="assets/herbal-pharmacy.jpg"
+						alt="Herbal Pharmacy"
+						style="width: 100%; height: 150px; object-fit: cover; display: block"
+					/>
+				</div>
+				<div style="display: flex; flex-direction: column; gap: 12px">
+					<div
+						style="
+							display: flex;
+							flex-direction: column;
+							background: #fff;
+							border: 1px solid rgba(17, 17, 17, 0.14);
+						"
+					>
+						<div
+							style="
+								display: grid;
+								grid-template-columns: minmax(0, 1fr) auto;
+								gap: 16px;
+								align-items: center;
+								padding: 18px 28px;
+							"
+						>
+							<button
+								type="button"
+								onClick="{{ t0 }}"
+								style="
+									font-family: 'Montserrat', sans-serif;
+									display: grid;
+									grid-template-columns: 48px minmax(0, 1fr);
+									gap: 20px;
+									align-items: center;
+									text-align: left;
+									padding: 6px 0;
+									background: transparent;
+									border: none;
+									cursor: pointer;
+									color: #111111;
+								"
+							>
+								<span
+									style="
+										width: 48px;
+										height: 48px;
+										border-radius: 50%;
+										background: #e6efe7;
+										border: 1px solid #b7cfbb;
+										color: #2d5c38;
+										display: flex;
+										align-items: center;
+										justify-content: center;
+										font-size: 0.7rem;
+										font-weight: 800;
+									"
+									>00</span
+								><span style="display: flex; flex-direction: column; gap: 4px"
+									><span
+										style="
+											font-size: clamp(1.1rem, 2vw, 1.35rem);
+											font-weight: 900;
+											letter-spacing: -0.015em;
+										"
+										>How validation works</span
+									><span style="font-size: 0.85rem; color: #555"
+										>2 x videos to watch, 9 methods to learn, live workshop and Q&amp;A</span
+									></span
+								>
+							</button>
+							<div style="display: flex; align-items: center; gap: 18px">
+								<div style="display: flex; flex-direction: column; align-items: center; gap: 4px">
+									<div
+										data-coach="0"
+										style="
+											width: 48px;
+											height: 48px;
+											border-radius: 50%;
+											background: #e6e3dc;
+											border: 1px solid rgba(17, 17, 17, 0.14);
+											box-sizing: border-box;
+										"
+									></div>
+									<span
+										style="
+											font-size: 0.58rem;
+											font-weight: 700;
+											letter-spacing: 0.08em;
+											text-transform: uppercase;
+											color: #6e6e6e;
+										"
+										>Coach</span
+									>
+								</div>
+								<button
+									type="button"
+									onClick="{{ t0 }}"
+									style="font-family:'Montserrat',sans-serif;background:transparent;border:none;cursor:pointer;font-size:1.4rem;font-weight:700;color:#C8332B;transform:rotate({{ r0 }});transition:transform .2s;padding:4px"
+								>
+									+
+								</button>
+							</div>
+						</div>
+						<sc-if value="{{ o0 }}" hint-placeholder-val="{{ false }}"
+							><div
+								style="
+									display: grid;
+									grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+									gap: 24px;
+									padding: 24px 28px 28px;
+									border-top: 1px solid rgba(17, 17, 17, 0.12);
+								"
+							>
+								<div
+									style="
+										display: flex;
+										flex-direction: column;
+										gap: 4px;
+										padding-left: 10px;
+										border-left: 2px solid #c8332b;
+									"
+								>
+									<span style="font-size: 1.1rem; font-weight: 800">2 videos</span
+									><span style="font-size: 0.72rem; color: #5a5a5a">to watch</span>
+								</div>
+								<div
+									style="
+										display: flex;
+										flex-direction: column;
+										gap: 4px;
+										padding-left: 10px;
+										border-left: 2px solid #c8332b;
+									"
+								>
+									<span style="font-size: 1.1rem; font-weight: 800">9 methods</span
+									><span style="font-size: 0.72rem; color: #5a5a5a">to learn</span>
+								</div>
+								<div
+									style="
+										display: flex;
+										flex-direction: column;
+										gap: 4px;
+										padding-left: 10px;
+										border-left: 2px solid #c8332b;
+									"
+								>
+									<span style="font-size: 1.1rem; font-weight: 800">Live workshop</span
+									><span style="font-size: 0.72rem; color: #5a5a5a">and Q&amp;A</span>
+								</div>
+							</div></sc-if
+						>
+					</div>
+
+					<div
+						style="
+							display: flex;
+							flex-direction: column;
+							background: #fff;
+							border: 1px solid rgba(17, 17, 17, 0.14);
+						"
+					>
+						<div
+							style="
+								display: grid;
+								grid-template-columns: minmax(0, 1fr) auto;
+								gap: 16px;
+								align-items: center;
+								padding: 18px 28px;
+							"
+						>
+							<button
+								type="button"
+								onClick="{{ t1 }}"
+								style="
+									font-family: 'Montserrat', sans-serif;
+									display: grid;
+									grid-template-columns: 48px minmax(0, 1fr);
+									gap: 20px;
+									align-items: center;
+									text-align: left;
+									padding: 6px 0;
+									background: transparent;
+									border: none;
+									cursor: pointer;
+									color: #111111;
+								"
+							>
+								<span
+									style="
+										width: 48px;
+										height: 48px;
+										border-radius: 50%;
+										background: #e6efe7;
+										border: 1px solid #b7cfbb;
+										color: #2d5c38;
+										display: flex;
+										align-items: center;
+										justify-content: center;
+										font-size: 0.7rem;
+										font-weight: 800;
+									"
+									>01</span
+								><span style="display: flex; flex-direction: column; gap: 4px"
+									><span
+										style="
+											font-size: clamp(1.1rem, 2vw, 1.35rem);
+											font-weight: 900;
+											letter-spacing: -0.015em;
+										"
+										>Review concept</span
+									><span style="font-size: 0.85rem; color: #555"
+										>Scouted benchmarks, concept and product selection</span
+									></span
+								>
+							</button>
+							<div style="display: flex; align-items: center; gap: 18px">
+								<div style="display: flex; flex-direction: column; align-items: center; gap: 4px">
+									<div
+										data-coach="1"
+										style="
+											width: 48px;
+											height: 48px;
+											border-radius: 50%;
+											background: #e6e3dc;
+											border: 1px solid rgba(17, 17, 17, 0.14);
+											box-sizing: border-box;
+										"
+									></div>
+									<span
+										style="
+											font-size: 0.58rem;
+											font-weight: 700;
+											letter-spacing: 0.08em;
+											text-transform: uppercase;
+											color: #6e6e6e;
+										"
+										>Coach</span
+									>
+								</div>
+								<button
+									type="button"
+									onClick="{{ t1 }}"
+									style="font-family:'Montserrat',sans-serif;background:transparent;border:none;cursor:pointer;font-size:1.4rem;font-weight:700;color:#C8332B;transform:rotate({{ r1 }});transition:transform .2s;padding:4px"
+								>
+									+
+								</button>
+							</div>
+						</div>
+						<sc-if value="{{ o1 }}" hint-placeholder-val="{{ false }}"
+							><div
+								style="
+									display: grid;
+									grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+									gap: 24px;
+									padding: 24px 28px 28px;
+									border-top: 1px solid rgba(17, 17, 17, 0.12);
+								"
+							>
+								<div
+									style="
+										display: flex;
+										flex-direction: column;
+										gap: 4px;
+										padding-left: 10px;
+										border-left: 2px solid #c8332b;
+									"
+								>
+									<span
+										style="
+											font-size: 0.62rem;
+											font-weight: 700;
+											letter-spacing: 0.08em;
+											color: #6e6e6e;
+										"
+										>SCOUTED BENCHMARKS</span
+									><span style="font-size: 1.1rem; font-weight: 800">2,100 / month</span
+									><span style="font-size: 0.72rem; color: #5a5a5a"
+										>local searches for herbal remedies</span
+									>
+								</div>
+								<div
+									style="
+										display: flex;
+										flex-direction: column;
+										gap: 4px;
+										padding-left: 10px;
+										border-left: 2px solid #c8332b;
+									"
+								>
+									<span
+										style="
+											font-size: 0.62rem;
+											font-weight: 700;
+											letter-spacing: 0.08em;
+											color: #6e6e6e;
+										"
+										>CONCEPT TEST</span
+									><span style="font-size: 1.1rem; font-weight: 800">31% vs 24%</span
+									><span style="font-size: 0.72rem; color: #5a5a5a"
+										>chose the pharmacy concept vs benchmark</span
+									>
+								</div>
+								<div
+									style="
+										display: flex;
+										flex-direction: column;
+										gap: 4px;
+										padding-left: 10px;
+										border-left: 2px solid #c8332b;
+									"
+								>
+									<span
+										style="
+											font-size: 0.62rem;
+											font-weight: 700;
+											letter-spacing: 0.08em;
+											color: #6e6e6e;
+										"
+										>PRODUCT SELECTION</span
+									><span style="font-size: 1.1rem; font-weight: 800"
+										>Traditional + frontier range</span
+									><span style="font-size: 0.72rem; color: #5a5a5a"
+										>German remedies, CBD, fly agaric, TCM, Ayurveda, legal psychedelics</span
+									>
+								</div>
+							</div></sc-if
+						>
+					</div>
+
+					<div
+						style="
+							display: flex;
+							flex-direction: column;
+							background: #fff;
+							border: 1px solid rgba(17, 17, 17, 0.14);
+						"
+					>
+						<div
+							style="
+								display: grid;
+								grid-template-columns: minmax(0, 1fr) auto;
+								gap: 16px;
+								align-items: center;
+								padding: 18px 28px;
+							"
+						>
+							<button
+								type="button"
+								onClick="{{ t2 }}"
+								style="
+									font-family: 'Montserrat', sans-serif;
+									display: grid;
+									grid-template-columns: 48px minmax(0, 1fr);
+									gap: 20px;
+									align-items: center;
+									text-align: left;
+									padding: 6px 0;
+									background: transparent;
+									border: none;
+									cursor: pointer;
+									color: #111111;
+								"
+							>
+								<span
+									style="
+										width: 48px;
+										height: 48px;
+										border-radius: 50%;
+										background: #e6efe7;
+										border: 1px solid #b7cfbb;
+										color: #2d5c38;
+										display: flex;
+										align-items: center;
+										justify-content: center;
+										font-size: 0.7rem;
+										font-weight: 800;
+									"
+									>02</span
+								><span style="display: flex; flex-direction: column; gap: 4px"
+									><span
+										style="
+											font-size: clamp(1.1rem, 2vw, 1.35rem);
+											font-weight: 900;
+											letter-spacing: -0.015em;
+										"
+										>Regulatory check</span
+									><span style="font-size: 0.85rem; color: #555"
+										>What can legally be sold</span
+									></span
+								>
+							</button>
+							<div style="display: flex; align-items: center; gap: 18px">
+								<div style="display: flex; flex-direction: column; align-items: center; gap: 4px">
+									<div
+										data-coach="2"
+										style="
+											width: 48px;
+											height: 48px;
+											border-radius: 50%;
+											background: #e6e3dc;
+											border: 1px solid rgba(17, 17, 17, 0.14);
+											box-sizing: border-box;
+										"
+									></div>
+									<span
+										style="
+											font-size: 0.58rem;
+											font-weight: 700;
+											letter-spacing: 0.08em;
+											text-transform: uppercase;
+											color: #6e6e6e;
+										"
+										>Coach</span
+									>
+								</div>
+								<button
+									type="button"
+									onClick="{{ t2 }}"
+									style="font-family:'Montserrat',sans-serif;background:transparent;border:none;cursor:pointer;font-size:1.4rem;font-weight:700;color:#C8332B;transform:rotate({{ r2 }});transition:transform .2s;padding:4px"
+								>
+									+
+								</button>
+							</div>
+						</div>
+						<sc-if value="{{ o2 }}" hint-placeholder-val="{{ false }}"
+							><div
+								style="
+									display: grid;
+									grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+									gap: 24px;
+									padding: 24px 28px 28px;
+									border-top: 1px solid rgba(17, 17, 17, 0.12);
+								"
+							>
+								<div
+									style="
+										display: flex;
+										flex-direction: column;
+										gap: 4px;
+										padding-left: 10px;
+										border-left: 2px solid #c8332b;
+									"
+								>
+									<span
+										style="
+											font-size: 0.62rem;
+											font-weight: 700;
+											letter-spacing: 0.08em;
+											color: #6e6e6e;
+										"
+										>RESULT</span
+									><span style="font-size: 1.1rem; font-weight: 800">38 substances cleared</span
+									><span style="font-size: 0.72rem; color: #5a5a5a"
+										>legally sellable from a German pharmacy</span
+									>
+								</div>
+								<div
+									style="
+										display: flex;
+										flex-direction: column;
+										gap: 4px;
+										padding-left: 10px;
+										border-left: 2px solid #c8332b;
+									"
+								>
+									<span
+										style="
+											font-size: 0.62rem;
+											font-weight: 700;
+											letter-spacing: 0.08em;
+											color: #6e6e6e;
+										"
+										>REIMBURSEMENT</span
+									><span style="font-size: 1.1rem; font-weight: 800">22%</span
+									><span style="font-size: 0.72rem; color: #5a5a5a"
+										>of range reimbursable by insurance</span
+									>
+								</div>
+							</div></sc-if
+						>
+					</div>
+
+					<div
+						style="
+							display: flex;
+							flex-direction: column;
+							background: #fff;
+							border: 1px solid rgba(17, 17, 17, 0.14);
+						"
+					>
+						<div
+							style="
+								display: grid;
+								grid-template-columns: minmax(0, 1fr) auto;
+								gap: 16px;
+								align-items: center;
+								padding: 18px 28px;
+							"
+						>
+							<button
+								type="button"
+								onClick="{{ t3 }}"
+								style="
+									font-family: 'Montserrat', sans-serif;
+									display: grid;
+									grid-template-columns: 48px minmax(0, 1fr);
+									gap: 20px;
+									align-items: center;
+									text-align: left;
+									padding: 6px 0;
+									background: transparent;
+									border: none;
+									cursor: pointer;
+									color: #111111;
+								"
+							>
+								<span
+									style="
+										width: 48px;
+										height: 48px;
+										border-radius: 50%;
+										background: #fff4d6;
+										border: 1px solid #e8c66d;
+										color: #644c16;
+										display: flex;
+										align-items: center;
+										justify-content: center;
+										font-size: 0.7rem;
+										font-weight: 800;
+									"
+									>03</span
+								><span style="display: flex; flex-direction: column; gap: 4px"
+									><span
+										style="
+											font-size: clamp(1.1rem, 2vw, 1.35rem);
+											font-weight: 900;
+											letter-spacing: -0.015em;
+										"
+										>Financials</span
+									><span style="font-size: 0.85rem; color: #555"
+										>Test key financial drivers against real data.</span
+									></span
+								>
+							</button>
+							<div style="display: flex; align-items: center; gap: 18px">
+								<div style="display: flex; flex-direction: column; align-items: center; gap: 4px">
+									<div
+										data-coach="3"
+										style="
+											width: 48px;
+											height: 48px;
+											border-radius: 50%;
+											background: #e6e3dc;
+											border: 1px solid rgba(17, 17, 17, 0.14);
+											box-sizing: border-box;
+										"
+									></div>
+									<span
+										style="
+											font-size: 0.58rem;
+											font-weight: 700;
+											letter-spacing: 0.08em;
+											text-transform: uppercase;
+											color: #6e6e6e;
+										"
+										>Coach</span
+									>
+								</div>
+								<button
+									type="button"
+									onClick="{{ t3 }}"
+									style="font-family:'Montserrat',sans-serif;background:transparent;border:none;cursor:pointer;font-size:1.4rem;font-weight:700;color:#C8332B;transform:rotate({{ r3 }});transition:transform .2s;padding:4px"
+								>
+									+
+								</button>
+							</div>
+						</div>
+						<sc-if value="{{ o3 }}" hint-placeholder-val="{{ false }}"
+							><div
+								style="
+									display: grid;
+									grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+									gap: 20px;
+									padding: 24px 28px 28px;
+									border-top: 1px solid rgba(17, 17, 17, 0.12);
+								"
+							>
+								<div
+									style="
+										display: flex;
+										flex-direction: column;
+										gap: 8px;
+										padding: 20px;
+										border: 1px solid rgba(17, 17, 17, 0.12);
+									"
+								>
+									<p style="font-size: 0.95rem; font-weight: 800">Street Traffic Sensor</p>
+									<p style="font-size: 0.85rem; line-height: 1.6; color: #555">
+										Estimate location potential.
+									</p>
+								</div>
+								<div
+									style="
+										display: flex;
+										flex-direction: column;
+										gap: 8px;
+										padding: 20px;
+										border: 1px solid rgba(17, 17, 17, 0.12);
+									"
+								>
+									<p style="font-size: 0.95rem; font-weight: 800">Costs benchmarks</p>
+								</div>
+								<div
+									style="
+										display: flex;
+										flex-direction: column;
+										gap: 8px;
+										padding: 20px;
+										border: 1px solid rgba(17, 17, 17, 0.12);
+									"
+								>
+									<p style="font-size: 0.95rem; font-weight: 800">Revenue benchmarks</p>
+								</div>
+							</div></sc-if
+						>
+					</div>
+
+					<div
+						style="
+							display: flex;
+							flex-direction: column;
+							background: #fff;
+							border: 1px solid rgba(17, 17, 17, 0.14);
+						"
+					>
+						<div
+							style="
+								display: grid;
+								grid-template-columns: minmax(0, 1fr) auto;
+								gap: 16px;
+								align-items: center;
+								padding: 18px 28px;
+							"
+						>
+							<button
+								type="button"
+								onClick="{{ t4 }}"
+								style="
+									font-family: 'Montserrat', sans-serif;
+									display: grid;
+									grid-template-columns: 48px minmax(0, 1fr);
+									gap: 20px;
+									align-items: center;
+									text-align: left;
+									padding: 6px 0;
+									background: transparent;
+									border: none;
+									cursor: pointer;
+									color: #111111;
+								"
+							>
+								<span
+									style="
+										width: 48px;
+										height: 48px;
+										border-radius: 50%;
+										background: #f4f4f2;
+										border: 1px solid #d9d9d4;
+										color: #5e5e59;
+										display: flex;
+										align-items: center;
+										justify-content: center;
+										font-size: 0.7rem;
+										font-weight: 800;
+									"
+									>04</span
+								><span style="display: flex; flex-direction: column; gap: 4px"
+									><span
+										style="
+											font-size: clamp(1.1rem, 2vw, 1.35rem);
+											font-weight: 900;
+											letter-spacing: -0.015em;
+										"
+										>Prepare pilot</span
+									><span style="font-size: 0.85rem; color: #555"
+										>As a market stand, a pop-up or a dummy website</span
+									></span
+								>
+							</button>
+							<div style="display: flex; align-items: center; gap: 18px">
+								<div style="display: flex; flex-direction: column; align-items: center; gap: 4px">
+									<div
+										data-coach="4"
+										style="
+											width: 48px;
+											height: 48px;
+											border-radius: 50%;
+											background: #e6e3dc;
+											border: 1px solid rgba(17, 17, 17, 0.14);
+											box-sizing: border-box;
+										"
+									></div>
+									<span
+										style="
+											font-size: 0.58rem;
+											font-weight: 700;
+											letter-spacing: 0.08em;
+											text-transform: uppercase;
+											color: #6e6e6e;
+										"
+										>Coach</span
+									>
+								</div>
+								<button
+									type="button"
+									onClick="{{ t4 }}"
+									style="font-family:'Montserrat',sans-serif;background:transparent;border:none;cursor:pointer;font-size:1.4rem;font-weight:700;color:#C8332B;transform:rotate({{ r4 }});transition:transform .2s;padding:4px"
+								>
+									+
+								</button>
+							</div>
+						</div>
+						<sc-if value="{{ o4 }}" hint-placeholder-val="{{ false }}"
+							><div
+								style="
+									display: grid;
+									grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+									gap: 20px;
+									padding: 24px 28px 28px;
+									border-top: 1px solid rgba(17, 17, 17, 0.12);
+								"
+							>
+								<div
+									style="
+										display: flex;
+										flex-direction: column;
+										gap: 8px;
+										padding: 20px;
+										border: 1px solid rgba(17, 17, 17, 0.12);
+									"
+								>
+									<p style="font-size: 0.95rem; font-weight: 800">Market stand</p>
+									<p style="font-size: 0.85rem; line-height: 1.6; color: #555">
+										Test demand at a farmers' market.
+									</p>
+								</div>
+								<div
+									style="
+										display: flex;
+										flex-direction: column;
+										gap: 8px;
+										padding: 20px;
+										border: 1px solid rgba(17, 17, 17, 0.12);
+									"
+								>
+									<p style="font-size: 0.95rem; font-weight: 800">Pop-up</p>
+									<p style="font-size: 0.85rem; line-height: 1.6; color: #555">
+										Does a real counter in this catchment convert footfall at the required daily
+										rate?
+									</p>
+								</div>
+								<div
+									style="
+										display: flex;
+										flex-direction: column;
+										gap: 8px;
+										padding: 20px;
+										border: 1px solid rgba(17, 17, 17, 0.12);
+									"
+								>
+									<p style="font-size: 0.95rem; font-weight: 800">Dummy website</p>
+									<p style="font-size: 0.85rem; line-height: 1.6; color: #555">
+										5.4% CTA conversion vs 4.2% benchmark.
+									</p>
+								</div>
+							</div></sc-if
+						>
+					</div>
+
+					<div
+						style="
+							display: flex;
+							flex-direction: column;
+							background: #fff;
+							border: 1px solid rgba(17, 17, 17, 0.14);
+						"
+					>
+						<div
+							style="
+								display: grid;
+								grid-template-columns: minmax(0, 1fr) auto;
+								gap: 16px;
+								align-items: center;
+								padding: 18px 28px;
+							"
+						>
+							<button
+								type="button"
+								onClick="{{ t5 }}"
+								style="
+									font-family: 'Montserrat', sans-serif;
+									display: grid;
+									grid-template-columns: 48px minmax(0, 1fr);
+									gap: 20px;
+									align-items: center;
+									text-align: left;
+									padding: 6px 0;
+									background: transparent;
+									border: none;
+									cursor: pointer;
+									color: #111111;
+								"
+							>
+								<span
+									style="
+										width: 48px;
+										height: 48px;
+										border-radius: 50%;
+										background: #f4f4f2;
+										border: 1px solid #d9d9d4;
+										color: #5e5e59;
+										display: flex;
+										align-items: center;
+										justify-content: center;
+										font-size: 0.7rem;
+										font-weight: 800;
+									"
+									>05</span
+								><span style="display: flex; flex-direction: column; gap: 4px"
+									><span
+										style="
+											font-size: clamp(1.1rem, 2vw, 1.35rem);
+											font-weight: 900;
+											letter-spacing: -0.015em;
+										"
+										>Communications Test</span
+									><span style="font-size: 0.85rem; color: #555"
+										>Data driven PR, digital communications and events to drive customers to
+										store.</span
+									></span
+								>
+							</button>
+							<div style="display: flex; align-items: center; gap: 18px">
+								<div style="display: flex; flex-direction: column; align-items: center; gap: 4px">
+									<div
+										data-coach="5"
+										style="
+											width: 48px;
+											height: 48px;
+											border-radius: 50%;
+											background: #e6e3dc;
+											border: 1px solid rgba(17, 17, 17, 0.14);
+											box-sizing: border-box;
+										"
+									></div>
+									<span
+										style="
+											font-size: 0.58rem;
+											font-weight: 700;
+											letter-spacing: 0.08em;
+											text-transform: uppercase;
+											color: #6e6e6e;
+										"
+										>Coach</span
+									>
+								</div>
+								<button
+									type="button"
+									onClick="{{ t5 }}"
+									style="font-family:'Montserrat',sans-serif;background:transparent;border:none;cursor:pointer;font-size:1.4rem;font-weight:700;color:#C8332B;transform:rotate({{ r5 }});transition:transform .2s;padding:4px"
+								>
+									+
+								</button>
+							</div>
+						</div>
+						<sc-if value="{{ o5 }}" hint-placeholder-val="{{ false }}"
+							><div
+								style="
+									display: grid;
+									grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+									gap: 20px;
+									padding: 24px 28px 28px;
+									border-top: 1px solid rgba(17, 17, 17, 0.12);
+								"
+							>
+								<div
+									style="
+										display: flex;
+										flex-direction: column;
+										gap: 8px;
+										padding: 20px;
+										border: 1px solid rgba(17, 17, 17, 0.12);
+									"
+								>
+									<p style="font-size: 0.95rem; font-weight: 800">Data driven PR</p>
+								</div>
+								<div
+									style="
+										display: flex;
+										flex-direction: column;
+										gap: 8px;
+										padding: 20px;
+										border: 1px solid rgba(17, 17, 17, 0.12);
+									"
+								>
+									<p style="font-size: 0.95rem; font-weight: 800">Digital communications</p>
+								</div>
+								<div
+									style="
+										display: flex;
+										flex-direction: column;
+										gap: 8px;
+										padding: 20px;
+										border: 1px solid rgba(17, 17, 17, 0.12);
+									"
+								>
+									<p style="font-size: 0.95rem; font-weight: 800">Events</p>
+								</div>
+							</div></sc-if
+						>
+					</div>
+
+					<div
+						style="
+							display: flex;
+							flex-direction: column;
+							background: #fff;
+							border: 1px solid rgba(17, 17, 17, 0.14);
+						"
+					>
+						<div
+							style="
+								display: grid;
+								grid-template-columns: minmax(0, 1fr) auto;
+								gap: 16px;
+								align-items: center;
+								padding: 18px 28px;
+							"
+						>
+							<button
+								type="button"
+								onClick="{{ t6 }}"
+								style="
+									font-family: 'Montserrat', sans-serif;
+									display: grid;
+									grid-template-columns: 48px minmax(0, 1fr);
+									gap: 20px;
+									align-items: center;
+									text-align: left;
+									padding: 6px 0;
+									background: transparent;
+									border: none;
+									cursor: pointer;
+									color: #111111;
+								"
+							>
+								<span
+									style="
+										width: 48px;
+										height: 48px;
+										border-radius: 50%;
+										background: #f4f4f2;
+										border: 1px solid #d9d9d4;
+										color: #5e5e59;
+										display: flex;
+										align-items: center;
+										justify-content: center;
+										font-size: 0.7rem;
+										font-weight: 800;
+									"
+									>06</span
+								><span style="display: flex; flex-direction: column; gap: 4px"
+									><span
+										style="
+											font-size: clamp(1.1rem, 2vw, 1.35rem);
+											font-weight: 900;
+											letter-spacing: -0.015em;
+										"
+										>Close the Financing Deal</span
+									><span style="font-size: 0.85rem; color: #555"
+										>Negotiate with prewarmed investors based on your validation results</span
+									></span
+								>
+							</button>
+							<div style="display: flex; align-items: center; gap: 18px">
+								<div style="display: flex; flex-direction: column; align-items: center; gap: 4px">
+									<div
+										data-coach="6"
+										style="
+											width: 48px;
+											height: 48px;
+											border-radius: 50%;
+											background: #e6e3dc;
+											border: 1px solid rgba(17, 17, 17, 0.14);
+											box-sizing: border-box;
+										"
+									></div>
+									<span
+										style="
+											font-size: 0.58rem;
+											font-weight: 700;
+											letter-spacing: 0.08em;
+											text-transform: uppercase;
+											color: #6e6e6e;
+										"
+										>Coach</span
+									>
+								</div>
+								<button
+									type="button"
+									onClick="{{ t6 }}"
+									style="font-family:'Montserrat',sans-serif;background:transparent;border:none;cursor:pointer;font-size:1.4rem;font-weight:700;color:#C8332B;transform:rotate({{ r6 }});transition:transform .2s;padding:4px"
+								>
+									+
+								</button>
+							</div>
+						</div>
+						<sc-if value="{{ o6 }}" hint-placeholder-val="{{ false }}"
+							><div
+								style="
+									display: flex;
+									flex-direction: column;
+									gap: 14px;
+									padding: 24px 28px 28px;
+									border-top: 1px solid rgba(17, 17, 17, 0.12);
+								"
+							>
+								<p
+									style="
+										font-size: 0.62rem;
+										font-weight: 700;
+										letter-spacing: 0.08em;
+										text-transform: uppercase;
+										color: #6e6e6e;
+									"
+								>
+									Investors interested in this deal
+								</p>
+								<div
+									style="
+										display: grid;
+										grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+										gap: 16px;
+									"
+								>
+									<div
+										style="
+											height: 72px;
+											display: flex;
+											align-items: center;
+											justify-content: center;
+											background: #f4f4f2;
+											border: 1px dashed rgba(17, 17, 17, 0.2);
+											font-size: 0.7rem;
+											font-weight: 700;
+											letter-spacing: 0.1em;
+											text-transform: uppercase;
+											color: #9a948b;
+										"
+									>
+										Investor logo
+									</div>
+									<div
+										style="
+											height: 72px;
+											display: flex;
+											align-items: center;
+											justify-content: center;
+											background: #f4f4f2;
+											border: 1px dashed rgba(17, 17, 17, 0.2);
+											font-size: 0.7rem;
+											font-weight: 700;
+											letter-spacing: 0.1em;
+											text-transform: uppercase;
+											color: #9a948b;
+										"
+									>
+										Investor logo
+									</div>
+									<div
+										style="
+											height: 72px;
+											display: flex;
+											align-items: center;
+											justify-content: center;
+											background: #f4f4f2;
+											border: 1px dashed rgba(17, 17, 17, 0.2);
+											font-size: 0.7rem;
+											font-weight: 700;
+											letter-spacing: 0.1em;
+											text-transform: uppercase;
+											color: #9a948b;
+										"
+									>
+										Investor logo
+									</div>
+								</div>
+							</div></sc-if
+						>
+					</div>
+				</div>
+			</section>
+			<section
+				data-screen-label="CTA"
+				style="
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					text-align: center;
+					gap: 28px;
+					padding: clamp(72px, 9vw, 110px) 64px;
+					background: #111111;
+					color: #fff;
+				"
+			>
+				<h2
+					style="
+						font-size: clamp(1.8rem, 4vw, 3.4rem);
+						line-height: 1.05;
+						font-weight: 900;
+						letter-spacing: -0.025em;
+						margin-bottom: 12px;
+						max-width: 1000px;
+					"
+				>
+					Ready to test your business?
+					<span style="color: #e36a62"><br />Apply for the validation programme.</span>
+				</h2>
+				<a
+					href="#"
+					style="
+						color: #fff;
+						background: #c8332b;
+						padding: 16px 40px;
+						border-radius: 999px;
+						text-decoration: none;
+						font-weight: 700;
+						font-size: 13px;
+						letter-spacing: 0.04em;
+					"
+					>Apply now</a
+				>
+			</section>
+			<footer
+				data-screen-label="Footer"
+				style="
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					gap: 24px;
+					flex-wrap: wrap;
+					padding: 24px 48px;
+					border-top: 1px solid rgba(17, 17, 17, 0.1);
+				"
+			>
+				<a
+					href="index.html"
+					style="color: #c8332b; font-weight: 700; font-size: 0.9rem; text-decoration: none"
+					>veche.design</a
+				>
+				<div
+					style="
+						display: flex;
+						gap: 24px;
+						font-size: 10px;
+						letter-spacing: 0.12em;
+						text-transform: uppercase;
+					"
+				>
+					<a href="#" style="color: #c8332b; text-decoration: none">Impressum</a
+					><a href="#" style="color: #c8332b; text-decoration: none">Privacy Policy</a>
+				</div>
+			</footer>
+		</x-dc>
+		<script type="text/x-dc" data-dc-script>
+			class Component extends DCLogic {
+			  state = { open: [false, false, false, false, false, false, false] };
+			  toggle(i) {
+			    this.setState(s => { const o = s.open.slice(); o[i] = !o[i]; return { open: o }; });
+			  }
+			  renderVals() {
+			    const v = {};
+			    this.state.open.forEach((o, i) => {
+			      v['o' + i] = o;
+			      v['r' + i] = o ? '45deg' : '0deg';
+			      v['t' + i] = () => this.toggle(i);
+			    });
+			    return v;
+			  }
+			}
+		</script>
+	</body>
+</html>

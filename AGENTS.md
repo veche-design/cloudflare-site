@@ -14,6 +14,15 @@ Automated tests are outside the scope of this repository.
 - **Package Manager**: npm
 - **Add-ons**: prettier, eslint, vitest, playwright, tailwindcss, sveltekit-adapter, paraglide, ai-tools
 
+## Session Bootstrap
+
+Before the first task in a new agent session that requires running or modifying the application:
+
+- Run `npm install --no-audit --no-fund` once from the repository root to reconcile local dependencies with `package.json` and `package-lock.json`.
+- Do not repeat this dependency install during the same session unless `package.json` or `package-lock.json` changes.
+- Skip the install for tasks that only read or discuss repository content and do not require local application/tool execution.
+- Do not run `npm ci` unless the user explicitly asks for a clean install or the local dependency tree is clearly broken.
+
 ## Validation Workflow
 
 - Do not create, modify, or generate automated tests of any kind, including unit, integration, end-to-end, snapshot, or visual regression tests.
@@ -33,6 +42,16 @@ Automated tests are outside the scope of this repository.
 - In particular, use existing utilities such as `.lift-card` for standard card elevation/hover behavior instead of reimplementing them inside individual Svelte components.
 - Keep component-local CSS for component-specific layout and behavior only.
 - Add or change a global/shared style only when the pattern is genuinely reusable across the site.
+
+## Design Handoffs
+
+- Design and prototype artifacts live under `/design` and are reference material, not production source.
+- Production UI remains under `/src`.
+- Preserve an approved design's visual intent while integrating it into the existing SvelteKit architecture.
+- Never degrade semantic HTML, keyboard behavior, accessibility, localization, or required application behavior purely for visual fidelity.
+- Reuse existing components, shared styles, assets, localization, and project conventions before introducing new ones.
+- Do not copy generated prototype HTML/CSS/JS wholesale into production and do not introduce React or another UI framework for a design handoff.
+- When implementing material from `/design`, use the project-local `design-to-svelte` skill when available.
 
 ---
 
