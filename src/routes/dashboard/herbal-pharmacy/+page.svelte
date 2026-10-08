@@ -337,9 +337,10 @@
 	.financing-stage.active {
 		background: #111;
 		color: white;
+		padding-block: 13px;
 	}
 	.financing-stage.active span {
-		visibility: hidden;
+		display: none;
 	}
 	button,
 	textarea {
