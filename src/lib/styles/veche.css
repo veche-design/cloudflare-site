@@ -174,7 +174,7 @@ main {
 
 /* ── PAGE WIDTH — caps full-bleed sections on wide viewports ── */
 .section-wrap {
-	max-width: 1320px;
+	max-width: 1680px;
 	margin: 0 auto;
 }
 
@@ -315,8 +315,8 @@ main {
 }
 .validate-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
-	gap: 32px 64px;
+	grid-template-columns: 3fr 2fr;
+	gap: 32px 80px;
 	align-items: stretch;
 }
 .validate-chart {
@@ -379,6 +379,7 @@ main {
 .validate-causes {
 	display: flex;
 	flex-direction: column;
+	max-width: 480px;
 }
 .validate-causes-label {
 	font-size: 0.7rem;
@@ -834,6 +835,9 @@ footer {
 	.contact,
 	.doc {
 		padding: 56px 24px;
+	}
+	.validate-grid {
+		grid-template-columns: 1fr;
 	}
 	.who-boxes {
 		grid-template-columns: 1fr;
