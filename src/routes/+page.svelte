@@ -99,28 +99,17 @@
 	<div class="how-head">
 		<span class="section-tag">{m.home_how_tag()}</span>
 		<h2>{m.home_how_title()}</h2>
-		<p>{m.home_how_intro()}</p>
 	</div>
 
 	<div class="hboxes">
 		<div class="hbox lift-card">
-			<div class="hbox-name">{m.home_how_start_title()}</div>
-			<p>{m.home_how_start_text()}</p>
+			<div class="hbox-name">{m.home_how_young_business_title()}</div>
+			<p>{m.home_how_young_business_text()}</p>
 		</div>
 
 		<div class="hbox lift-card">
-			<div class="hbox-name">{m.home_how_data_title()}</div>
-			<p>{m.home_how_data_text()}</p>
-		</div>
-
-		<div class="hbox lift-card">
-			<div class="hbox-name">{m.home_how_expert_title()}</div>
-			<p>{m.home_how_expert_text()}</p>
-		</div>
-
-		<div class="hbox lift-card">
-			<div class="hbox-name">{m.home_how_launch_title()}</div>
-			<p>{m.home_how_launch_text()}</p>
+			<div class="hbox-name">{m.home_how_new_business_title()}</div>
+			<p>{m.home_how_new_business_text()}</p>
 		</div>
 	</div>
 </section>
@@ -134,18 +123,18 @@
 
 	<div class="who-boxes">
 		<div class="who-box lift-card">
-			<span class="who-name">{m.home_who_ecosystem_title()}</span>
-			<span class="who-desc">{m.home_who_ecosystem_text()}</span>
+			<span class="who-name">{m.home_who_entrepreneurs_title()}</span>
+			<span class="who-desc">{m.home_who_entrepreneurs_text()}</span>
 		</div>
 
 		<div class="who-box lift-card">
-			<span class="who-name">{m.home_who_teams_title()}</span>
-			<span class="who-desc">{m.home_who_teams_text()}</span>
+			<span class="who-name">{m.home_who_support_title()}</span>
+			<span class="who-desc">{m.home_who_support_text()}</span>
 		</div>
 
 		<div class="who-box lift-card">
-			<span class="who-name">{m.home_who_investors_title()}</span>
-			<span class="who-desc">{m.home_who_investors_text()}</span>
+			<span class="who-name">{m.home_who_funders_title()}</span>
+			<span class="who-desc">{m.home_who_funders_text()}</span>
 		</div>
 	</div>
 </section>
