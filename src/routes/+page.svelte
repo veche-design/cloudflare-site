@@ -47,7 +47,7 @@
 	imageAlt=""
 />
 
-<section class="validate">
+<section class="validate section-wrap">
 	<div class="validate-head">
 		<span class="section-tag">{m.home_validate_tag()}</span>
 		<h2>{m.home_validate_title()}</h2>
@@ -104,7 +104,7 @@
 	</div>
 </section>
 
-<section class="build">
+<section class="build section-wrap">
 	<div class="build-head">
 		<span class="section-tag">{m.home_build_tag()}</span>
 		<h2>{m.home_build_title()}</h2>
@@ -114,7 +114,7 @@
 	<div class="categories">
 		<div class="category">
 			<img class="cat-img" src={foodsImage} alt="" />
-			<div class="cat-name">{m.home_build_food_products()}</div>
+			<div class="cat-name">{m.home_build_food_health()}</div>
 		</div>
 
 		<div class="category">
@@ -124,7 +124,7 @@
 
 		<div class="category">
 			<img class="cat-img" src={microbiomStoreImage} alt="" />
-			<div class="cat-name">{m.home_build_food_health()}</div>
+			<div class="cat-name">{m.home_build_retail()}</div>
 		</div>
 
 		<div class="category">
@@ -134,7 +134,7 @@
 	</div>
 </section>
 
-<section class="how">
+<section class="how section-wrap">
 	<div class="how-head">
 		<span class="section-tag">{m.home_how_tag()}</span>
 		<h2>{m.home_how_title()}</h2>
@@ -153,7 +153,7 @@
 	</div>
 </section>
 
-<section class="who">
+<section class="who section-wrap">
 	<div class="who-head">
 		<span class="section-tag">{m.home_who_tag()}</span>
 		<h2>{m.home_who_title()}</h2>
@@ -178,7 +178,7 @@
 	</div>
 </section>
 
-<section class="contact">
+<section class="contact section-wrap">
 	<div>
 		<span class="section-tag">{m.home_contact_tag()}</span>
 

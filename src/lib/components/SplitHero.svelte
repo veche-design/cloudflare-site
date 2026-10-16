@@ -12,7 +12,7 @@
 	let { title, description, actions, image, imageAlt }: Props = $props();
 </script>
 
-<section class="split-hero">
+<section class="split-hero section-wrap">
 	<div class="split-hero__content">
 		<div class="split-hero__title">
 			{#if typeof title === 'string'}
@@ -47,7 +47,7 @@
 <style>
 	.split-hero {
 		display: grid;
-		grid-template-columns: 2fr 1fr;
+		grid-template-columns: 3fr 2fr;
 		min-height: 480px;
 	}
 
