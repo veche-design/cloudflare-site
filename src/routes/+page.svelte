@@ -36,7 +36,12 @@
 	</p>
 {/snippet}
 
-<SplitHero title={homeHeroTitle} description={homeHeroDescription} image={frankfurtImage} imageAlt="" />
+<SplitHero
+	title={homeHeroTitle}
+	description={homeHeroDescription}
+	image={frankfurtImage}
+	imageAlt=""
+/>
 
 <section class="problem">
 	<div class="problem-head">
