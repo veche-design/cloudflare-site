@@ -1,6 +1,10 @@
 <script lang="ts">
+	import foodLabFrankfurtImage from '$lib/assets/images/food-lab-frankfurt.jpg';
+	import foodsImage from '$lib/assets/images/foods.jpg';
 	import frankfurtImage from '$lib/assets/images/frankfurt.jpg';
+	import microbiomStoreImage from '$lib/assets/images/microbiom-store.jpg';
 	import ogImage from '$lib/assets/images/og-image.jpg';
+	import restaurantsImage from '$lib/assets/images/restaurants.jpg';
 	import SplitHero from '$lib/components/SplitHero.svelte';
 	import { m } from '$lib/paraglide/messages.js';
 
@@ -43,30 +47,59 @@
 	imageAlt=""
 />
 
-<section class="problem">
-	<div class="problem-head">
-		<span class="section-tag">{m.home_problem_tag()}</span>
-		<h2>{m.home_problem_title()}</h2>
+<section class="validate">
+	<div class="validate-head">
+		<span class="section-tag">{m.home_validate_tag()}</span>
+		<h2>{m.home_validate_title()}</h2>
 	</div>
 
-	<div class="pboxes pboxes-3">
-		<div class="pbox lift-card">
-			<div class="p-big">{m.home_problem_unemployed_title()}</div>
-			<div class="p-reg">{m.home_problem_unemployed_text()}</div>
+	<div class="validate-grid">
+		<div class="validate-chart">
+			<p class="validate-chart-label">{m.home_validate_chart_label()}</p>
+
+			<div class="validate-bars">
+				<div class="validate-bar-col">
+					<span class="validate-bar-value">60%</span>
+					<div class="validate-bar" style:height="75%"></div>
+				</div>
+				<div class="validate-bar-col">
+					<span class="validate-bar-value">64%</span>
+					<div class="validate-bar" style:height="80%"></div>
+				</div>
+				<div class="validate-bar-col">
+					<span class="validate-bar-value">63%</span>
+					<div class="validate-bar" style:height="78.8%"></div>
+				</div>
+			</div>
+
+			<div class="validate-bar-labels">
+				<p>{m.home_validate_sector_food()}</p>
+				<p>{m.home_validate_sector_gastro()}</p>
+				<p>{m.home_validate_sector_retail()}</p>
+			</div>
+
+			<p class="validate-chart-source">{m.home_validate_chart_source()}</p>
 		</div>
 
-		<div class="pbox lift-card">
-			<div class="p-reg">{m.home_problem_found_lead()}</div>
-			<div class="p-big">{m.home_problem_found_title()}</div>
+		<div class="validate-causes">
+			<p class="validate-causes-label">{m.home_validate_causes_label()}</p>
 
-			{#if m.home_problem_found_tail()}
-				<div class="p-reg">{m.home_problem_found_tail()}</div>
-			{/if}
-		</div>
-
-		<div class="pbox lift-card">
-			<div class="p-reg">{m.home_problem_failure_lead()}</div>
-			<div class="p-big">{m.home_problem_failure_title()}</div>
+			<div class="validate-cause">
+				<span class="validate-cause-num">01</span>
+				<p>{m.home_validate_cause_1()}</p>
+			</div>
+			<div class="validate-cause">
+				<span class="validate-cause-num">02</span>
+				<p>{m.home_validate_cause_2()}</p>
+			</div>
+			<div class="validate-cause">
+				<span class="validate-cause-num">03</span>
+				<p>{m.home_validate_cause_3()}</p>
+			</div>
+			<div class="validate-cause">
+				<span class="validate-cause-num">04</span>
+				<p>{m.home_validate_cause_4()}</p>
+			</div>
 		</div>
 	</div>
 </section>
@@ -75,22 +108,28 @@
 	<div class="build-head">
 		<span class="section-tag">{m.home_build_tag()}</span>
 		<h2>{m.home_build_title()}</h2>
+		<p class="build-subtitle">{m.home_build_subtitle()}</p>
 	</div>
 
 	<div class="categories">
 		<div class="category">
-			<div class="cat-name">{m.home_build_crafts()}</div>
-			<div class="cat-img cat-img-crafts"></div>
+			<img class="cat-img" src={foodsImage} alt="" />
+			<div class="cat-name">{m.home_build_food_products()}</div>
 		</div>
 
 		<div class="category">
-			<div class="cat-name">{m.home_build_food()}</div>
-			<div class="cat-img cat-img-foods"></div>
+			<img class="cat-img" src={restaurantsImage} alt="" />
+			<div class="cat-name">{m.home_build_restaurants()}</div>
 		</div>
 
 		<div class="category">
-			<div class="cat-name">{m.home_build_systems()}</div>
-			<div class="cat-img cat-img-systems"></div>
+			<img class="cat-img" src={microbiomStoreImage} alt="" />
+			<div class="cat-name">{m.home_build_food_health()}</div>
+		</div>
+
+		<div class="category">
+			<img class="cat-img" src={foodLabFrankfurtImage} alt="" />
+			<div class="cat-name">{m.home_build_innovation()}</div>
 		</div>
 	</div>
 </section>
