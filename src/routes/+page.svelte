@@ -1,18 +1,9 @@
 <script lang="ts">
-	import { resolve } from '$app/paths';
-	import type { Pathname } from '$app/types';
-	import barefootStoreImage from '$lib/assets/images/barefoot-store.jpg';
 	import frankfurtImage from '$lib/assets/images/frankfurt.jpg';
-	import herbalPharmacyImage from '$lib/assets/images/herbal-pharmacy.jpg';
 	import ogImage from '$lib/assets/images/og-image.jpg';
-	import rabiaImage from '$lib/assets/images/rabia.jpg';
-	import DatabaseEntryCard from '$lib/components/DatabaseEntryCard.svelte';
 	import SplitHero from '$lib/components/SplitHero.svelte';
 	import { m } from '$lib/paraglide/messages.js';
-	import { localizeHref } from '$lib/paraglide/runtime';
 
-	const databaseHref = resolve(localizeHref('/database') as Pathname);
-	const dashboardHref = resolve(localizeHref('/dashboard') as Pathname);
 	const ogImageUrl = new URL(ogImage, 'https://veche.design').href;
 </script>
 
@@ -45,23 +36,7 @@
 	</p>
 {/snippet}
 
-{#snippet homeHeroActions()}
-	<a href={databaseHref} class="btn btn-outline">
-		{m.cta_explore_tested_businesses()}
-	</a>
-
-	<a href={dashboardHref} class="btn btn-outline">
-		{m.home_hero_test_business()}
-	</a>
-{/snippet}
-
-<SplitHero
-	title={homeHeroTitle}
-	description={homeHeroDescription}
-	actions={homeHeroActions}
-	image={frankfurtImage}
-	imageAlt=""
-/>
+<SplitHero title={homeHeroTitle} description={homeHeroDescription} image={frankfurtImage} imageAlt="" />
 
 <section class="problem">
 	<div class="problem-head">
@@ -112,46 +87,6 @@
 			<div class="cat-name">{m.home_build_systems()}</div>
 			<div class="cat-img cat-img-systems"></div>
 		</div>
-	</div>
-</section>
-
-<section class="db-section">
-	<div class="db-head">
-		<span class="section-tag">{m.home_database_tag()}</span>
-		<h2>{m.home_database_title()}</h2>
-		<div class="db-sub2">{m.home_database_subtitle()}</div>
-	</div>
-
-	<div class="preview-grid">
-		<DatabaseEntryCard
-			title={m.home_database_rabia()}
-			image={rabiaImage}
-			imageAlt={m.home_database_rabia_image_alt()}
-			industryTags={[m.database_industry_food()]}
-			href="/database/rabia"
-		/>
-
-		<DatabaseEntryCard
-			title={m.home_database_barefoot()}
-			image={barefootStoreImage}
-			industryTags={[m.database_industry_retail()]}
-			imageAlt={m.home_database_barefoot_image_alt()}
-			href="/database/barefoot-store"
-		/>
-
-		<DatabaseEntryCard
-			title={m.home_database_herbal_pharmacy()}
-			image={herbalPharmacyImage}
-			industryTags={[m.database_industry_health(), m.database_industry_retail()]}
-			imageAlt={m.home_database_herbal_pharmacy_image_alt()}
-			href="/database/herbal-pharmacy"
-		/>
-	</div>
-
-	<div class="db-cta">
-		<a href={databaseHref} class="btn btn-lg">
-			{m.cta_explore_tested_businesses()}
-		</a>
 	</div>
 </section>
 

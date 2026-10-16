@@ -21,20 +21,6 @@
 			<a href={resolve(localizeHref('/') as Pathname)} class:active={pathname === '/'}>
 				{m.nav_home()}
 			</a>
-
-			<a
-				href={resolve(localizeHref('/database') as Pathname)}
-				class:active={pathname === '/database' || pathname.startsWith('/database/')}
-			>
-				{m.nav_database()}
-			</a>
-
-			<a
-				href={resolve(localizeHref('/dashboard') as Pathname)}
-				class:active={pathname === '/dashboard' || pathname.startsWith('/dashboard/')}
-			>
-				{m.nav_dashboard()}
-			</a>
 		</div>
 
 		<div class="lang-toggle" aria-label="Language">
