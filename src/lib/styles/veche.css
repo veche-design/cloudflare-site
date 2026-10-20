@@ -346,6 +346,7 @@ main {
 	justify-content: flex-end;
 	gap: 6px;
 	flex: 1;
+	min-width: 0;
 	height: 100%;
 }
 .validate-bar-value {
@@ -366,6 +367,8 @@ main {
 }
 .validate-bar-labels p {
 	flex: 1;
+	min-width: 0;
+	overflow-wrap: break-word;
 	text-align: center;
 	font-size: 0.85rem;
 	font-weight: 800;
