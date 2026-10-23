@@ -16,3 +16,6 @@ bun.lockb
 # Paraglide / inlang generated files
 project.inlang/*
 !project.inlang/settings.json
+
+# Local Python virtual environment
+.venv/
