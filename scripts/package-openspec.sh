@@ -53,7 +53,7 @@ elif [[ $# -eq 1 ]]; then
     echo "Error: openspec/$TARGET is not a directory"
     exit 1
   fi
-  NAME_PREFIX="chessboard-openspec-$(sanitize "$TARGET")"
+  NAME_PREFIX="cloudflare-openspec-$(sanitize "$TARGET")"
 fi
 
 ARCHIVE_NAME="${NAME_PREFIX}-${TIMESTAMP}.tgz"

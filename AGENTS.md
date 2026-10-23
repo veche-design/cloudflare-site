@@ -12,7 +12,7 @@ Automated tests are outside the scope of this repository.
 
 - **Language**: TypeScript
 - **Package Manager**: npm
-- **Add-ons**: prettier, eslint, vitest, playwright, tailwindcss, sveltekit-adapter, paraglide, ai-tools
+- **Add-ons**: prettier, eslint, vitest, playwright, tailwindcss, enhanced-img, sveltekit-adapter, paraglide, ai-tools
 
 ## Validation Workflow
 
@@ -21,9 +21,24 @@ Automated tests are outside the scope of this repository.
 - The presence of Vitest, Playwright, or existing tests does not imply that testing work is required.
 - Do not suggest adding tests or treat missing tests as unfinished work.
 - Run `npm run format` after making changes.
-- Do not run `npm run test`, `npm run lint`, `npm run check`, or `npm run build`, or equivalent commands, unless the user explicitly asks you to.
-- In the final response, briefly report whether formatting completed. Remind the user to run `npm run lint`, `npm run check`, and `npm run build` locally before committing and review their output.
-- If the user provides failing output, use it to diagnose and fix the issues without adding tests.
+- Run `npm run lint`, `npm run check`, and `npm run build` after a larger block of work (a finished page, component, or refactoring, or a dependency/config change), not after every small fix.
+- Run all three before committing or pushing, when the user asks for it. Fix what they report, without adding tests.
+- In the final response, briefly report whether formatting completed and which of lint/check/build were run.
+
+## Browser Verification
+
+Browser checks are for verifying a meaningful visual state, not part of the routine edit loop.
+
+- Use the project's own CLI: `./node_modules/.bin/playwright-cli`, not a global install. Check `--help` instead of guessing commands. If the dependency is not installed, say so; do not install it silently or change `package.json` for verification.
+- Start `npm run dev` in the background, wait for the URL Vite reports, and use that URL. Do not run `npm run build` just to look at a page. Stop the server you started when done, and never leave duplicate servers on different ports.
+- Restart the dev server when routing, layout, assets, config, or dependencies changed, or when the output looks stale.
+- Keep it token-efficient:
+  - Do not take screenshots after routine edits.
+  - Prefer `playwright-cli find` to locate nodes in a large page.
+  - Prefer snapshots of an element or selector over full-page snapshots, and limit snapshot depth.
+  - Use `--raw` when only the value is needed.
+  - Read saved snapshot files only when their content is needed.
+- Keep CLI output (`.playwright-cli/`, screenshots) temporary and untracked; remove it when finished.
 
 ## Styling Reuse
 

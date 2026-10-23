@@ -71,94 +71,132 @@ Not relevant for this project: `$app/stores`, `goto` options, cookies, CSRF, rem
     --install npm cloudflare-site-new
   ```
 
-- [ ] Set `"name": "cloudflare-site"` in `package.json`.
-- [ ] Update all dependencies to latest (`sv` pins older versions, e.g. vitest 4, `@types/node` 24).
-- [ ] Add `wrangler` as a dev dependency.
-- [ ] Verify `npm run dev` starts.
+- [x] Set `"name": "cloudflare-site"` in `package.json`.
+- [x] Update all dependencies to latest (`typescript` stays on 6.x).
+- [x] Add `wrangler` as a dev dependency.
+- [x] Verify `npm run dev` starts.
+- [x] `.vscode/settings.json` extended (format on save etc.), same as the current repo.
+- [x] `export const prerender = true` in `src/routes/+layout.ts`; `npm run build` with
+      `adapter-static` works (`build/` has `/`, `/de`, `/demo/playwright`, `/de/demo/playwright`).
 
 ### 1b. Remove the scaffold demo app
 
 The `demo` template ships a sample app that is not part of the site:
 
-- [ ] Routes: `sverdle/`, `about/`, `Counter.svelte`, `Header.svelte`, `+page.ts`; replace
-      `+page.svelte` and `+layout.svelte` with empty placeholders.
-- [ ] `src/routes/demo/DemoLinks.svelte` (keep `demo/playwright/` and its e2e test).
-- [ ] `src/lib/images/` (Svelte logo, GitHub icon, welcome image).
-- [ ] `layout.css`: drop the demo styles, keep the tailwind imports and plugins.
-- [ ] Dependencies: `@fontsource/fira-mono`, `@neoconfetti/svelte`.
-- [ ] `static/favicon.svg` and its `<link rel="icon">` in `src/app.html` (favicons come from the
+- [x] Routes `sverdle/` and `about/` removed (and their links in the scaffold `Header`).
+- [x] `Counter.svelte`, `Header.svelte`, `src/routes/+page.ts` (its `prerender` is now
+      redundant); replace `+page.svelte` and `+layout.svelte` with empty placeholders.
+- [x] `src/routes/demo/DemoLinks.svelte` (keep `demo/playwright/` and its e2e test).
+- [x] `src/lib/images/` (Svelte logo, GitHub icon, welcome image).
+- [x] `layout.css`: drop the demo styles, keep the tailwind imports and plugins.
+- [x] Dependencies: `@fontsource/fira-mono`, `@neoconfetti/svelte`.
+- [x] `static/favicon.svg` and its `<link rel="icon">` in `src/app.html` (favicons come from the
       layout).
-- [ ] Add `prerender: { entries: ['*', '/demo/playwright'] }` to the `sveltekit()` config.
+- [x] Add `prerender: { entries: ['*', '/demo/playwright'] }` to the `sveltekit()` config. Do it
+      together with removing `DemoLinks`: until then the widget is the only link to
+      `/demo/playwright` and is what makes the prerenderer find it. Check afterwards that `build/`
+      still contains `demo/playwright.html`.
 
 ### 2. Configuration
 
-- [ ] `vite.config.ts`: add paraglide `strategy: ['url', 'cookie', 'baseLocale']`.
-- [ ] `tsconfig.json`: carry over custom options (`lib`, `target`, `rewriteRelativeImportExtensions`,
-      etc.) on top of `extends "$app/tsconfig"`.
-- [ ] `wrangler.jsonc` (assets from `./build`, `html_handling: drop-trailing-slash`).
-- [ ] `.npmrc` (`engine-strict=true`).
-- [ ] `.gitignore`: carry over project-specific entries (Claude local files,
-      `/artifacts`, `.dev.vars*`).
+- [x] `vite.config.ts`: paraglide `strategy: ['url', 'cookie', 'baseLocale']`.
+- [x] `tsconfig.json`: nothing to carry over. The generated `$app/tsconfig` already sets
+      `allowJs`, `checkJs`, `forceConsistentCasingInFileNames`, `resolveJsonModule`,
+      `moduleResolution: bundler`, `skipLibCheck`, `esModuleInterop`. The rest of the old options
+      are irrelevant with `noEmit` (`rewriteRelativeImportExtensions`, `sourceMap`, `target`), and
+      the old narrow `lib` is dropped in favour of the default `ESNext` + `DOM`.
+- [x] `wrangler.jsonc` copied unchanged (assets from `./build`, `html_handling: drop-trailing-slash`,
+      `compatibility_date` `2026-04-25`).
+- [x] `.npmrc` (`engine-strict=true`): already identical in the scaffold.
+- [x] `.gitignore`: Claude local files, `/artifacts`, `.dev.vars*` added; `.wrangler` and the rest
+      already come from the scaffold.
+- [x] `.prettierignore`: `.github/skills/` added (moved here from step 9: the generated skill
+      markdown makes `prettier --write/--check .` fail).
 
 ### 3. i18n
 
-- [ ] `project.inlang/settings.json` (should match the scaffold).
-- [ ] `messages/en.json`, `messages/de.json` (drop the unused `hello_world` demo message).
-- [ ] `src/app.html` (matches the scaffold once the favicon link is removed in step 1b).
+- [x] `project.inlang/settings.json`: identical to the scaffold (en/de, message-format plugin).
+- [x] `messages/en.json`, `messages/de.json` copied from the current site; the demo-only
+      `hello_world` and the unused `image_place_holder` messages are dropped.
+- [x] `src/app.html`: same as the current one, apart from blank lines. The scaffold version is kept.
 
 ### 4. Assets
 
-- [ ] Copy the whole `src/lib/assets/` (favicon, fonts, images, logos).
-- [ ] `static/robots.txt`.
+- [x] Copy the whole `src/lib/assets/` (62 files: favicon, fonts, images, logos; the untracked
+      `.DS_Store` is left out). Identical to the current site.
+- [x] `static/robots.txt`: already identical in the scaffold.
 
 ### 5. Styles
 
-- [ ] `src/lib/styles/veche.css`.
-- [ ] `src/routes/layout.css` (tailwind + plugins + `veche.css` import).
+- [x] `src/lib/styles/veche.css` copied unchanged (relative `../assets/...` urls still resolve).
+- [x] `src/routes/layout.css` replaced with the current one (tailwind, `veche.css`, forms and
+      typography plugins).
 
 ### 6. Components and layout
 
-- [ ] `Header.svelte`, `Footer.svelte`, `SplitHero.svelte` → `#lib/...` imports with extensions,
-      `Pathname` → `Path`.
-- [ ] `src/routes/+layout.svelte` (favicons, header/footer), `src/routes/+layout.ts`
-      (`prerender = true`). The scaffold's hidden locale links are not needed: the header language
-      toggle already lets the prerenderer crawl the `/de/...` pages.
-- [ ] `src/hooks.server.ts`, `src/hooks.ts`: compare with the scaffold, keep the scaffold version.
+- [x] `Header.svelte`, `Footer.svelte`, `SplitHero.svelte` copied to `src/lib/components/`:
+      `$lib/...` → `#lib/...` (with `.js` extensions for paraglide), `Pathname` → `Path`.
+- [x] `src/routes/+layout.svelte`: favicons, `Header`, `Footer`; the scaffold's hidden locale links
+      are gone (the header language toggle lets the prerenderer crawl `/de/...`).
+      `src/routes/+layout.ts` (`prerender = true`) was already in place.
+- [x] `src/hooks.server.ts`, `src/hooks.ts`: the scaffold versions are kept (SK3 imports from
+      `@sveltejs/kit/hooks`, `resolve({ ...event, request }, ...)`, `#lib/...js`).
+
+`npm run build` fails until step 7: the footer links to `/impressum` and `/privacy-policy`, which do
+not exist yet (`prerender_http_error`, 404 for both locales).
 
 ### 7. Pages
 
-- [ ] `/` (`src/routes/+page.svelte`).
-- [ ] `/impressum`.
-- [ ] `/privacy-policy`.
-- [ ] Visual check of every page in en and de, desktop and mobile, against the current site.
+- [x] `/` (`src/routes/+page.svelte`): only the imports changed (`#lib/...`).
+- [x] `/impressum`, `/privacy-policy`: only `Pathname` → `Path` and the paraglide import changed.
+- [x] `npm run build` works again: `build/` has `/`, `/impressum`, `/privacy-policy` and their
+      `/de/...` versions, plus `/demo/playwright` (and `/de/demo/playwright`).
+- [x] Visual check of every page in en and de, desktop (1440x900) and mobile (390x844), against the
+      current site: full-page screenshots via `playwright-cli` from both dev servers. 10 of 12
+      are byte-identical; the two desktop home pages differ by ~9 pixels inside the `foods` category
+      image (image decoding noise), nothing visible.
 
-### 8. Build verification (run locally by the user)
+### 8. Build verification
 
-- [ ] `npm run format`, `npm run lint`, `npm run check`, `npm run build`.
-- [ ] `build/` contains prerendered pages for both locales (`/`, `/impressum`, `/privacy-policy`,
-      `/de`, `/de/impressum`, `/de/privacy-policy`).
-- [ ] `npx wrangler dev` serves `./build` correctly (language toggle, links, assets, trailing slashes).
+- [x] `npm run format`, `npm run lint`, `npm run check`, `npm run build`: all clean (ESLint no issues,
+      svelte-check 865 files, 0 errors, 0 warnings, no build warnings).
+- [x] `build/` contains prerendered pages for both locales (`/`, `/impressum`, `/privacy-policy`,
+      `/de`, `/de/impressum`, `/de/privacy-policy`) plus `/demo/playwright` (and `/de/...`).
+- [x] `npx wrangler dev` serves `./build`: all pages 200, unknown path 404, trailing slash
+      redirects (307) to the slash-less URL.
+- [x] `npm run test`: vitest examples (2 files, 2 tests) and the Playwright e2e smoke test
+      (`/demo/playwright` against `build` + `preview`) pass.
 
 ### 9. Repository-specific files
 
-Re-add onto the new project what the scaffold does not generate:
+Re-added onto the new project what the scaffold does not generate:
 
-- [ ] `.github/workflows/*` (CI, release, auto-merge, codeql, contribution-*), `.github/dependabot.yml`.
-- [ ] `.githooks/pre-push`.
-- [ ] `scripts/*`.
-- [ ] `AGENTS.md`: merge the project-specific sections (Project Context, Validation Workflow,
-      Styling Reuse) into the generated one. `ai-tools` does not create `CLAUDE.md`; re-add it with
-      `@AGENTS.md`. The generated `.claude/settings.json`, `.vscode/mcp.json` and
-      `.github/skills|agents` are identical to the current ones.
-- [ ] `.prettierignore`: re-add `.github/skills/` (generated content, not ours to format).
-- [ ] `README.md`: project description, commands, updated `sv create` command.
-- [ ] `docs/plan.md` (this file).
+- [x] `.github/workflows/*` (CI, release, auto-merge, codeql, contribution-\*) and
+      `.github/dependabot.yml`, copied unchanged.
+- [x] `.githooks/pre-push`, copied unchanged (not enabled via `core.hooksPath` in the old repo either).
+- [x] `scripts/*`: copied, with stale bits fixed: `package-openspec.sh` kept (openspec may come
+      later) with the `chessboard-openspec-` prefix renamed to `cloudflare-openspec-`;
+      `package-review-src.sh` no longer copies `deploy-site` and now includes `.agents`;
+      `npm-link.sh` has an empty `LINK_PACKAGES` list (was `@mirasen/chessboard`).
+- [x] `AGENTS.md`: Project Context, Project Configuration, Validation Workflow (lint/check/build
+      are no longer forbidden: run after larger blocks and before commit/push on request),
+      Browser Verification (project-local `playwright-cli`, token-efficient usage), Styling Reuse,
+      then the generated Svelte MCP section. `CLAUDE.md` re-added with `@AGENTS.md`.
+- [x] `playwright-cli` added: `@playwright/cli` dev dependency, skill in `.claude/skills` /
+      `.agents/skills`, `.playwright-cli/` ignored; `allowScripts` in `package.json` (without
+      versions) for `esbuild`, `workerd`, `fsevents`.
+- [x] `.prettierignore`: `.claude/skills/` and `.agents/skills/` added next to `.github/skills/`.
+- [x] `README.md`: project description, commands, actual `sv create` command.
+- [x] `docs/plan.md` (this file).
 
 ### 10. Replace repository contents
 
-- [ ] On branch `migrate/sk-3`: remove all tracked files except `.git`.
-- [ ] Copy `../cloudflare-site-new` over (without `.git`, `node_modules`, `.svelte-kit`, `build`).
-- [ ] `npm install`, regenerate `package-lock.json`.
+- [x] On branch `migrate/sk-3`: all tracked files removed (`git rm -r`).
+- [x] `../cloudflare-site-new` copied over with `rsync` (without `.git`, `node_modules`,
+      `.svelte-kit`, `build`, `test-results`, `.wrangler`, `.playwright-cli`, `.DS_Store`). The
+      commit history of the scaffold repo is not carried over.
+- [x] `npm ci` works with the copied `package-lock.json` (lock file unchanged);
+      `npm run lint`, `npm run check` (869 files, 0 errors) and `npm run build` pass.
 - [ ] Commit, open a PR to `main`, check CI and the Cloudflare preview deployment.
 
 ### 11. Optional: enhanced images (after the migration is merged)

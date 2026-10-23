@@ -1,12 +1,12 @@
 <script lang="ts">
-	import foodLabFrankfurtImage from '$lib/assets/images/food-lab-frankfurt.jpg';
-	import foodsImage from '$lib/assets/images/foods.jpg';
-	import frankfurtImage from '$lib/assets/images/frankfurt.jpg';
-	import microbiomStoreImage from '$lib/assets/images/microbiom-store.jpg';
-	import ogImage from '$lib/assets/images/og-image.jpg';
-	import restaurantsImage from '$lib/assets/images/restaurants.jpg';
-	import SplitHero from '$lib/components/SplitHero.svelte';
-	import { m } from '$lib/paraglide/messages.js';
+	import foodLabFrankfurtImage from '#lib/assets/images/food-lab-frankfurt.jpg';
+	import foodsImage from '#lib/assets/images/foods.jpg';
+	import frankfurtImage from '#lib/assets/images/frankfurt.jpg';
+	import microbiomStoreImage from '#lib/assets/images/microbiom-store.jpg';
+	import ogImage from '#lib/assets/images/og-image.jpg';
+	import restaurantsImage from '#lib/assets/images/restaurants.jpg';
+	import SplitHero from '#lib/components/SplitHero.svelte';
+	import { m } from '#lib/paraglide/messages.js';
 
 	const ogImageUrl = new URL(ogImage, 'https://veche.design').href;
 </script>

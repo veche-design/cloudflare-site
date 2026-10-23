@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import type { Pathname } from '$app/types';
-	import { getLocale, localizeHref } from '$lib/paraglide/runtime';
+	import type { Path } from '$app/types';
+	import { getLocale, localizeHref } from '#lib/paraglide/runtime.js';
 
 	const locale = getLocale();
-	const homeHref = resolve(localizeHref('/') as Pathname);
+	const homeHref = resolve(localizeHref('/') as Path);
 </script>
 
 <svelte:head>

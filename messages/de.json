@@ -1,7 +1,5 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"hello_world": "Hello, {name} from de!",
-	"image_place_holder": "Bild folgt",
 	"nav_home": "Start",
 	"footer_imprint": "Impressum",
 	"footer_privacy": "Datenschutz",

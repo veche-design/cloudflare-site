@@ -16,9 +16,8 @@
 
 set -eu
 
-LINK_PACKAGES=(
-  "@mirasen/chessboard"
-)
+# Add the names of locally developed packages here, e.g. "@scope/pkg".
+LINK_PACKAGES=()
 
 separator="------------------------------------------"
 

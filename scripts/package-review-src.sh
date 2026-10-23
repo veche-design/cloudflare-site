@@ -76,7 +76,6 @@ copy_if_exists ".npmignore"
 copy_if_exists ".github"
 copy_if_exists ".githooks"
 
-copy_if_exists "deploy-site"
 copy_if_exists "wrangler.jsonc"
 
 copy_if_exists "messages"
@@ -93,6 +92,7 @@ copy_if_exists ".npmrc"
 copy_if_exists "AGENTS.md"
 copy_if_exists "CLAUDE.md"
 copy_if_exists ".claude"
+copy_if_exists ".agents"
 
 
 # Optional extras in full mode
