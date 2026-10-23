@@ -111,7 +111,9 @@ The `demo` template ships a sample app that is not part of the site:
 - [x] `.gitignore`: Claude local files, `/artifacts`, `.dev.vars*` added; `.wrangler` and the rest
       already come from the scaffold.
 - [x] `.prettierignore`: `.github/skills/` added (moved here from step 9: the generated skill
-      markdown makes `prettier --write/--check .` fail).
+      markdown makes `prettier --write/--check .` fail). Also `project.inlang/*` except
+      `settings.json`: paraglide generates `README.md`, `.meta.json` and `.lix/` there during the
+      build, and CI (`build` then `lint`) failed on them in the first PR run.
 
 ### 3. i18n
 
