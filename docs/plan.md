@@ -201,12 +201,19 @@ Re-added onto the new project what the scaffold does not generate:
       `npm run lint`, `npm run check` (869 files, 0 errors) and `npm run build` pass.
 - [ ] Commit, open a PR to `main`, check CI and the Cloudflare preview deployment.
 
-### 11. Optional: enhanced images (after the migration is merged)
+### 11. Enhanced images (branch `feat/enhanced-img`, after the migration PR)
 
-`enhanced-img` is installed during scaffolding, but the migration ports images 1:1 as plain imports.
+`enhanced-img` is installed during scaffolding; the migration ported images 1:1 as plain imports.
 
-- [ ] Switch content images (hero, categories) to `<enhanced:img>` for AVIF/WebP and responsive sizes.
-- [ ] Keep `og-image.jpg` as a plain import: meta tags need a plain URL.
+- [x] Home page category images and the `SplitHero` image use `<enhanced:img>` (imports with
+      `?enhanced`): AVIF/WebP in two sizes plus a JPEG fallback, `sizes` matching the layout,
+      `fetchpriority="high"` on the hero and `loading="lazy"` on the category images.
+      `SplitHero`'s `image` prop is now a `Picture`; its scoped `img` rule became
+      `:global(img)` because the plugin's markup is not visible to Svelte's CSS analysis.
+- [x] `og-image.jpg` stays a plain import (meta tags need a plain URL).
+- [x] Page heights are identical to the PR preview at 1440 and 390 px; crops of hero and categories
+      look the same (AVIF re-encoding only).
+- Not touched: the `frankfurt.jpg` CSS `background-image` in `veche.css`.
 
 ### 12. Optional: Storybook (after the migration is merged)
 
