@@ -43,8 +43,19 @@ jobs:
             npm run build
 
       - name: Deploy to Cloudflare
+        id: deploy
         uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: deploy --tag ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
+
+      - name: E2E against production
+        env:
+          PLAYWRIGHT_BASE_URL: ${{ steps.deploy.outputs.deployment-url }}
+        run: |
+          if [ -z "$PLAYWRIGHT_BASE_URL" ]; then
+            echo "::error::wrangler-action returned no deployment-url; not running e2e against a local server instead"
+            exit 1
+          fi
+          npm run test:e2e
