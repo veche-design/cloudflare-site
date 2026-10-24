@@ -1,15 +1,16 @@
 <script lang="ts">
-	import appleTouchIcon from '$lib/assets/favicon/apple-touch-icon.png';
-	import favicon16 from '$lib/assets/favicon/favicon-16.png';
-	import favicon32 from '$lib/assets/favicon/favicon-32.png';
-	import faviconSvg from '$lib/assets/favicon/favicon.svg';
+	import appleTouchIcon from '#lib/assets/favicon/apple-touch-icon.png';
+	import favicon16 from '#lib/assets/favicon/favicon-16.png';
+	import favicon32 from '#lib/assets/favicon/favicon-32.png';
+	import faviconSvg from '#lib/assets/favicon/favicon.svg';
 
-	import Footer from '$lib/components/Footer.svelte';
-	import Header from '$lib/components/Header.svelte';
+	import Footer from '#lib/components/Footer.svelte';
+	import Header from '#lib/components/Header.svelte';
 
+	import type { LayoutProps } from './$types';
 	import './layout.css';
 
-	let { children } = $props();
+	let { children }: LayoutProps = $props();
 </script>
 
 <svelte:head>

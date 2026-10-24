@@ -1,11 +1,12 @@
 <script lang="ts">
+	import type { Picture } from '@sveltejs/enhanced-img';
 	import type { Snippet } from 'svelte';
 
 	type Props = {
 		title: string | Snippet;
 		description?: string | Snippet;
 		actions?: Snippet;
-		image: string;
+		image: Picture;
 		imageAlt: string;
 	};
 
@@ -40,7 +41,12 @@
 	</div>
 
 	<div class="split-hero__image">
-		<img src={image} alt={imageAlt} />
+		<enhanced:img
+			src={image}
+			sizes="(max-width: 900px) 100vw, min(40vw, 672px)"
+			fetchpriority="high"
+			alt={imageAlt}
+		/>
 	</div>
 </section>
 
@@ -93,7 +99,7 @@
 		overflow: hidden;
 	}
 
-	.split-hero__image img {
+	.split-hero__image :global(img) {
 		position: absolute;
 		inset: 0;
 		display: block;

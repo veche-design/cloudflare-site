@@ -25,8 +25,7 @@ vite.config.ts.timestamp-*
 test-results
 # Paraglide
 src/lib/paraglide
-project.inlang/*
-!project.inlang/settings.json
+project.inlang/cache/
 
 # Claude
 .claude/settings.local.json
@@ -37,8 +36,8 @@ project.inlang/*
 /artifacts
 
 # wrangler files
-.wrangler
 .dev.vars*
 !.dev.vars.example
-.env*
-!.env.example
+
+# Playwright CLI output (may contain credentials)
+.playwright-cli/

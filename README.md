@@ -1,51 +1,33 @@
-# cloudflare-site
+# veche.design
 
-landing page
+The public veche.design website and UI prototype for the future app.
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Built with SvelteKit 3, Svelte 5, Tailwind CSS 4 and Paraglide (en/de), prerendered with
+`adapter-static` and deployed to Cloudflare with Wrangler.
 
 ## Commands
 
 - `npm run dev` - run local server
 - `npm run format` - format all files before git push/sync
+- `npm run lint`, `npm run check`, `npm run build` - run before committing
 - `./scripts/push-update.sh "<comment>"` - format and push the changes to the current branch
 - `./scripts/kirill.sh` - pull the latest changes, install the dependencies, build, and run the local server
 
-## Creating a project
+## Project setup
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```sh
-# create a new project
-npx sv create my-app
-```
-
-To recreate this project with the same configuration:
+The project was scaffolded with [`sv`](https://github.com/sveltejs/cli) and then the demo app was removed:
 
 ```sh
-# recreate this project
-npx sv@0.17.0 create --template minimal --types ts --add prettier eslint vitest="usages:unit,component" playwright tailwindcss="plugins:typography,forms" sveltekit-adapter="adapter:static" paraglide="languageTags:en, de+demo:no" --install npm cloudflare-site-new
+npx sv@1.1.1 create --template demo --types ts --add prettier eslint vitest="usages:unit,component" playwright="demo:yes" tailwindcss="plugins:typography,forms" enhanced-img sveltekit-adapter="adapter:static" paraglide="languageTags:en, de+demo:no" ai-tools="ide:claude-code,vscode,other+delivery:plugin+tools:mcp,svelte-code-writer,svelte-core-bestpractices,svelte-file-editor+mcpSetup:remote" --install npm cloudflare-site
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+Add features with `sv add`, e.g. `npx sv add storybook`.
 
 ## Building
 
-To create a production version of your app:
-
 ```sh
 npm run build
+npm run preview
 ```
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+The production build is written to `build/` and served by Cloudflare (`wrangler.jsonc`).

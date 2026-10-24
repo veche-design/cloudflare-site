@@ -10,3 +10,12 @@ bun.lockb
 
 # Some AI content
 .github/skills/
+.claude/skills/
+.agents/skills/
+
+# Paraglide / inlang generated files
+project.inlang/*
+!project.inlang/settings.json
+
+# Local Python virtual environment
+.venv/
