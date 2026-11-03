@@ -4,7 +4,7 @@
 	import frankfurtImage from '#lib/assets/images/frankfurt.jpg?enhanced';
 	import microbiomStoreImage from '#lib/assets/images/microbiom-store.jpg?enhanced';
 	import ogImage from '#lib/assets/images/og-image.jpg';
-	import restaurantsImage from '#lib/assets/images/restaurants.jpg?enhanced';
+	import systemsImage from '#lib/assets/images/systems.jpg?enhanced';
 	import SplitHero from '#lib/components/SplitHero.svelte';
 	import { m } from '#lib/paraglide/messages.js';
 
@@ -121,12 +121,12 @@
 		<div class="category">
 			<enhanced:img
 				class="cat-img"
-				src={restaurantsImage}
+				src={systemsImage}
 				sizes={categorySizes}
 				loading="lazy"
 				alt=""
 			/>
-			<div class="cat-name">{m.home_build_restaurants()}</div>
+			<div class="cat-name">{m.home_build_methods()}</div>
 		</div>
 
 		<div class="category">
