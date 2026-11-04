@@ -4,6 +4,7 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
+		"postinstall": "playwright-cli install --skills && playwright-cli install --skills=agents",
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
