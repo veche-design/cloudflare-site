@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#fff;color:#111111;font-family:'Montserrat',sans-serif;-webkit-font-smoothing:antialiased}a{color:#111111}a:hover{color:#C8332B}h1,h2,p{margin:0}</style>
+</helmet>
+<header data-screen-label="Nav" style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px 48px;flex-wrap:wrap;border-bottom:1px solid rgba(17,17,17,0.08);position:sticky;top:0;z-index:300;background:#fff">
+<a href="Veche Website.dc.html" style="display:inline-flex;align-items:center;text-decoration:none"><img src="src/lib/assets/logos/logo.svg" alt="veche.design" style="height:18px;width:auto;display:block"></a>
+<nav style="display:flex;gap:28px;align-items:center;font-size:0.8rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;flex-wrap:wrap">
+<a href="Veche Website.dc.html" style="color:#C8332B;text-decoration:none;padding-bottom:4px;border-bottom:2px solid #C8332B">Home</a>
+<a href="Database.dc.html" style="text-decoration:none;padding-bottom:4px">Database</a>
+<a href="Test Your Business.dc.html" style="text-decoration:none;padding-bottom:4px">Test your business</a>
+<div style="display:flex;gap:6px;margin-left:8px;font-size:10px;font-weight:600;letter-spacing:0.1em"><span style="background:#6e6e6e;color:#fff;border:1px solid #6e6e6e;padding:4px 10px">EN</span><span style="border:1px solid rgba(110,110,110,0.3);color:#6e6e6e;padding:4px 10px">DE</span></div>
+</nav>
+</header>
+<section data-screen-label="Hero" style="display:grid;grid-template-columns:2fr 1fr;min-height:480px;background:#C8332B">
+<div style="display:flex;flex-direction:column;justify-content:center;gap:28px;padding:clamp(48px,7vw,112px) clamp(20px,3.8vw,72px);color:#fff">
+<h1 style="font-size:clamp(1.4rem,3vw,2.6rem);line-height:1.18;font-weight:900;letter-spacing:-0.015em;text-transform:uppercase;max-width:620px">We test businesses that create AI-resistant jobs</h1>
+<p style="font-size:clamp(1.05rem,1.6vw,1.3rem);line-height:1.6;max-width:560px;color:rgba(255,255,255,0.9)"><strong style="font-weight:800;color:#fff">Non-digital ventures</strong> ready to launch in the Rhine Main region.</p>
+<div style="display:flex;gap:12px;flex-wrap:wrap;padding-top:8px">
+<a href="Database.dc.html" style="color:#fff;border:1.5px solid rgba(255,255,255,0.6);padding:16px 40px;border-radius:999px;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:0.04em">Explore tested businesses</a>
+<a href="Test Your Business.dc.html" style="color:#fff;border:1.5px solid rgba(255,255,255,0.6);padding:16px 40px;border-radius:999px;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:0.04em">Test your business idea</a>
+</div>
+</div>
+<img src="src/lib/assets/images/frankfurt.jpg" alt="Frankfurt" style="width:100%;height:100%;min-height:360px;object-fit:cover;display:block;background:#bbb">
+</section>
+<section data-screen-label="Crises" style="display:flex;flex-direction:column;gap:40px;padding:clamp(64px,8vw,96px) 64px">
+<div style="display:flex;flex-direction:column;gap:18px"><p style="font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#C8332B">We turn</p><h2 style="font-size:clamp(1.4rem,2.6vw,2.2rem);line-height:1.2;font-weight:900;letter-spacing:-0.015em;max-width:900px">The crises of today into opportunities.</h2></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px">
+<div style="display:flex;flex-direction:column;justify-content:center;gap:12px;padding:40px 32px;border:1px solid rgba(17,17,17,0.14);background:#fff"><p style="font-size:clamp(1.5rem,2.6vw,2rem);font-weight:900;color:#C8332B;line-height:1.15;letter-spacing:-0.01em">3 million unemployed</p><p style="font-size:1.15rem;line-height:1.5;color:#333;font-weight:500">include junior applicants, senior and technical managers</p></div>
+<div style="display:flex;flex-direction:column;justify-content:center;gap:12px;padding:40px 32px;border:1px solid rgba(17,17,17,0.14);background:#fff"><p style="font-size:1.15rem;line-height:1.5;color:#333;font-weight:500">can found</p><p style="font-size:clamp(1.5rem,2.6vw,2rem);font-weight:900;color:#C8332B;line-height:1.15;letter-spacing:-0.01em">AI-resistant businesses</p></div>
+<div style="display:flex;flex-direction:column;justify-content:center;gap:12px;padding:40px 32px;border:1px solid rgba(17,17,17,0.14);background:#fff"><p style="font-size:1.15rem;line-height:1.5;color:#333;font-weight:500">but of all new ventures</p><p style="font-size:clamp(1.5rem,2.6vw,2rem);font-weight:900;color:#C8332B;line-height:1.15;letter-spacing:-0.01em">43% fail due to poor product market fit</p></div>
+</div>
+</section>
+<section data-screen-label="What we build" style="display:flex;flex-direction:column;gap:56px;padding:clamp(64px,8vw,96px) 64px;background:#F4F4F2">
+<div style="display:flex;flex-direction:column;gap:18px"><p style="font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#C8332B">We help build</p><h2 style="font-size:clamp(1.4rem,2.6vw,2.2rem);line-height:1.2;font-weight:900;letter-spacing:-0.015em;max-width:720px">Things people can touch, taste and experience.</h2></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px">
+<div style="display:flex;flex-direction:column;gap:22px"><p style="font-size:clamp(1.1rem,1.9vw,1.45rem);font-weight:900;text-transform:uppercase;letter-spacing:0.01em;color:#C8332B;line-height:1.25;min-height:2.6em">Consumer goods, circular hardware and crafts</p><img src="uploads/crafts.jpg" alt="Crafts" style="width:100%;height:240px;object-fit:cover;border:1px solid rgba(17,17,17,0.1);box-sizing:border-box;display:block;background:#d9d9d6"></div>
+<div style="display:flex;flex-direction:column;gap:22px"><p style="font-size:clamp(1.1rem,1.9vw,1.45rem);font-weight:900;text-transform:uppercase;letter-spacing:0.01em;color:#C8332B;line-height:1.25;min-height:2.6em">Food products and restaurants</p><img src="uploads/foods.jpg" alt="Food" style="width:100%;height:240px;object-fit:cover;border:1px solid rgba(17,17,17,0.1);box-sizing:border-box;display:block;background:#d9d9d6"></div>
+<div style="display:flex;flex-direction:column;gap:22px"><p style="font-size:clamp(1.1rem,1.9vw,1.45rem);font-weight:900;text-transform:uppercase;letter-spacing:0.01em;color:#C8332B;line-height:1.25;min-height:2.6em">Systems, methods and exhibitions</p><img src="uploads/systems.jpg" alt="Systems" style="width:100%;height:240px;object-fit:cover;border:1px solid rgba(17,17,17,0.1);box-sizing:border-box;display:block;background:#d9d9d6"></div>
+</div>
+</section>
+
+<section data-screen-label="Database" style="display:flex;flex-direction:column;gap:48px;padding:clamp(64px,8vw,96px) 64px">
+<div style="display:flex;flex-direction:column;gap:18px"><p style="font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#C8332B">The database</p><h2 style="font-size:clamp(1.4rem,2.6vw,2.2rem);line-height:1.2;font-weight:900;letter-spacing:-0.015em;max-width:600px">Validated businesses with AI-resistant jobs.</h2><p style="font-size:1rem;color:#555;font-weight:500">Non-digital ventures ready to launch.</p></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px">
+<a href="Database.dc.html" style="display:flex;flex-direction:column;padding:16px 16px 22px;background:#fff;border:1px solid rgba(17,17,17,0.14);text-decoration:none;color:#111111"><img src="src/lib/assets/images/rabia.jpg" alt="Rabia — Afghan Food Products" style="width:100%;height:200px;object-fit:cover;display:block;margin-bottom:16px"><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px"><span style="font-size:0.65rem;font-weight:700;letter-spacing:0.06em;line-height:1;text-transform:uppercase;border:1px solid rgba(17,17,17,0.14);border-radius:999px;color:#6e6e6e;padding:6px 9px">FOOD</span></div><p style="font-size:0.98rem;font-weight:700;line-height:1.3">Rabia — Afghan Food Products</p></a>
+<a href="Database.dc.html" style="display:flex;flex-direction:column;padding:16px 16px 22px;background:#fff;border:1px solid rgba(17,17,17,0.14);text-decoration:none;color:#111111"><img src="src/lib/assets/images/barefoot-store.jpg" alt="Barefoot Store" style="width:100%;height:200px;object-fit:cover;display:block;margin-bottom:16px"><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px"><span style="font-size:0.65rem;font-weight:700;letter-spacing:0.06em;line-height:1;text-transform:uppercase;border:1px solid rgba(17,17,17,0.14);border-radius:999px;color:#6e6e6e;padding:6px 9px">RETAIL</span></div><p style="font-size:0.98rem;font-weight:700;line-height:1.3">Barefoot Store</p></a>
+<a href="Database.dc.html" style="display:flex;flex-direction:column;padding:16px 16px 22px;background:#fff;border:1px solid rgba(17,17,17,0.14);text-decoration:none;color:#111111"><img src="src/lib/assets/images/herbal-pharmacy.jpg" alt="Herbal Pharmacy" style="width:100%;height:200px;object-fit:cover;display:block;margin-bottom:16px"><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px"><span style="font-size:0.65rem;font-weight:700;letter-spacing:0.06em;line-height:1;text-transform:uppercase;border:1px solid rgba(17,17,17,0.14);border-radius:999px;color:#6e6e6e;padding:6px 9px">HEALTH</span><span style="font-size:0.65rem;font-weight:700;letter-spacing:0.06em;line-height:1;text-transform:uppercase;border:1px solid rgba(17,17,17,0.14);border-radius:999px;color:#6e6e6e;padding:6px 9px">RETAIL</span></div><p style="font-size:0.98rem;font-weight:700;line-height:1.3">Herbal Pharmacy</p></a>
+</div>
+<div style="display:flex"><a href="Database.dc.html" style="background:#C8332B;color:#fff;padding:19px 48px;border-radius:999px;text-decoration:none;font-weight:700;font-size:14px;letter-spacing:0.05em">Explore tested businesses</a></div>
+</section>
+<section data-screen-label="How we work" style="display:flex;flex-direction:column;gap:48px;padding:clamp(64px,8vw,96px) 64px;background:#F4F4F2">
+<div style="display:flex;flex-direction:column;gap:18px"><p style="font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#C8332B">How we work</p><h2 style="font-size:clamp(1.4rem,2.6vw,2.2rem);line-height:1.2;font-weight:900;letter-spacing:-0.015em;max-width:760px">We validate business with tailored tests and real data</h2><p style="font-size:0.95rem;color:#555;line-height:1.6">Launching a business is safer with us.</p></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px">
+<div style="display:flex;flex-direction:column;gap:14px;padding:30px 26px 34px;background:#fff;border:1px solid rgba(17,17,17,0.14)"><p style="font-size:0.95rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#C8332B;line-height:1.35">Start with</p><p style="font-size:0.88rem;line-height:1.7;color:#333">your idea or a scouted business that works well elsewhere</p></div>
+<div style="display:flex;flex-direction:column;gap:14px;padding:30px 26px 34px;background:#fff;border:1px solid rgba(17,17,17,0.14)"><p style="font-size:0.95rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#C8332B;line-height:1.35">Test with real data</p><p style="font-size:0.88rem;line-height:1.7;color:#333">based on tailored experiments and benchmarks</p></div>
+<div style="display:flex;flex-direction:column;gap:14px;padding:30px 26px 34px;background:#fff;border:1px solid rgba(17,17,17,0.14)"><p style="font-size:0.95rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#C8332B;line-height:1.35">Get expert feedback</p><p style="font-size:0.88rem;line-height:1.7;color:#333">from experienced developers and investors</p></div>
+<div style="display:flex;flex-direction:column;gap:14px;padding:30px 26px 34px;background:#fff;border:1px solid rgba(17,17,17,0.14)"><p style="font-size:0.95rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#C8332B;line-height:1.35">Launch validated business</p><p style="font-size:0.88rem;line-height:1.7;color:#333">improves your success chances significantly</p></div>
+</div>
+</section>
+<section data-screen-label="Partners" style="display:flex;flex-direction:column;gap:48px;padding:clamp(64px,8vw,96px) 64px">
+<div style="display:flex;flex-direction:column;gap:18px"><p style="font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#C8332B">We work with</p><h2 style="font-size:clamp(1.4rem,2.6vw,2.2rem);line-height:1.2;font-weight:900;letter-spacing:-0.015em">All players building businesses.</h2><p style="font-size:0.95rem;color:#555;line-height:1.6">in the Rhine Main region.</p></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+<div style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:12px;padding:30px 22px;border:1px solid rgba(17,17,17,0.14);background:#fff"><p style="font-size:clamp(1rem,1.5vw,1.2rem);font-weight:800;letter-spacing:0.02em;color:#C8332B;text-transform:uppercase">Ecosystem</p><p style="font-size:0.86rem;color:#555;line-height:1.5">City Development Agencies, Incubators, Employment Agencies and Chambers of Commerce</p></div>
+<div style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:12px;padding:30px 22px;border:1px solid rgba(17,17,17,0.14);background:#fff"><p style="font-size:clamp(1rem,1.5vw,1.2rem);font-weight:800;letter-spacing:0.02em;color:#C8332B;text-transform:uppercase">Teams</p><p style="font-size:0.86rem;color:#555;line-height:1.5">who work on an early stage project or want to launch a tested business</p></div>
+<div style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:12px;padding:30px 22px;border:1px solid rgba(17,17,17,0.14);background:#fff"><p style="font-size:clamp(1rem,1.5vw,1.2rem);font-weight:800;letter-spacing:0.02em;color:#C8332B;text-transform:uppercase">Investors</p><p style="font-size:0.86rem;color:#555;line-height:1.5">Funds and Angel Investors interested in safer returns and long-term co-development</p></div>
+</div>
+</section>
+<section data-screen-label="Contact" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:28px;padding:clamp(72px,9vw,110px) 64px;background:#111111;color:#fff">
+<p style="font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#E36A62">Get in touch</p>
+<h2 style="font-size:clamp(1.8rem,4vw,3.4rem);line-height:1.05;font-weight:900;letter-spacing:-0.025em;margin-bottom:12px">Let's build something <span style="color:#E36A62">real.</span></h2>
+<a href="mailto:hello@veche.design" style="color:#fff;background:#C8332B;padding:16px 40px;border-radius:999px;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:0.04em">Get in touch</a>
+</section>
+<footer data-screen-label="Footer" style="display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding:24px 48px;border-top:1px solid rgba(17,17,17,0.1)">
+<a href="#" style="color:#C8332B;font-weight:700;font-size:0.9rem;text-decoration:none">veche.design</a>
+<div style="display:flex;gap:24px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase"><a href="#" style="color:#C8332B;text-decoration:none">Impressum</a><a href="#" style="color:#C8332B;text-decoration:none">Privacy Policy</a></div>
+</footer></x-dc>
+</body>
+</html>

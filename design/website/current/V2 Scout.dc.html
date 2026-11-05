@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#fff;color:#111111;font-family:'Montserrat',sans-serif;-webkit-font-smoothing:antialiased}a{color:#111111}a:hover{color:#C8332B}h1,h2,h3,p{margin:0}html{scroll-behavior:smooth}</style>
+</helmet>
+<header data-screen-label="Nav" style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px 48px;flex-wrap:wrap;border-bottom:1px solid rgba(17,17,17,0.08);position:sticky;top:0;z-index:300;background:#fff">
+<a href="V2 Home.dc.html" style="display:inline-flex;align-items:center;text-decoration:none"><img src="src/lib/assets/logos/logo.svg" alt="veche.design" style="height:18px;width:auto;display:block"></a>
+<nav style="display:flex;gap:28px;align-items:center;font-size:0.8rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;flex-wrap:wrap">
+<a href="V2 Home.dc.html" style="text-decoration:none;padding-bottom:4px">Home</a>
+<a href="V2 Scout.dc.html" style="color:#C8332B;text-decoration:none;padding-bottom:4px;border-bottom:2px solid #C8332B">FIND BUSINESS</a>
+<a href="V2 Test.dc.html" style="text-decoration:none;padding-bottom:4px">TESTING PROGRAM</a>
+<a href="V2 Finance.dc.html" style="text-decoration:none;padding-bottom:4px">GET FUNDING</a>
+<a href="Experiment Library.dc.html" style="text-decoration:none;padding-bottom:4px">LIBRARY</a>
+<div style="display:flex;gap:6px;margin-left:8px;font-size:10px;font-weight:600;letter-spacing:0.1em"><span style="background:#6e6e6e;color:#fff;border:1px solid #6e6e6e;padding:4px 10px">EN</span><span style="border:1px solid rgba(110,110,110,0.3);color:#6e6e6e;padding:4px 10px">DE</span></div>
+</nav>
+</header>
+<section data-screen-label="Hero" style="display:grid;grid-template-columns:2fr 1fr;grid-template-rows:minmax(0,1fr);height:clamp(200px,22vw,260px);overflow:hidden;background:#C8332B">
+<div style="display:flex;flex-direction:column;justify-content:center;gap:14px;padding:32px clamp(20px,3.8vw,72px);color:#fff">
+<h1 style="font-size:clamp(1.3rem,2.6vw,2.2rem);line-height:1.15;font-weight:900;letter-spacing:-0.015em;text-transform:uppercase;max-width:720px">Scout successful food, gastro and health businesses</h1>
+<p style="font-size:clamp(1rem,1.4vw,1.15rem);line-height:1.5;max-width:560px;color:rgba(255,255,255,0.9)">what works worldwide, can work in the Rhine Main region</p>
+</div>
+<img src="uploads/systems.jpg" alt="Scouting" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;background:#bbb">
+</section>
+<section id="scout" data-screen-label="Scouting tool" style="display:flex;flex-direction:column;gap:32px;padding:clamp(56px,7vw,88px) 64px;background:#F4F4F2">
+<div style="display:flex;flex-direction:column;gap:18px"><p style="font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#C8332B">SCOUT WORLDWIDE</p><h2 style="font-size:clamp(1.4rem,2.6vw,2.2rem);line-height:1.2;font-weight:900;letter-spacing:-0.015em;max-width:760px">Find business opportunities in your region</h2></div>
+<div style="display:flex;flex-direction:column;gap:18px;padding:28px;background:#fff;border:1.5px solid #111111;border-radius:28px">
+<p style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#C8332B">Ask in your own words</p>
+<textarea value="{{ prompt }}" onInput="{{ onPrompt }}" rows="3" style="font-family:'Montserrat',sans-serif;font-size:clamp(1.1rem,2vw,1.5rem);font-weight:400;line-height:1.35;letter-spacing:-0.01em;color:#111111;border:none;outline:none;resize:none;padding:0;background:transparent;width:100%"></textarea>
+<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding-top:14px;border-top:1px solid rgba(17,17,17,0.1)">
+<span style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#6e6e6e;margin-right:4px">Scanning</span>
+<sc-for list="{{ detected }}" as="d" hint-placeholder-count="3">
+<sc-if value="{{ d.sep }}" hint-placeholder-val="{{ false }}"><span style="font-size:0.78rem;font-weight:600;color:#6e6e6e;padding:0 2px">compare</span></sc-if>
+<span style="display:inline-flex;align-items:center;gap:6px;font-size:0.78rem;font-weight:600;padding:6px 12px;border-radius:999px;background:{{ d.tint }};color:{{ d.color }}"><span style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase">{{ d.label }}</span>{{ d.value }}</span>
+</sc-for>
+<sc-if value="{{ noneDetected }}" hint-placeholder-val="{{ false }}"><span style="font-size:0.8rem;color:#6e6e6e">Add an industry or region</span></sc-if>
+</div>
+<div style="display:flex;justify-content:flex-end;align-items:center;gap:16px;flex-wrap:wrap">
+<button type="button" onClick="{{ scout }}" style="font-family:'Montserrat',sans-serif;background:#C8332B;color:#fff;border:none;border-radius:999px;padding:17px 56px;font-weight:700;font-size:13px;letter-spacing:0.08em;cursor:pointer">SCOUT</button>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<p style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#6e6e6e">Example prompts</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:12px">
+<sc-for list="{{ ideas }}" as="i" hint-placeholder-count="3">
+<button type="button" onClick="{{ i.use }}" style="font-family:'Montserrat',sans-serif;display:flex;flex-direction:column;gap:10px;text-align:left;padding:18px 20px;border-radius:20px;border:1.5px solid {{ i.line }};background:#fff;cursor:pointer" style-hover="background:#fafafa">
+<span style="align-self:flex-start;font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:{{ i.tint }};color:{{ i.color }}">{{ i.label }}</span>
+<span style="font-size:0.92rem;font-weight:600;line-height:1.45;color:#111111">{{ i.text }}</span>
+<span style="font-size:0.7rem;font-weight:700;letter-spacing:0.06em;color:{{ i.color }}">Use this prompt →</span>
+</button>
+</sc-for>
+</div>
+</div>
+</section>
+<sc-if value="{{ showOptions }}" hint-placeholder-val="{{ false }}">
+<section id="options" data-screen-label="Results: health retail options" style="display:flex;flex-direction:column;gap:28px;padding:clamp(56px,7vw,88px) 64px">
+<div style="display:flex;flex-direction:column;gap:14px"><p style="font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#C8332B">Health retail · successful worldwide, missing in Rhine Main</p><h2 style="font-size:clamp(1.4rem,2.6vw,2.2rem);line-height:1.2;font-weight:900;letter-spacing:-0.015em">Choose a business to explore</h2></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:16px">
+<sc-for list="{{ options }}" as="o" hint-placeholder-count="3">
+<button type="button" onClick="{{ o.pick }}" style="font-family:'Montserrat',sans-serif;display:flex;flex-direction:column;gap:10px;text-align:left;padding:22px 24px;border-radius:20px;border:1.5px solid {{ o.line }};background:{{ o.bg }};cursor:pointer" style-hover="border-color:#C8332B">
+<span style="font-size:1.05rem;font-weight:800;line-height:1.3;color:#111111">{{ o.name }}</span>
+<span style="font-size:0.86rem;line-height:1.55;color:#555">{{ o.desc }}</span>
+<span style="font-size:0.7rem;font-weight:700;letter-spacing:0.06em;color:#C8332B">Show results →</span>
+</button>
+</sc-for>
+</div>
+</section>
+</sc-if>
+<sc-if value="{{ showInfra }}" hint-placeholder-val="{{ false }}">
+<section id="infra" data-screen-label="Results: innovation infrastructure" style="display:flex;flex-direction:column;gap:28px;padding:clamp(56px,7vw,88px) 64px">
+<div style="display:flex;flex-direction:column;gap:14px"><p style="font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#C8332B">Food innovation infrastructure · Rhine Main</p><h2 style="font-size:clamp(1.4rem,2.6vw,2.2rem);line-height:1.2;font-weight:900;letter-spacing:-0.015em">Infrastructure that helps businesses grow</h2></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:16px">
+<sc-for list="{{ infra }}" as="o" hint-placeholder-count="4">
+<div style="display:flex;flex-direction:column;gap:10px;padding:22px 24px;border-radius:20px;border:1.5px solid rgba(17,17,17,0.14);background:#fff">
+<span style="font-size:1.05rem;font-weight:800;line-height:1.3;color:#111111">{{ o.name }}</span>
+<span style="font-size:0.86rem;line-height:1.55;color:#555">{{ o.desc }}</span>
+</div>
+</sc-for>
+</div>
+</section>
+</sc-if>
+<sc-if value="{{ scouted }}" hint-placeholder-val="{{ false }}">
+<section id="results" data-screen-label="Results: summary" style="display:flex;flex-direction:column;gap:28px;padding:clamp(56px,7vw,88px) 64px 0">
+<div style="display:flex;flex-direction:column;gap:14px"><p style="font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#C8332B">Scouting · Consumer health · Rhine-Main · 12 Oct 2026</p><h2 style="font-size:clamp(1.4rem,2.6vw,2.2rem);line-height:1.2;font-weight:900;letter-spacing:-0.015em">{{ r.title }}</h2><p style="font-size:0.95rem;line-height:1.65;color:#333;max-width:820px;text-wrap:pretty">{{ r.desc }}</p><p style="font-size:0.85rem;color:#6e6e6e;font-weight:500">{{ querySummary }}</p></div>
+<div style="display:flex;flex-direction:column;gap:6px;padding:22px 28px;background:#C8332B;color:#fff;border-radius:28px">
+<p style="font-size:clamp(1rem,1.6vw,1.25rem);font-weight:800;line-height:1.3">{{ r.gap }}</p>
+<p style="font-size:0.9rem;line-height:1.5;color:#fff">{{ r.gapSub }}</p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:20px">
+<sc-for list="{{ r.stats }}" as="st" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;gap:8px;padding-top:16px;border-top:1px solid #111"><span style="font-size:clamp(2rem,3.6vw,3rem);font-weight:900;letter-spacing:-0.03em;line-height:1;color:#C8332B">{{ st.n }}</span><span style="font-size:0.88rem;line-height:1.5;color:#333">{{ st.t }}</span></div>
+</sc-for>
+</div>
+</section>
+<section data-screen-label="Results: proven elsewhere" style="display:flex;flex-direction:column;gap:32px;padding:clamp(48px,6vw,72px) 64px clamp(56px,7vw,88px)">
+<div style="display:flex;flex-direction:column;gap:14px"><p style="font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#C8332B">01 · Proven elsewhere</p><h2 style="font-size:clamp(1.4rem,2.6vw,2.2rem);line-height:1.2;font-weight:900;letter-spacing:-0.015em">Similar businesses working in other cities</h2></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:20px">
+<sc-for list="{{ r.refs }}" as="e" hint-placeholder-count="6">
+<div style="display:flex;flex-direction:column;gap:10px;padding:18px 18px 20px;background:#fff;border:1px solid rgba(17,17,17,0.14)">
+<div style="display:flex"><span style="font-size:0.65rem;font-weight:700;letter-spacing:0.06em;line-height:1.3;text-transform:uppercase;border:1px solid rgba(17,17,17,0.14);border-radius:999px;color:#6e6e6e;padding:6px 9px">{{ e.loc }}</span></div>
+<p style="font-size:1rem;font-weight:800;line-height:1.3">{{ e.name }}</p>
+<p style="font-size:0.88rem;line-height:1.6;color:#555;text-wrap:pretty">{{ e.desc }}</p>
+<div style="display:flex;flex-direction:column;gap:4px;padding:12px 14px;background:#FBEDEC;flex:1"><span style="font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#C8332B">Why it matters</span><span style="font-size:0.86rem;line-height:1.5;font-weight:600;color:#111">{{ e.why }}</span></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;padding-top:4px">
+<sc-for list="{{ e.links }}" as="ln" hint-placeholder-count="1"><a href="{{ ln.url }}" target="_blank" rel="noopener" style="color:#C8332B;border:1.5px solid #C8332B;border-radius:999px;padding:9px 18px;text-decoration:none;font-weight:700;font-size:12px;letter-spacing:0.04em">{{ ln.label }} ↗</a></sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+<section data-screen-label="Results: Rhine Main search" style="display:flex;flex-direction:column;gap:32px;padding:clamp(56px,7vw,88px) 64px;background:#F4F4F2">
+<div style="display:flex;flex-direction:column;gap:14px"><p style="font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#C8332B">02 · Rhine-Main search</p><h2 style="font-size:clamp(1.4rem,2.6vw,2.2rem);line-height:1.2;font-weight:900;letter-spacing:-0.015em">What turns up instead</h2><p style="font-size:0.95rem;line-height:1.65;color:#333;max-width:820px;text-wrap:pretty">{{ r.searchIntro }}</p></div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<p style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#6e6e6e">Queries run · 12 Oct 2026</p>
+<div style="display:flex;flex-wrap:wrap;gap:6px">
+<sc-for list="{{ r.queries }}" as="q" hint-placeholder-count="8"><span style="font-size:0.75rem;font-weight:600;padding:6px 12px;border-radius:999px;background:#fff;border:1px solid rgba(17,17,17,0.14);color:#333">{{ q }}</span></sc-for>
+</div>
+</div>
+<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:18px 24px;background:#fff;border:1.5px solid #111;border-radius:999px">
+<span style="font-size:0.7rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;background:#C8332B;color:#fff;padding:7px 14px;border-radius:999px">Result</span>
+<p style="font-size:0.95rem;font-weight:700;line-height:1.4;flex:1;min-width:240px">{{ r.result }}</p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px;align-items:start">
+<iframe src="{{ r.mapSrc }}" title="Google Maps search Rhine-Main" loading="lazy" style="width:100%;height:520px;border:1px solid rgba(17,17,17,0.14);display:block;background:#e6e3dc"></iframe>
+<div style="display:flex;flex-direction:column;background:#fff;border:1px solid rgba(17,17,17,0.14)">
+<sc-for list="{{ r.adj }}" as="m" hint-placeholder-count="10">
+<div style="display:flex;flex-direction:column;gap:4px;padding:14px 18px;border-bottom:1px solid rgba(17,17,17,0.08)">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline"><a href="{{ m.url }}" target="_blank" rel="noopener" style="font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#6e6e6e;text-decoration:none">{{ m.name }} ↗</a><span style="font-size:0.72rem;color:#6e6e6e">{{ m.where }}</span></div>
+<span style="font-size:0.95rem;font-weight:700;color:#111111;line-height:1.4">{{ m.why }}</span>
+<span style="font-size:0.8rem;color:#555;line-height:1.45">{{ m.what }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+<section data-screen-label="Results: comparison" style="display:flex;flex-direction:column;gap:28px;padding:clamp(56px,7vw,88px) 64px">
+<div style="display:flex;flex-direction:column;gap:14px"><p style="font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#C8332B">03 · Comparison</p><h2 style="font-size:clamp(1.4rem,2.6vw,2.2rem);line-height:1.2;font-weight:900;letter-spacing:-0.015em">The concept against what's already here</h2><p style="font-size:0.95rem;line-height:1.65;color:#333;max-width:820px;text-wrap:pretty">{{ r.cmpIntro }}</p></div>
+<div style="overflow-x:auto;border:1px solid rgba(17,17,17,0.14)">
+<div style="min-width:1040px;display:flex;flex-direction:column">
+<div style="display:grid;grid-template-columns:180px repeat(7,minmax(0,1fr));border-bottom:1px solid #111">
+<span style="padding:14px 16px"></span>
+<sc-for list="{{ r.cols }}" as="c" hint-placeholder-count="7"><span style="display:flex;flex-direction:column;gap:3px;padding:14px 12px;background:{{ c.bg }}"><span style="font-size:0.8rem;font-weight:800;line-height:1.25;color:{{ c.color }}">{{ c.name }}</span><span style="font-size:0.68rem;color:#6e6e6e;line-height:1.3">{{ c.sub }}</span></span></sc-for>
+</div>
+<sc-for list="{{ r.rows }}" as="rw" hint-placeholder-count="5">
+<div style="display:grid;grid-template-columns:180px repeat(7,minmax(0,1fr));border-bottom:1px solid rgba(17,17,17,0.08)">
+<span style="padding:14px 16px;font-size:0.72rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:#6e6e6e;line-height:1.35">{{ rw.label }}</span>
+<sc-for list="{{ rw.cells }}" as="x" hint-placeholder-count="7"><span style="padding:14px 12px;font-size:0.8rem;line-height:1.4;font-weight:{{ x.fw }};background:{{ x.bg }};color:#111111">{{ x.t }}</span></sc-for>
+</div>
+</sc-for>
+<div style="display:grid;grid-template-columns:180px repeat(7,minmax(0,1fr))">
+<span style="padding:16px;font-size:0.72rem;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;color:#C8332B;line-height:1.35">Gap it leaves</span>
+<sc-for list="{{ r.gaps }}" as="g" hint-placeholder-count="7"><span style="padding:16px 12px;font-size:0.85rem;line-height:1.35;font-weight:800;background:{{ g.bg }};color:#111111">{{ g.t }}</span></sc-for>
+</div>
+</div>
+</div>
+<p style="font-size:0.75rem;line-height:1.6;color:#6e6e6e;max-width:980px">{{ r.method }}</p>
+<div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding-top:8px">
+<a href="V2 Test.dc.html" style="color:#fff;background:#C8332B;padding:18px 44px;border-radius:999px;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:0.06em">TEST THIS BUSINESS</a>
+<span style="font-size:0.88rem;color:#555;font-weight:500">See the validation programme for a {{ r.title }}</span>
+</div>
+</section>
+</sc-if>
+<section data-screen-label="CTA" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:28px;padding:clamp(72px,9vw,110px) 64px;background:#111111;color:#fff">
+<h2 style="font-size:clamp(1.8rem,4vw,3.4rem);line-height:1.05;font-weight:900;letter-spacing:-0.025em;margin-bottom:12px;max-width:1000px">Found a business idea? <span style="color:#E36A62"><br>Validate with us and get funding.</span></h2>
+<a href="V2 Test.dc.html" style="color:#fff;background:#C8332B;padding:16px 40px;border-radius:999px;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:0.04em">Test your business idea</a>
+</section>
+<footer data-screen-label="Footer" style="display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding:24px 48px;border-top:1px solid rgba(17,17,17,0.1)">
+<a href="V2 Home.dc.html" style="color:#C8332B;font-weight:700;font-size:0.9rem;text-decoration:none">veche.design</a>
+<div style="display:flex;gap:24px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase"><a href="#" style="color:#C8332B;text-decoration:none">Impressum</a><a href="#" style="color:#C8332B;text-decoration:none">Privacy Policy</a></div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const CATS = [
+  { key: 'industry', label: 'Industry', color: '#C8332B', tint: '#FBEDEC', tags: ['Gastro', 'Food brand', 'Food health', 'Food retail'] },
+  { key: 'model', label: 'Business model', color: '#A86A12', tint: '#FBF3E6', tags: ['Shop / retail', 'Online shop', 'Franchise', 'Subscription', 'Workshops & courses', 'B2B supply'] },
+  { key: 'cuisine', label: 'Cuisine', color: '#3A7A4C', tint: '#EDF5EF', tags: ['Afghan', 'Ethiopian', 'Ukrainian', 'Vietnamese', 'Korean', 'Levantine', 'Austrian'] },
+  { key: 'function', label: 'Food function', color: '#2D5C8C', tint: '#ECF2F8', tags: ['Herbal medicine', 'Gut health', 'Functional drinks', 'Plant protein', 'Fermentation'] },
+  { key: 'launch', label: 'New launches', color: '#7A3E6E', tint: '#F5EDF3', tags: ['Last 12 months', 'Last 3 years', 'Established 10+ years'] },
+  { key: 'region', label: 'Region', color: '#555555', tint: '#F1F1EF', tags: ['Europe', 'Asia', 'Africa', 'North America', 'South America'] }
+];
+const DEFAULT_PROMPT = 'Which health retail business are successful worldwide but missing in Rhine Main?';
+const IDEAS = [
+  { label: 'Scalable gastro', text: 'Which scalable restaurants can be opened in Rhine Main?' },
+  { label: 'Health retail', text: DEFAULT_PROMPT, health: true },
+  { label: 'Food innovation infrastructure', text: 'How to help businesses grow in the region?', infra: true }
+];
+const INFRA = [
+  { name: 'Food Lab', desc: 'Shared kitchen and test space where food businesses develop and trial products.' },
+  { name: 'Pop-up Restaurant Services', desc: 'Ready-to-use venues and services so new concepts can trade for a few weeks.' },
+  { name: 'Restaurant Residency Program', desc: 'Time-limited residencies in an existing restaurant to test a concept with real guests.' },
+  { name: 'Market Pilot Stands', desc: 'Market stands that new businesses can rent short-term to test demand.' }
+];
+const OPTIONS = [
+  { name: 'Microbiom Store', desc: 'A walk-in shop for gut health: live ferments, home-fermenting kits and a microbiome test counter.' },
+  { name: 'Functional Drink Bars', desc: 'Elixirs, kombucha on tap and alcohol-free cocktails: an evening out without alcohol.' },
+  { name: 'Herbal Pharmacy', desc: 'Loose medicinal herbs, custom blends and expert advice in one shop.' }
+];
+const EXTRA = { region: ['Worldwide', 'Rhine Main', 'Frankfurt', 'Scandinavia', 'Austria', 'Poland'], industry: ['Health retail', 'Restaurant', 'Herbal pharmacy'] };
+class Component extends DCLogic {
+  state = { prompt: DEFAULT_PROMPT, stage: 'none', option: 'Herbal Pharmacy', reports: null };
+  componentDidMount() { fetch('data/scouting.json').then(r => r.json()).then(reports => this.setState({ reports })).catch(() => {}); }
+  go(id) { setTimeout(() => { const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 60, behavior: 'smooth' }); }, 80); }
+  renderVals() {
+    const { prompt, stage, option } = this.state;
+    const p = prompt.toLowerCase();
+    const found = [];
+    CATS.filter(c => c.key === 'industry' || c.key === 'region').forEach(c => [...c.tags, ...(EXTRA[c.key] || [])].forEach(t => {
+      const k = t.toLowerCase().replace(/s$/, '');
+      const i = p.indexOf(k);
+      if (i >= 0 && !found.some(f => f.value.toLowerCase().includes(k))) found.push({ i, label: c.label, value: t, color: c.color, tint: c.tint, region: c.key === 'region' });
+    }));
+    found.sort((a, b) => a.i - b.i);
+    const detected = found.map((d, n) => ({ ...d, sep: d.region && n > 0 && found[n - 1].region }));
+    const isHealth = p.includes('health retail');
+    const runScout = pr => {
+      const q = (pr ?? prompt).toLowerCase();
+      if (q.includes('help businesses grow') || q.includes('innovation infrastructure')) { this.setState({ stage: 'infra' }); this.go('infra'); }
+      else if (q.includes('health retail')) { this.setState({ stage: 'options' }); this.go('options'); }
+      else { this.setState({ stage: 'results', option: 'Herbal Pharmacy' }); this.go('results'); }
+    };
+    const ideas = IDEAS.map(i => ({ label: i.label, text: i.text, color: '#C8332B', tint: '#FBEDEC', line: '#C8332B40', use: () => { this.setState({ prompt: i.text }); if (i.health || i.infra) runScout(i.text); } }));
+    return {
+      prompt, onPrompt: e => this.setState({ prompt: e.target.value }),
+      detected, noneDetected: detected.length === 0, ideas,
+      scout: () => runScout(),
+      showOptions: stage !== 'none' && stage !== 'infra' && isHealth,
+      showInfra: stage === 'infra', infra: INFRA,
+      options: OPTIONS.map(o => ({ ...o, line: stage === 'results' && option === o.name ? '#C8332B' : 'rgba(17,17,17,0.14)', bg: stage === 'results' && option === o.name ? '#FBEDEC' : '#fff', pick: () => { this.setState({ stage: 'results', option: o.name }); this.go('results'); } })),
+      scouted: stage === 'results', showGap: true,
+      resultTitle: isHealth ? option : 'Herbal pharmacies',
+      querySummary: 'Results for: “' + prompt + '”' + (isHealth ? '' : ' · demo shows Herbal Pharmacy'),
+      r: (this.state.reports || {})[isHealth ? option : 'Herbal Pharmacy'] || { stats: [], refs: [], queries: [], adj: [], cols: [], rows: [], gaps: [] }
+    };
+  }
+}
+</script>
+</body>
+</html>

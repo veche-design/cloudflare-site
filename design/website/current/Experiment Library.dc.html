@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#fff;color:#111;font-family:'Montserrat',sans-serif;-webkit-font-smoothing:antialiased}a{color:#111}a:hover{color:#C8332B}h1,h2,h3,p{margin:0}textarea::placeholder{color:#8a8a8a}</style>
+</helmet>
+<div style="display:flex;flex-direction:column;min-height:100vh">
+<header data-screen-label="Nav" style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px 48px;flex-wrap:wrap;border-bottom:1px solid rgba(17,17,17,0.08);position:sticky;top:0;z-index:300;background:#fff">
+<a href="V2 Home.dc.html" style="display:inline-flex;align-items:center;text-decoration:none"><img src="src/lib/assets/logos/logo.svg" alt="veche.design" style="height:18px;width:auto;display:block"></a>
+<nav style="display:flex;gap:28px;align-items:center;font-size:0.8rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;flex-wrap:wrap">
+<a href="V2 Home.dc.html" style="text-decoration:none;padding-bottom:4px">Home</a>
+<a href="V2 Scout.dc.html" style="text-decoration:none;padding-bottom:4px">FIND BUSINESS</a>
+<a href="V2 Test.dc.html" style="text-decoration:none;padding-bottom:4px">TESTING PROGRAM</a>
+<a href="V2 Finance.dc.html" style="text-decoration:none;padding-bottom:4px">GET FUNDING</a>
+<a href="Experiment Library.dc.html" style="color:#C8332B;text-decoration:none;padding-bottom:4px;border-bottom:2px solid #C8332B">LIBRARY</a>
+<div style="display:flex;gap:6px;margin-left:8px;font-size:10px;font-weight:600;letter-spacing:0.1em"><span style="background:#6e6e6e;color:#fff;border:1px solid #6e6e6e;padding:4px 10px">EN</span><span style="border:1px solid rgba(110,110,110,0.3);color:#6e6e6e;padding:4px 10px">DE</span></div>
+</nav>
+</header>
+<section data-screen-label="Hero" style="display:grid;grid-template-columns:2fr 1fr;grid-template-rows:minmax(0,1fr);height:clamp(200px,22vw,260px);overflow:hidden;background:#C8332B">
+<div style="display:flex;flex-direction:column;justify-content:center;gap:14px;padding:32px clamp(20px,3.8vw,72px);color:#fff">
+<h1 style="font-size:clamp(1.3rem,2.6vw,2.2rem);line-height:1.15;font-weight:900;letter-spacing:-0.015em;text-transform:uppercase;max-width:720px">Business Testing Methods</h1>
+<p style="font-size:clamp(1rem,1.4vw,1.15rem);line-height:1.5;max-width:600px;color:#fff;text-wrap:pretty">Testing your food or gastro business before starting can save you a lot of trouble. Find the right methods for your business type and stage.</p>
+</div>
+<img src="uploads/foods.jpg" alt="Food business testing" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;background:#bbb">
+</section>
+
+<section data-screen-label="Search" style="display:flex;flex-direction:column;gap:12px;padding:clamp(32px,4vw,48px) clamp(20px,4.4vw,64px) 0">
+<div style="display:flex;flex-direction:column;gap:18px;padding:28px;background:#fff;border:1.5px solid #111111;border-radius:28px;max-width:1100px">
+<p style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#C8332B">Ask what you want to test</p>
+<textarea value="{{ prompt }}" onInput="{{ onPrompt }}" rows="2" style="font-family:'Montserrat',sans-serif;font-size:clamp(1.1rem,2vw,1.5rem);font-weight:700;line-height:1.35;letter-spacing:-0.01em;color:#111111;border:none;outline:none;resize:none;padding:0;background:transparent;width:100%"></textarea>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-top:14px;border-top:1px solid rgba(17,17,17,0.1)">
+<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+<span style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#6e6e6e;margin-right:4px">Matches</span>
+<sc-for list="{{ detected }}" as="d" hint-placeholder-count="1">
+<span style="font-size:0.78rem;font-weight:600;padding:6px 12px;border-radius:999px;background:#FBEDEC;color:#C8332B">{{ d }}</span>
+</sc-for>
+<sc-if value="{{ noneDetected }}" hint-placeholder-val="{{ false }}"><span style="font-size:0.8rem;color:#6e6e6e">Mention a topic like location, price, taste or social media</span></sc-if>
+</div>
+<button type="button" onClick="{{ runSearch }}" style="font-family:'Montserrat',sans-serif;background:#C8332B;color:#fff;border:none;border-radius:999px;padding:17px 48px;font-weight:700;font-size:13px;letter-spacing:0.08em;cursor:pointer">FIND METHODS</button>
+</div>
+</div>
+</section>
+
+<section data-screen-label="Method shelf" style="display:flex;flex-wrap:wrap;gap:40px 56px;padding:clamp(32px,4vw,48px) clamp(20px,4.4vw,64px) 96px">
+<aside style="flex:0 1 260px;min-width:min(100%,220px);position:sticky;top:80px;align-self:flex-start;max-height:calc(100vh - 100px);overflow-y:auto;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:10px">
+<p style="font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#C8332B">Venture type</p>
+<sc-for list="{{ ventureFilters }}" as="f" hint-placeholder-count="6">
+<button onClick="{{ f.toggle }}" style="font:inherit;font-size:13px;cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:baseline;text-align:left;padding:7px 0;border:none;border-bottom:1px solid #e2e2e2;background:transparent;color:{{ f.fg }};font-weight:{{ f.fw }}"><span>{{ f.label }}</span><span style="font-variant-numeric:tabular-nums">{{ f.count }}</span></button>
+</sc-for>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<p style="font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#C8332B">Stage</p>
+<sc-for list="{{ stageFilters }}" as="f" hint-placeholder-count="7">
+<button onClick="{{ f.toggle }}" style="font:inherit;font-size:13px;cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:baseline;text-align:left;padding:7px 0;border:none;border-bottom:1px solid #e2e2e2;background:transparent;color:{{ f.fg }};font-weight:{{ f.fw }}"><span>{{ f.label }}</span><span style="font-variant-numeric:tabular-nums">{{ f.count }}</span></button>
+</sc-for>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<p style="font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#C8332B">Qualitative / Quantitative</p>
+<sc-for list="{{ typeFilters }}" as="f" hint-placeholder-count="2">
+<button onClick="{{ f.toggle }}" style="font:inherit;font-size:13px;cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:baseline;text-align:left;padding:7px 0;border:none;border-bottom:1px solid #e2e2e2;background:transparent;color:{{ f.fg }};font-weight:{{ f.fw }}"><span>{{ f.label }}</span><span style="font-variant-numeric:tabular-nums">{{ f.count }}</span></button>
+</sc-for>
+</div>
+<sc-if value="{{ anyFilter }}" hint-placeholder-val="{{ false }}"><button onClick="{{ reset }}" style="font:inherit;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;align-self:flex-start;padding:0;border:none;background:none;color:#C8332B">Reset filters</button></sc-if>
+</aside>
+
+<div style="flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;border-bottom:1px solid #111;padding-bottom:14px">
+<h2 style="font-size:clamp(1.3rem,2.2vw,1.9rem);font-weight:900;letter-spacing:-0.02em;line-height:1.15">{{ shelfTitle }}</h2>
+<p style="font-size:13px;font-weight:600;color:#555;font-variant-numeric:tabular-nums">{{ resultLabel }}</p>
+</div>
+<sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:14px;padding:48px 0;border-bottom:1px solid #e2e2e2">
+<p style="font-size:clamp(1.2rem,2vw,1.6rem);font-weight:800;letter-spacing:-0.01em">No method matches these filters.</p>
+<p style="font-size:14px;line-height:1.6;color:#555;max-width:520px">Remove a filter or rephrase your question.</p>
+<button onClick="{{ reset }}" style="font:inherit;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;align-self:flex-start;padding:12px 24px;border:1.5px solid #111;border-radius:999px;background:#fff;color:#111">Reset filters</button>
+</div>
+</sc-if>
+<sc-for list="{{ groups }}" as="g" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;align-items:baseline;gap:14px"><span style="font-size:clamp(2rem,3vw,2.6rem);font-weight:900;letter-spacing:-0.04em;line-height:1;color:#C8332B">{{ g.num }}</span><h3 style="font-size:clamp(1rem,1.4vw,1.2rem);font-weight:800;letter-spacing:-0.005em;text-transform:uppercase">{{ g.label }}</h3><span style="font-size:13px;color:#777;font-weight:600">{{ g.count }}</span></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:0 32px">
+<sc-for list="{{ g.items }}" as="m" hint-placeholder-count="2">
+<button onClick="{{ m.open }}" style="font:inherit;color:#111;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:14px;padding:20px 0 26px;border:none;border-top:1px solid #111;background:transparent" style-hover="color:#C8332B">
+<span style="display:flex;justify-content:space-between;gap:12px;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#666"><span>{{ m.focus }}</span><span>{{ m.id }}</span></span>
+<span style="font-size:1.3rem;font-weight:900;letter-spacing:-0.02em;line-height:1.15">{{ m.name }}</span>
+<span style="font-size:15px;line-height:1.5;font-weight:500;color:#111;text-wrap:pretty">„{{ m.q1 }}“</span>
+<span style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding-top:12px;border-top:1px solid #e2e2e2;font-size:12px;line-height:1.4;color:#111">
+<span style="display:flex;flex-direction:column;gap:3px"><span style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#777">Time</span><span style="font-weight:600">{{ m.time }}</span></span>
+<span style="display:flex;flex-direction:column;gap:3px"><span style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#777">Evidence</span><span style="font-weight:600">{{ m.evidenceShort }}</span></span>
+</span>
+<span style="display:flex;flex-direction:column;gap:6px;font-size:12px;line-height:1.4">
+<span style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#C8332B">Data</span>
+<span style="display:flex;flex-wrap:wrap;gap:6px">
+<sc-for list="{{ m.data }}" as="d" hint-placeholder-count="2"><span style="font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;background:#FBEDEC;color:#111">{{ d }}</span></sc-for>
+</span>
+</span>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<sc-if value="{{ open }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ close }}" style="position:fixed;inset:0;background:rgba(17,17,17,0.35);z-index:400"></div>
+<aside data-screen-label="Method detail" role="dialog" style="position:fixed;top:0;right:0;bottom:0;width:min(100%,640px);background:#fff;border-left:1px solid #111;z-index:401;overflow-y:auto;display:flex;flex-direction:column">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px clamp(20px,3vw,40px);border-bottom:1px solid #111;position:sticky;top:0;background:#fff">
+<span style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#666">{{ sel.id }} · {{ sel.stageLabel }}</span>
+<button onClick="{{ close }}" style="font:inherit;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;padding:6px 0;border:none;background:none;color:#111">Close ✕</button>
+</div>
+<div style="display:flex;flex-direction:column;gap:32px;padding:32px clamp(20px,3vw,40px) 56px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#C8332B">{{ sel.focus }}</p>
+<h2 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;letter-spacing:-0.03em;line-height:1">{{ sel.name }}</h2>
+</div>
+<p style="font-size:16px;line-height:1.7;text-wrap:pretty">{{ sel.what }}</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));border-top:1px solid #111">
+<sc-for list="{{ sel.facts }}" as="fa" hint-placeholder-count="4">
+<div style="display:flex;flex-direction:column;gap:4px;padding:14px 16px 14px 0;border-bottom:1px solid #e2e2e2"><span style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#777">{{ fa.k }}</span><span style="font-size:14px;font-weight:600;line-height:1.4">{{ fa.v }}</span></div>
+</sc-for>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;padding:22px;background:#FBEDEC">
+<p style="font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#C8332B">Data veche.design provides</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ sel.data }}" as="d" hint-placeholder-count="3"><span style="font-size:13px;font-weight:700;padding:7px 14px;border-radius:999px;background:#fff;color:#111">{{ d }}</span></sc-for>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:4px">
+<p style="font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;padding-bottom:10px">Questions it answers</p>
+<sc-for list="{{ sel.questions }}" as="q" hint-placeholder-count="4">
+<div style="display:flex;gap:16px;padding:12px 0;border-top:1px solid #e2e2e2"><span style="font-size:13px;font-weight:900;color:#C8332B;flex:none;width:18px">{{ q.n }}</span><span style="font-size:15px;line-height:1.5;font-weight:500">{{ q.text }}</span></div>
+</sc-for>
+</div>
+</div>
+</div>
+</aside>
+</sc-if>
+<footer data-screen-label="Footer" style="display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding:24px 48px;border-top:1px solid rgba(17,17,17,0.1);margin-top:auto">
+<a href="V2 Home.dc.html" style="color:#C8332B;font-weight:700;font-size:0.9rem;text-decoration:none">veche.design</a>
+<div style="display:flex;gap:24px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase"><a href="#" style="color:#C8332B;text-decoration:none">Impressum</a><a href="#" style="color:#C8332B;text-decoration:none">Privacy Policy</a></div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const VT = ['Gastronomy','Packaged food brand','Retail','Food health','Social project','Innovation infrastructure'];
+const STAGES = ['Problem & opportunity','Concept & product portfolio','Operations, Soft Launch, Pilot','Location Tests','Communications','Financials, pricing, unit economics','Scale'];
+const KEYWORDS = [
+ ['problem','need','opportunity','pain','gap','competitor','review'],
+ ['concept','product','portfolio','menu','recipe','taste','assortment'],
+ ['operation','soft launch','pilot','kitchen','queue','service','hygiene','staff'],
+ ['location','site','footfall','catchment','customers to expect','passers','street','lease'],
+ ['communication','marketing','social media','instagram','ads','brand','message','campaign'],
+ ['price','pricing','margin','unit economics','cost','revenue','financ','profit','pay'],
+ ['scale','grow','second site','franchise','listing','expand']
+];
+let M = [
+ {id:'PCD-001',name:'Customer problem interview',focus:'Customer needs',stage:1,v:[0,1,2,3,4,5],time:'Hours–2 weeks',evidence:'Low–Medium (stated/observed)',qq:'Qualitative',sample:'5–20 participants',data:['Interview guide','Recruiting panel Rhine Main'],
+  what:'A semi-structured 1:1 conversation that reconstructs how the person handled the problem the last few times it occurred, what it cost them in money, time or hassle, and what workaround they use today. Questions stay in the past tense and avoid describing your solution, so you hear behaviour rather than opinion.',
+  qs:['Does this problem actually occur often enough to matter to this segment?','What are people doing today instead, and what does that cost them?','Which part of the current experience do they describe as painful without prompting?','Who inside the household or business actually feels the pain and who pays?']},
+ {id:'PCD-018',name:'Review mining',focus:'Market gaps',stage:1,v:[0,1,2,3],time:'Hours–2 weeks',evidence:'Low–Medium (stated/observed)',qq:'Qualitative',sample:'200–2,000 reviews',data:['Google Reviews','Tripadvisor','Lieferando ratings','Amazon reviews'],
+  what:'Structured analysis of public reviews for competing products, restaurants or venues, coded by attribute and sentiment, with attention to the 1-star and 3-star bands where reasoning is most explicit. Gives an unbudgeted map of category expectations.',
+  qs:['Which attributes drive praise and which drive rejection in this category?','What do customers expect as table stakes before they will consider anything new?','Which unmet need appears repeatedly across competitors?','How do customers describe the category in their own words?']},
+ {id:'CCP-003',name:'Mystery purchase',focus:'Competition',stage:1,v:[0,1,2,3],time:'Hours–2 weeks',evidence:'High (comparative)',qq:'Quantitative / mixed',sample:'5–20 competitor visits',data:['Competitor map Rhine Main','Mystery shopping checklist'],
+  what:"The competitor's full purchase journey is completed anonymously — order, payment, delivery, packaging, support, returns — and documented at each step. Exposes the service standard you will be judged against.",
+  qs:["What does the competitor's end-to-end experience actually feel like?",'How fast and reliable is their fulfilment?','Where does their experience fail?',"Which of their steps sets the customer's expectation of you?"]},
+ {id:'ICT-001',name:'Concept card test',focus:'Concept',stage:2,v:[0,1,2,3,4,5],time:'Hours–2 weeks',evidence:'Low–Medium (stated)',qq:'Qualitative',sample:'20–100 participants',data:['Concept card template','Online survey panel'],
+  what:'A single-page written concept — insight, offer, key benefit, price — shown to target customers who then rate relevance, uniqueness and purchase intent and explain their answer. The cheapest way to kill weak concepts before anything is built.',
+  qs:['Is the core idea understood without explanation?','Which benefit do customers actually value most?','Does purchase intent clear your go/no-go threshold?','Which segment responds most strongly?']},
+ {id:'FST-010',name:'Blind taste test',focus:'Product',stage:2,v:[0,1,3],time:'Hours–2 weeks',evidence:'Medium–High (observed)',qq:'Quantitative / mixed',sample:'30–150 consumers',data:['Sensory scoring sheets','Tasting panel Food Lab'],
+  what:'Products or dishes are tasted without any brand, packaging, price or provenance cues, in coded, randomised order. It isolates the intrinsic product from everything the brand, the story and the room do for it.',
+  qs:['How does the product perform on taste alone?','Do you win without brand support?','Which competitor is strongest blind?','Is your recipe advantage real or brand-carried?']},
+ {id:'PPT-004',name:'Menu & assortment test',focus:'Product portfolio',stage:2,v:[0,2,3],time:'1–4 weeks',evidence:'High (real behavior)',qq:'Quantitative / mixed',sample:'100–1,000 transactions',data:['Competitor menus & price lists','POS sales-mix benchmarks'],
+  what:'A reduced or rotating menu or shelf range is sold for a fixed period and the sales mix is recorded per item. Shows which products carry the business and which only add complexity.',
+  qs:['Which items sell and which only fill the menu?','How many products do you really need at launch?','Which items cannibalise each other?','Where does complexity cost more than it earns?']},
+ {id:'RHS-005',name:'Pop-up restaurant',focus:'Pilot',stage:3,v:[0,4],time:'Days–weeks',evidence:'High (real behavior)',qq:'Quantitative / mixed',sample:'50–500 visits',data:['Pop-up venues Rhine Main','POS & till data'],
+  what:'A short-run restaurant in a temporary or borrowed space, trading with real guests, staff and a real till. Tests concept, kitchen, service and unit economics together without a lease or fit-out.',
+  qs:['Can the concept fill covers at your target price?','What is the real food cost, labour cost and margin per cover?','Does the kitchen hold up across a full service?','Do guests return or recommend?']},
+ {id:'OEE-004',name:'Queue test',focus:'Operations',stage:3,v:[0,2],time:'Hours–2 weeks',evidence:'High–Very high (real operations)',qq:'Quantitative / mixed',sample:'3–10 peak periods',data:['Peak-hour footfall','Queue timing app'],
+  what:'Waiting times, queue length and abandonment are measured at real demand levels, and layout or staffing is varied to see the effect. Queue tolerance is often the hidden constraint on revenue in food and retail.',
+  qs:['How long do customers actually wait at peak?','At what wait length do people leave without buying?','How much revenue is lost to abandonment?','Which layout or staffing change cuts the wait most?']},
+ {id:'TRQ-009',name:'Contamination test',focus:'Food safety',stage:3,v:[0,1,3,5],time:'Hours–2 weeks',evidence:'Very high (technical)',qq:'Quantitative / mixed',sample:'Lab samples per batch',data:['Partner food labs','HACCP templates'],
+  what:'Product, equipment, surfaces and inputs are tested for foreign bodies, cross-contact and allergen carry-over, including after changeovers. Allergen cross-contact is one of the highest-consequence risks in small food production.',
+  qs:['Is there measurable cross-contamination between products?','Does your cleaning between batches actually work?','Where are foreign-body risks concentrated?','Can you honestly make a free-from claim?']},
+ {id:'SLE-005',name:'Soft launch',focus:'Soft launch',stage:3,v:[0,2,3,4,5],time:'Days–weeks',evidence:'High–Very high (real operations)',qq:'Quantitative / mixed',sample:'100–5,000 transactions',data:['POS & till data','Google Business Profile insights'],
+  what:'Trading begins quietly, without promotion, at limited capacity, so operations can stabilise before demand is created. Protects the reputation that a botched full opening would spend.',
+  qs:['Does the operation hold up with real, unmanaged customers?','What baseline demand arrives without any promotion?','Which operational issues must be fixed before you promote?','What is the actual cost of a trading day?']},
+ {id:'LOC-001',name:'Footfall count',focus:'Passers-by',stage:4,v:[0,2,3,4],time:'1–3 weeks',evidence:'High (observed)',qq:'Quantitative / mixed',sample:'7–21 counting days',data:['hystreet.com pedestrian counts','Google Popular Times','Manual count sheets'],
+  what:'Passers-by in front of a candidate site are counted by hour and weekday and split by target group, then compared with the capture rate of similar businesses. Turns a gut feeling about a street into an expected number of customers.',
+  qs:['How many people pass the site per hour and weekday?','How many of them match your target group?','Which capture rate is realistic for this business type?','How many customers per day can you expect?']},
+ {id:'LOC-004',name:'Catchment analysis',focus:'Location demand',stage:4,v:[0,2,3,4,5],time:'Days–2 weeks',evidence:'Medium–High (modelled)',qq:'Quantitative / mixed',sample:'1–5 candidate sites',data:['Zensus 2022 population grid','Purchasing power by district','Competitor map from Google Maps'],
+  what:'The area from which a site can realistically draw customers is mapped by walking and driving time, and filled with population, purchasing power and competing offers. Shows whether enough of the right people live and work close enough.',
+  qs:['How many target customers live or work within reach?','How much do they spend on this category?','How many competitors already serve this area?','Which candidate site has the strongest catchment?']},
+ {id:'BUE-019',name:'Temporary lease test',focus:'Site trading',stage:4,v:[0,2,3,4],time:'1–6 months',evidence:'High–Very high (real operations)',qq:'Quantitative / mixed',sample:'1 site, sustained trading',data:['Interim-use spaces Rhine Main','Rent benchmarks by street'],
+  what:'A short-term or flexible lease is taken to trade properly in a site before signing a long one, testing the location, the fit-out and the operating rhythm. Costs more per month, and buys out most of the location risk.',
+  qs:['Does the business work in this site over a sustained trading period?','What are the real occupancy and operating costs?','Does trade build, hold or decline over the months?','Would you sign a long lease here on this evidence?']},
+ {id:'FSP-001',name:'Fake-door test',focus:'Demand signal',stage:5,v:[0,1,2,3,5],time:'Hours–2 weeks',evidence:'Medium–High (behavioral)',qq:'Quantitative / mixed',sample:'200–2,000 visitors',data:['Landing page template','Meta & Google ad accounts'],
+  what:'A visible entry point to a product that does not exist yet — a button, a menu line, a shelf tag — records how many people try to use it and then explains honestly that it is coming soon. Measures intent through action rather than statement.',
+  qs:['How many people actively try to buy or book this option?','Which of several fake options attracts the most attempts?','Is the click-through high enough to justify building it?','Do the people who click match your target segment?']},
+ {id:'COM-007',name:'Social ad message test',focus:'Messaging',stage:5,v:[0,1,2,3,4,5],time:'1–2 weeks',evidence:'High (real behavior)',qq:'Quantitative / mixed',sample:'5,000–50,000 impressions',data:['Meta Ad Library','Google Trends','Instagram hashtag reach'],
+  what:'Several versions of the same offer, each with a different headline, image or benefit, run as small paid ads to the same audience. Click and sign-up rates show which message actually moves people.',
+  qs:['Which message gets the most clicks from your target group?','Which benefit should lead your communication?','What does it cost to win one interested customer?','Which channel reaches your audience cheapest?']},
+ {id:'ICT-015',name:'Concept + price test',focus:'Willingness to pay',stage:6,v:[0,1,2,3],time:'Hours–2 weeks',evidence:'Low–Medium (stated)',qq:'Quantitative / mixed',sample:'20–100 participants',data:['Competitor price lists','Online survey panel'],
+  what:'The concept is shown together with a specific price so appeal is measured on the actual value proposition rather than an imagined free version. Purchase intent typically drops sharply, which is the point.',
+  qs:['Does the concept still appeal once the real price is attached?','At which price does purchase intent collapse?','Is the price seen as credible for the quality signalled?','Which segment remains interested at full price?']},
+ {id:'PWP-003',name:'Van Westendorp PSM',focus:'Price range',stage:6,v:[0,1,2,3],time:'Hours–2 weeks',evidence:'Medium (stated)',qq:'Quantitative / mixed',sample:'100–300 respondents',data:['Price survey template','Retail price scans'],
+  what:'Four questions establish the prices at which the product is seen as too cheap, cheap, expensive and too expensive, and the intersections define an acceptable price range. Useful for bounding a range early, weak for picking a single optimal price.',
+  qs:['What price range do customers consider acceptable?','At which price does the product read as suspiciously cheap?','At which price is it rejected as too expensive?','Does your intended price sit inside the acceptable band?']},
+ {id:'RHS-014',name:'Table-turn test',focus:'Capacity & revenue',stage:6,v:[0],time:'Days–weeks',evidence:'High (real behavior)',qq:'Quantitative / mixed',sample:'10–30 services',data:['Reservation system data','Gastro revenue benchmarks'],
+  what:"The time from seating to table reset is measured across services and party types, and compared with the model's assumption. Turn time drives capacity and therefore the whole revenue forecast.",
+  qs:['How long does a table actually take from seat to reset?','How many turns per service is realistic?','Which stage of the meal creates the delay?','Does the revenue model survive the real turn time?']},
+ {id:'FIN-002',name:'Unit economics model',focus:'Margins',stage:6,v:[0,1,2,3,4,5],time:'Days–2 weeks',evidence:'Medium–High (modelled)',qq:'Quantitative / mixed',sample:'Pilot data + benchmarks',data:['Food cost benchmarks','Rent & wage levels Rhine Main','Database project figures'],
+  what:'Revenue, food cost, labour, rent and other costs are broken down per cover, per product or per customer, using pilot data where available and benchmarks where not. Shows the volume needed to break even.',
+  qs:['What does one sale really earn after all direct costs?','How many sales per day do you need to break even?','Which cost line has the most influence on profit?','How much funding do you need until break-even?']},
+ {id:'SCL-003',name:'Retail listing test',focus:'Distribution',stage:7,v:[1,3],time:'1–3 months',evidence:'High–Very high (real sales)',qq:'Quantitative / mixed',sample:'3–20 stores',data:['Retailer listing criteria','Scanner sales data'],
+  what:'The product is listed in a small number of shops for a fixed period and rate of sale per store and week is tracked against the category average. Decides whether a wider listing is worth pursuing.',
+  qs:['How many units sell per store and week?','Does the rate of sale beat the category average?','Which store types and regions perform best?','Will the retailer extend the listing?']},
+ {id:'SCL-006',name:'Second-site replication',focus:'Replication',stage:7,v:[0,2,4],time:'3–12 months',evidence:'Very high (real operations)',qq:'Quantitative / mixed',sample:'2 sites',data:['Site comparison data','Database project benchmarks'],
+  what:'A second location is opened with the same concept and the results are compared with the first site. Shows whether success depends on the founder and the first street, or on a model that can be repeated.',
+  qs:['Does the second site reach the first site’s figures?','Which results depend on the founder being present?','What has to be standardised before a third site?','How long does a new site take to break even?']}
+];
+const LOCKED = ['What counts as proof','Decision threshold','Typical failure mode','What you need','Minimum viable version'];
+const isQuant = m => m.qq.startsWith('Quant') ? 1 : 0;
+const DEFAULT_PROMPT = 'How to test a location and figure out how many customers to expect?';
+const detect = p => { const q = p.toLowerCase(); return STAGES.map((s,i) => KEYWORDS[i].some(k => q.includes(k)) ? i+1 : 0).filter(Boolean); };
+
+class Component extends DCLogic {
+  state = { vts:[], stages:[], types:[], open:null, prompt: DEFAULT_PROMPT, applied:null };
+  componentDidMount(){ fetch('data/methods.json').then(r => r.json()).then(x => { const have = new Set(M.map(m => m.id)); M = M.concat(x.filter(m => !have.has(m.id))); this.forceUpdate(); }).catch(() => {}); this._k = e => { if(e.key==='Escape') this.setState({open:null}); }; window.addEventListener('keydown', this._k); }
+  componentWillUnmount(){ window.removeEventListener('keydown', this._k); }
+  tog(key, v){ this.setState(s => ({ [key]: s[key].includes(v) ? s[key].filter(x=>x!==v) : [...s[key], v] })); }
+  match(m, skip){
+    const s = this.state;
+    if (skip!=='vts' && s.vts.length && !s.vts.some(v => m.v.includes(v))) return false;
+    if (skip!=='stages' && s.stages.length && !s.stages.includes(m.stage)) return false;
+    if (skip!=='types' && s.types.length && !s.types.includes(isQuant(m))) return false;
+    return true;
+  }
+  facet(key, vals, labels, getter){
+    const on = this.state[key];
+    return vals.map((v,i) => {
+      const active = on.includes(v);
+      return { label: labels[i], count: M.filter(m => getter(m, v) && this.match(m, key)).length, fg: active ? '#C8332B' : '#111', fw: active ? 800 : 500, toggle: () => this.tog(key, v) };
+    });
+  }
+  renderVals(){
+    const s = this.state;
+    const det = detect(s.prompt);
+    const res = M.filter(m => this.match(m));
+    const groups = [1,2,3,4,5,6,7].map(n => {
+      const items = res.filter(m => m.stage===n);
+      return { num: '0'+n, label: STAGES[n-1], count: items.length, items: items.map(m => ({ id:m.id, name:m.name, focus:m.focus, q1:m.qs[0], time:m.time, evidenceShort: m.evidence.split(' (')[0], data:m.data, open: () => this.setState({open:m.id}) })) };
+    }).filter(g => g.items.length);
+    let sel = null;
+    const om = M.find(m => m.id===s.open);
+    if (om) sel = { id:om.id, name:om.name, focus:om.focus, what:om.what, data:om.data, stageLabel: 'Stage '+om.stage+' · '+STAGES[om.stage-1],
+      facts: [{k:'Time', v:om.time},{k:'Evidence', v:om.evidence},{k:'Type', v: isQuant(om) ? 'Quantitative' : 'Qualitative'},{k:'Sample size', v:om.sample}],
+      questions: om.qs.map((q,i) => ({ n: i+1, text: q })) };
+    const vtLabel = s.vts.length === 1 ? VT[s.vts[0]] : s.vts.length ? s.vts.length + ' venture types' : 'all venture types';
+    return {
+      groups, sel, open: !!sel, empty: res.length===0,
+      prompt: s.prompt, onPrompt: e => this.setState({ prompt: e.target.value }),
+      detected: det.map(i => STAGES[i-1]), noneDetected: det.length === 0,
+      runSearch: () => this.setState({ stages: det, applied: s.prompt }),
+      shelfTitle: s.applied && s.stages.length ? 'Methods for your question' : 'Methods for ' + vtLabel,
+      resultLabel: res.length+' of '+M.length+' methods',
+      ventureFilters: this.facet('vts',[0,1,2,3,4,5], VT, (m,v) => m.v.includes(v)),
+      stageFilters: this.facet('stages',[1,2,3,4,5,6,7], STAGES, (m,v) => m.stage===v),
+      typeFilters: this.facet('types',[0,1], ['Qualitative','Quantitative'], (m,v) => isQuant(m)===v),
+      anyFilter: !!(s.vts.length || s.stages.length || s.types.length),
+      reset: () => this.setState({vts:[],stages:[],types:[],applied:null}),
+      close: () => this.setState({open:null})
+    };
+  }
+}
+</script>
+</body>
+</html>
