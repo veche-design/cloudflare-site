@@ -1,5 +1,4 @@
 <script lang="ts">
-	import foodLabFrankfurtImage from '#lib/assets/images/food-lab-frankfurt.jpg?enhanced';
 	import foodsImage from '#lib/assets/images/foods.jpg?enhanced';
 	import frankfurtImage from '#lib/assets/images/frankfurt.jpg?enhanced';
 	import microbiomStoreImage from '#lib/assets/images/microbiom-store.jpg?enhanced';
@@ -8,7 +7,7 @@
 	import SplitHero from '#lib/components/SplitHero.svelte';
 	import { m } from '#lib/paraglide/messages.js';
 
-	const categorySizes = '(min-width: 1100px) 25vw, (min-width: 600px) 50vw, 100vw';
+	const categorySizes = '(min-width: 1100px) 33vw, (min-width: 600px) 50vw, 100vw';
 	const ogImageUrl = new URL(ogImage, 'https://veche.design').href;
 </script>
 
@@ -115,7 +114,7 @@
 	<div class="categories">
 		<div class="category">
 			<enhanced:img class="cat-img" src={foodsImage} sizes={categorySizes} loading="lazy" alt="" />
-			<div class="cat-name">{m.home_build_food_health()}</div>
+			<div class="cat-name">{m.home_build_products()}</div>
 		</div>
 
 		<div class="category">
@@ -137,18 +136,7 @@
 				loading="lazy"
 				alt=""
 			/>
-			<div class="cat-name">{m.home_build_retail()}</div>
-		</div>
-
-		<div class="category">
-			<enhanced:img
-				class="cat-img"
-				src={foodLabFrankfurtImage}
-				sizes={categorySizes}
-				loading="lazy"
-				alt=""
-			/>
-			<div class="cat-name">{m.home_build_innovation()}</div>
+			<div class="cat-name">{m.home_build_spaces()}</div>
 		</div>
 	</div>
 </section>
